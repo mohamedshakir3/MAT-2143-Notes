@@ -1,0 +1,37 @@
+\contentsline {chapter}{\numberline {1}Equivalence Relations}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Review of Equivalence Relations}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Examples of Equivalence Relations}{3}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Well-defined Operations on Equivalence Classes and Number Theory}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Well-defined Operations on Equivalence Classes}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Number Theory}{8}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Number Theory Cont. and Integers Modulo n}{10}{chapter.3}%
+\contentsline {section}{\numberline {3.1}More Number Theory}{10}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Prime Factorization}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Integers Modulo n}{13}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Operations on $\mathbb {Z}_n$, Symmetries, and Groups}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Arithmetic Modulo n}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Symmetries}{14}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Properties of Symmetries}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Generating Sets}{16}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Groups}{17}{section.4.3}%
+\contentsline {chapter}{\numberline {5}More Examples of Groups, Groups of Units of $\mathbb {Z}_n$}{18}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Basic Properties of Groups, Products of Groups, Isomorphisms}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Basic Properties of Groups}{19}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Small Groups}{21}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Products of Groups}{22}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Isomorphisms}{22}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Automorphisms, Subgroups}{24}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Automorphisms}{24}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Quaternions}{25}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Subgroups}{26}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Subgroup Test}{27}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Alternative Versions of Subgroup Test}{27}{subsection.7.3.2}%
+\contentsline {chapter}{\numberline {8}Lattices and Cyclic Groups}{29}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Find all subgroups of $(\mathbb {Z}, +)$}{29}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Symmetries of a Square}{30}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Subgroups of Symmetries of a Square}{33}{subsection.8.2.1}%
+\contentsline {chapter}{\numberline {9}Cyclic Groups}{35}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Cyclic Groups}{35}{section.9.1}%
+\contentsline {chapter}{\numberline {10}}{41}{chapter.10}%
+\contentsline {subsection}{\numberline {10.0.1}Lattices}{43}{subsection.10.0.1}%
+\contentsline {section}{\numberline {10.1}Complex Numbers}{43}{section.10.1}%

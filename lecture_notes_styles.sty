@@ -1,0 +1,46 @@
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.geometric}
+\pagestyle{empty}
+
+\pgfdeclarelayer{edgelayer}
+\pgfdeclarelayer{nodelayer}
+\pgfsetlayers{edgelayer,nodelayer,main}
+
+\renewcommand{\chaptername}{Lecture}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\usepackage{gensymb}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newcommand{\drawsquare}[0]{
+ \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (0) at (-11, 7) {};
+		\node [label={above: 2}] (1) at (-8, 7) {};
+		\node [label={below: 3}] (2) at (-11, 4) {};
+		\node [label={below: 4}] (3) at (-8, 4) {};
+		\node  (4) at (2.25, 4.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (2.center) to (3.center);
+	\end{pgfonlayer}
+    \end{tikzpicture} 
+}

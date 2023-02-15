@@ -1,0 +1,1669 @@
+\documentclass[openany]{report}
+
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{stylesheet}
+\usepackage{lecture_notes_styles}
+
+
+\title{MAT 2143 Lecture Notes}
+\author{Last updated:}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Equivalence Relations}
+\section{Review of Equivalence Relations}
+\onehalfspacing
+Set X and a notion of equivalence $\sim$. For all $x,y \in X$, either $x \sim y$ or $x \not\sim y$.
+\textbf{Recall}: $X \times X = \{(x,y): x,y \in \real\}$. Define $R = \{(x,y): x,y \in \real \ x \sim y \}$.\\[2ex]
+R is an \blue{equivalence relation} if 
+\begin{itemize}
+    \item $x,y \in R \ \forall x \in X$
+    \item $(x,y) \in R \iff (y,x) \in R$
+    \item $(x,y) \in R \ (y,z) \in R \implies (x,z) \in R$
+\end{itemize}
+If $R$ is an equivalence relation on $X$, then we define the \blue{equivalence class} of $x \in X$ as
+$$[x] = \{y \in X: x \sim y\}$$
+
+\section{Examples of Equivalence Relations}
+\onehalfspacing
+\begin{itemize}
+    \item Take any set $X$ and let $x \sim y$ mean $x = y$\\
+    \textbf{Reflexive:} \purple{$x \sim y$?} Yes, because $x = x$\\
+    \textbf{Symmetric:} \purple{$x \sim y \iff y \sim x$?} Yes, because if $x=y$, then $y = x$.\\
+    \textbf{Transitive:} \purple{$x \sim y \ y \sim z \implies x \sim z$?} Yes, because if $x=y$ and $y = z$, then $x = z$.
+    
+    \item Take $X = \real^2$ and let $(a,b) \sim (c,d)$ mean $a^2 + b^2 = c^2 + d^2$\\
+    \textbf{Reflexive:} \purple{$(a,b)\sim (a,b)$?} Yes, because $a^2 + b^2 = a^2 + b^2$\\
+    \textbf{Symmetric:} \purple{$(a,b) \sim (c,d) \iff (c,d) \sim (a,b)$?} Yes, because if $a^2 + b^2 = c^2 + d^2$, then $c^2 + d^2 = a^2 + b^2$.\\
+    \textbf{Transitive:} \purple{$(a,b) \sim (c,d) \ (c,d) \sim (e,f) \implies (a,b) \sim (e,f)$?} Yes, because if $a^2 + b^2 = c^2 + d^2$ and $c^2 + d^2 = e^2 + f^2$, then $a^2 + b^2 =  e^2 + f^2$.
+
+    \item Take $X = \ints \times (\ints \setminus \{0\})$ and let $(a,b) \sim (c,d)$ mean $(ad = bc)$.\\
+    \textbf{Reflexive:} \purple{$(a,b)\sim (a,b)$?} Yes, because multiplication of $\ints$ is commutative, so $ab = ba$.\\
+    \textbf{Symmetric:} \purple{$(a,b) \sim (c,d) \iff (c,d) \sim (a,b)$?} Yes,
+    $$(a,b) \sim (c,d) \implies ad = bc$$
+    $$cb = da$$
+    $$(c,d) \sim (a,b)$$
+    \textbf{Transitive:} \purple{$(a,b) \sim (c,d) \ (c,d) \sim (e,f) \implies (a,b) \sim (e,f)$?} We want $ad = bc$, $cf = de \implies af = be$\\
+    \textbf{Case 1: $c = 0$} Then $bc = 0 = ad$, $d \in \ints \setminus \{0\}$, so $d\neq 0$, $a = 0$\\
+    $cf = 0 = de$, again $d \neq 0$, so $e = 0$.\\
+    \[\therefore af = be = 0\]
+    \textbf{Case 2: $c \neq 0$} Then $\frac{ad}{c} = b$, $\frac{de}{c} = f$
+    \[\therefore af = a \cdot \frac{de}{c} = \frac{ad}{c} \cdot e = be\]
+\end{itemize}
+
+\begin{theorem}
+Let $X$ be a set with an equivalence relation. Then 
+$$[x] \cap [y] \neq \emptyset \implies [x] = [y]$$
+So, equivalence classes are disjoint or equal.
+\end{theorem}
+\begin{proof}
+Assume $[x] \cap [y] \neq \emptyset$. So $\exists z \in [x] \cap [y]$\\
+Now let $a \in [x]$
+\begin{align*}
+    a &\sim z\tag{since $z\in[x]$ , $z \sim x \sim a$}\\
+    z &\sim y\tag{since $z \in [y]$}\\
+    a &\sim y\tag{transitivity}\\
+    a &\in [y]\\
+    \therefore [x] &\subseteq [y]
+\end{align*}
+Now take $b \in [y]$, using the same arguments we get
+\begin{align*}
+    b \sim z\tag{since $z\in[y]$ , $z \sim y \sim b$}\\
+    z \sim x\tag{since $z \in [x]$}\\
+    b \sim x\tag{transitivity}\\
+    b \in [x]\\
+    \therefore [y] \subseteq [x]
+\end{align*}
+\end{proof}
+\noindent
+\textbf{Observation:} If $X$ is some set with an equivalence relation, then every $x \in X$ is in some equivalence class.
+
+\begin{definition}[Partitions]
+Say we have some $R_j \subseteq X$ for $j \in \{1,2,\dots, n\}$, with every $x \in X$ in exactly one $R_j$, then the $R_j$ form a partition of $X$.
+\end{definition}
+\begin{theorem}
+    Let $X$ be a set with an equivalence relation. Then the equivalence classes form a partition of $X$.
+\end{theorem}
+\begin{proof}
+    If $z \in X$, then $z \in [z]$, therefore z is in at least one equivalence class.\\
+    If $z \in [x]$ and $z \in [y]$, then $[x] \cap [y] \neq \emptyset$ therefore $[x] = [y]$ (as shown previously). Therefore z is in at most one equivalence class.
+\end{proof}
+\begin{theorem}
+    Let $R_j$ form a partition of $X$. Say that $x \sim y$ means $x,y \in R_j$ for some j. Then $\sim$ is an equivalence relation on X.
+\end{theorem}
+\begin{proof}
+\[\]
+    \begin{itemize}
+        \item $x \in X$, so $x \in R_j$ for some j $implies x,x \in R_j \implies x \sim x$
+        \item $x \sim y \iff x,y \in R_j \iff y,x \in R_j \iff y \sim x$
+        \item \begin{align*}
+            x \sim y \ y \sim z &\implies 
+                \begin{cases}
+                    x,y \in R_i\\
+                    y,z \in R_j
+                \end{cases}
+                \implies y \in R_i, R_j \\ 
+                &\implies i=j\\
+                &\implies x,z \in R_j\\
+                &\therefore x \sim z
+        \end{align*}
+    \end{itemize}
+\end{proof}
+
+\noindent
+\textbf{Example of Finding Equivalence Classes}\\
+Take $X = R \times R$, and let $(a,b) \sim (c,d)$ mean $a^2 + b^2 = c^2 + d^2$. Find the equivalence class of $(0,0)$, $(3,4)$, $(a,b)$
+ \begin{align*}
+        [(0,0)] &= \{(x,y) : (x,y) \sim (0,0)\}\\
+        &= \{(x,y) : x^2 + y^2 = 0^2 + 0^2 = 0\}\\
+        &= \{(x,y) : x = y = 0\}
+\end{align*}
+\begin{align*}
+            [(3,4)] &= \{(x,y) : (x,y) \sim (3,4)\}\\
+        &= \{(x,y) : x^2 + y^2 = 3^2 + 4^2 = 25\}\\
+        &= \{(x,y) : \sqrt{x^2+y^2} = 5\}
+\end{align*}
+\begin{align*}
+        [(a,b)] &= \{(x,y) : (x,y) \sim (a,b)\}\\
+        &= \{(x,y) : x^2 + y^2 = a^2 + b^2 = r\}\\
+        &= \{(x,y) : \sqrt{x^2+y^2} = r\}
+\end{align*}
+        
+\chapter{Well-defined Operations on Equivalence Classes and Number Theory}
+\section{Well-defined Operations on Equivalence Classes}
+Consider a set $X$, an equivalence relation $\sim$, and an operation $\cdot$. This operation is \blue{well-defined on equivalence classes} if \\
+
+\begin{align*}
+\begin{rcases}
+ x \sim y\\
+ w \sim z
+\end{rcases}
+&\implies x \cdot w \sim y \cdot z\\
+\begin{rcases}
+ [x] = [y]\\
+ [w] = [z]
+\end{rcases}
+&\implies [x \cdot w] = [y \cdot z]
+\end{align*}
+
+\textbf{Example: } Let $X = \real \times \real$, $(a,b) \sim (c,d)$ means $a^2 + b^2 = c^2 + d^2$, is addition well-defined on equivalence classes? (\textit{Addition meaning $(x,y) + (z,y) = (x + z, y+w)$})\\
+\[
+Let \ 
+\begin{cases}
+(a,b) \sim (c,d)\\
+(e,f) \sim (g,h)
+\end{cases}
+then \ 
+\begin{cases}
+    a^2 + b^2 = c^2 + d^2\\
+    e^2 + f^2 = g^2 + h^2
+\end{cases}
+\]
+Now,
+\[
+\begin{cases}
+    (a,b) + (e,f) = (a + e, b+f)\\
+    (c,d) + (g,h) = (c+g, d+h)
+\end{cases}
+\]
+\textbf{Question:} Is $(a+e)^2 + (b+f)^2 = (c+g)^2 + (d+h)^2$?
+$$(a+e)^2 + (b+f)^2 = a^2 + 2ae + e^2 + b^2 + 2bf + f^2$$
+$$(c+g)^2 + (d+h)^2 = c^2 + 2cg + g^2 + d^2 + 2dh + h^2$$
+$a^2 + b^2 = c^2 + d^2$, and $e^2 + f^2 = g^2 + h^2$, so 
+$$(a+e)^2 + (b+f)^2 = (c+g)^2 + (d+h)^2 \iff 2ae + 2bf = 2cg + 2dh$$
+\textbf{Counterexample:} Take 
+$$(a,b) = (c,d) = (1,2)$$
+$$(e,f) = (3,4) \ \ \ \ (g,h) = (4,3)$$
+So no, addition is not well defined. \\[3ex]
+\noindent
+\textbf{Another Example: } TBC.
+
+\section{Number Theory}
+\begin{fact}
+Every non-empty set $S \subseteq \nat$ has a minimum element $d$ in $S$
+\end{fact}
+\begin{prop}
+Let $a,b \in \ints$, $b > 0$, then $\exists ! \ q,r \in \ints$ with $a = bq + r$, $0 \leq r < b$
+\end{prop}
+\begin{proof}
+    (Existence) Let $S = \{a - bx: x \in \ints, a-bx \geq 0 \}$. 
+    $\emptyset \neq S \subseteq \nat$, so $S$ has a minimum element.\\
+    Let \[\begin{cases}
+        r = min(S)\\
+        q = \frac{a-r}{b}
+    \end{cases}\]
+    $r = a - bd$, $d \in \ints$, then $bq +r = b(\frac{a-r}{b}) + r = a - r + r = a$.\\[1ex]
+    If $b \leq r$, then $0 \leq r - b < r$, which contradicts the minimality of $r$.\\[2ex]
+    (Uniqueness) Say $a = bq + r = bp + s$, $0 \leq r,s < b$. Then
+    $$b(q-p) = s - r$$
+    So $s-r$ is a multiple of b, but $0 \leq r,s < b$, so it must be that $r - s = 0$, therefore $r = s$.
+\end{proof}
+
+\chapter{Number Theory Cont. and Integers Modulo n}
+\section{More Number Theory}
+\begin{definition}
+    $m \mid n$ means $\exists x \in \ints$ with $n = mx$
+\end{definition}
+\begin{definition}
+    Let $a,b \in \ints$. If d is a positive integer with $d \mid a$ and $d \mid b$, if $c \mid a$ and $c \mid b$, then $c \mid d$, then d is a \blue{gcd} of a and b.
+\end{definition}
+\begin{theorem}
+    For every $a,b \in \ints$, $\exists \ !$ gcd $d$. Furthermore, $\exists x,y \in \ints$, $d = ax + by$. Furthermore, d is the largest common divisor of a,b
+\end{theorem}
+\begin{proof}
+    Let $S = \{ ax + by : x,y \in \ints, ax + by > 0\}$. $S \subseteq \nat$, so $\exists \ !$ minimum element $d$ in $S$.\\
+    Write
+    \begin{align*}
+        a &= dq + r\tag{$0 \leq r < d$}\\
+        a &= (ax + by)q + r\tag{some $x,y \in \ints$}\\
+        r &= a(1-qx) + b(-qy)\\
+        r &= ax' + by'\tag{$x' = 1-qx$, $y' = -qy$}\\
+        0 \leq r = ax' + by' < d
+    \end{align*}
+    So. either $r = 0$ or $r \in S$ but not both, but $r < d$ which is the minimum of the set. Therefore $r \not\in S$. So $r = 0$ and $d \mid a$. Same argument with $b = dq + r \implies d \mid b$.\\
+    Now suppose $c \mid a$ and $c \mid b$, then $a = a'c$ and $b = b'c$, $a',b' \in \ints$.
+    $$d = ax + by = a'cx + b'cy = c(a'x + b'y$$
+    So, $c \mid d$.
+\end{proof}
+\begin{corollary}
+If $gcd(a,b) = 1$, then $\exists x,y$ such that $ax + by = 1$.
+\end{corollary}
+\begin{proof}
+    Same as the previous proof, in the case that $gcd(a,b) = 1$.
+\end{proof}
+\begin{corollary}
+    If $gcd(a,b) = d$, then $\{ax + by: x,y \in \ints\} = d\cdot n$, $\forall n \in \ints$.
+\end{corollary}
+\begin{proof}
+    No proof was provided in the notes I guess. :P 
+\end{proof}
+\begin{definition}[Least Common Multiple]
+    Let $a,b \in \ints$. If $m$ is a positive integer with
+    \begin{itemize}
+        \item $a\mid m$ and $b \mid m$
+        \item if $a \mid n$ and $b \mid n$, then $m \mid n$
+    \end{itemize}
+    then m is a \blue{lcm} of $a,b$.
+\end{definition}
+\begin{theorem}
+    For every $a,b$, $\exists \ !$ lcm $m$.
+\end{theorem}
+\begin{definition}
+    $p \in \ints$ $p > 1$
+    \begin{itemize}
+        \item $p$ is irreducible if the only positive divisors of p are 1 and p
+        \item p is prime if whenever $p \mid ab$, then $p |a$ or $p |b$
+    \end{itemize}
+\end{definition}
+\begin{prop}
+    $p$ is prime $\implies$ $p$ is irreducible
+\end{prop}
+\begin{proof}
+    Say $p$ is not irreducible, $p = ab$, and $1 < a,b < p$. Then $p \nmid a$ and $p \nmid b$.
+\end{proof}
+\begin{prop}
+    $p$ is irreducible $\implies$ $p$ is prime
+\end{prop}
+\begin{proof}
+    $p \mid ab \implies ab = mp$ for some $m \in \ints$. Say $p \nmid a$, since $p$ is irreducible $gcd(a,p) = 1$. So $\exists s,t$ such that $as + pt = 1$. 
+    \begin{align*}
+      b = b(as +pt) &= abs + bpt  
+      &= mps + bpt
+      &= (ms + bt)p
+    \end{align*}
+    Therefore $b$ is a multiple of $p$, so $p \mid b$.
+\end{proof}
+
+\section{Prime Factorization}
+\begin{theorem}
+    $n \in \ints$ $n > 1$\\[1ex]
+    $\exists!$ $\begin{cases}
+        p_1 p_2 \dots p_s , &\text{distinct primes}\\
+        e_1 e_2 \cdots e_s, &\text{positive integers}
+    \end{cases}$ \\[1ex]
+    With 
+    $$n = p_1^{e_1} \cdot p_2^{e_2} \cdots p_s^{e_s}$$
+\end{theorem}
+\begin{proof}
+    Proof was omitted.
+\end{proof}
+\noindent
+\textbf{Prime Factorization Gives GCD:}\\
+
+\textbf{Example:} 
+$$a = 2 \cdot 5 \cdot 7^{10} \cdot 13 = 2^{\hlblue{1}} \cdot 3^{\hlblue{0}} \cdot 5^1 \cdot 7^{10} \cdot 13^1 \cdot 17^{\hlblue{0}}$$
+$$b = 2 \cdot 3^2 \cdot 7^2 \cdot 17 = 2^1 \cdot 3^2 \cdot 5^{\hlblue{0}} \cdot 7^{\hlblue{2}} \cdot 13^{\hlblue{0}} \cdot 17^1$$
+$$gcd(a,b) = 2^1 \cdot 7^2$$
+
+$$a = p_1^{e_1} \cdot p_2^{e_2} \cdots p_s^{e_s}$$
+$$b = q_1^{F_1} \cdot q_2^{F_2} \cdots q_s^{F_s}$$
+$\forall$ prime $p$, define $g(p) = min\begin{cases}
+    e_i &\text{if $p = p_i$}\\
+    f_j &\text{if $p = q_j$}\\
+    0
+\end{cases}$.\\
+Then, 
+$$gcd(a,b) = \prod_{prime \ p} p^{g(p)}$$ 
+
+\noindent
+\textbf{Prime Factorization Gives LCM:}\\
+
+\textbf{Example:} 
+$$a = 2 \cdot 5 \cdot 7^{10} \cdot 13 = 2^1 \cdot 3^0 \cdot 5^{\hlblue{1}} \cdot 7^{\hlblue{10}} \cdot 13^{\hlblue{1}} \cdot 17^0$$
+$$b = 2 \cdot 3^2 \cdot 7^2 \cdot 17 = 2^{\hlblue{1}} \cdot 3^{\hlblue{2}} \cdot 5^0 \cdot 7^2 \cdot 13^0 \cdot 17^{\hlblue{1}}$$
+$$lcm(a,b) = 2^1 \cdot 3^2 \cdot 5^1 \cdot 7^{10} \cdot 13^1 \cdot 17^1$$
+
+$$a = p_1^{e_1} \cdot p_2^{e_2} \cdots p_s^{e_s}$$
+$$b = q_1^{F_1} \cdot q_2^{F_2} \cdots q_s^{F_s}$$
+$\forall$ prime $p$, define $l(p) = min\begin{cases}
+    e_i &\text{if $p = p_i$}\\
+    f_j &\text{if $p = q_j$}\\
+    0
+\end{cases}$.\\
+Then, 
+$$gcd(a,b) = \prod_{prime \ p} p^{l(p)}$$ 
+
+\section{Integers Modulo n}
+TBC.
+
+\chapter{Operations on $\ints_n$, Symmetries, and Groups}
+\section{Arithmetic Modulo n}
+TBC.
+\section{Symmetries}
+Consider the symmetries of a rectangle.\\
+\begin{center}
+   \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (0) at (-11, 7) {};
+		\node [label={above: 2}] (1) at (-7, 7) {};
+		\node [label={below: 3}] (2) at (-11, 4) {};
+		\node [label={below: 4}] (3) at (-7, 4) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (2.center) to (3.center);
+	\end{pgfonlayer}
+\end{tikzpicture} 
+\end{center}
+The notation for functions is 
+$$F = \begin{pmatrix}
+1 & 2 & 3 & 4\\
+f(1) & f(2) & f(3) & f(4)
+\end{pmatrix}$$
+\begin{align*}
+    \epsilon = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        1 & 2 & 3 & 4
+    \end{pmatrix} \hspace{0.5in}& 
+    \alpha = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 1 & 4 & 3
+    \end{pmatrix}\\[1ex]
+    \rho = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        3 & 4 & 1 & 2
+    \end{pmatrix} \hspace{0.5in}&
+    \beta = \begin{pmatrix}
+        1 & 2  & 3 & 4\\
+        4 & 3 & 2 & 1
+    \end{pmatrix}
+\end{align*}
+\textbf{Claim:} $\{\epsilon, \rho, \alpha, \beta\}$ are \emph{all} the symmetries of a rectangle.
+\begin{proof}
+    DGD Question - Will add later.
+\end{proof}
+\noindent
+Consider the symmetries of a square.
+\begin{center}
+    \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (0) at (-11, 7) {};
+		\node [label={above: 2}] (1) at (-8, 7) {};
+		\node [label={below: 3}] (2) at (-11, 4) {};
+		\node [label={below: 4}] (3) at (-8, 4) {};
+		\node [] (4) at (2.25, 4.75) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (2.center) to (3.center);
+	\end{pgfonlayer}
+    \end{tikzpicture} 
+\end{center}
+\begin{align*}
+    \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        1 & 2 & 3 & 4
+    \end{pmatrix} && \epsilon
+    && \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 1 & 4 & 3
+    \end{pmatrix} \\[1ex]
+    \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 3 & 4 & 1
+    \end{pmatrix} && 90\degree 
+    &&\begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        4 & 3 & 2 & 1
+    \end{pmatrix}\\[1ex]
+    \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        3 & 4 & 1 & 2
+    \end{pmatrix}&& 180\degree
+    && \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        3 & 2 & 1 & 4
+    \end{pmatrix}\\[1ex]
+    \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        4 & 1 & 2 & 3
+    \end{pmatrix}&& 270\degree
+    &&\begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        1 & 4 & 3 & 2
+    \end{pmatrix}
+\end{align*}
+\subsection{Properties of Symmetries}
+    $S = \{\alpha, \beta, \dots\}$ symmetries of some objection, with the operation composition.
+\textbf{Properties:}
+\begin{itemize}
+    \item $\alpha \circ \beta$ is a symmetry $\forall \alpha,\beta \in S$
+    \item $(\alpha \circ \beta) \circ \gamma = \alpha \circ (\beta \circ \gamma)$ $\forall \alpha,\beta,\gamma \in S$
+    \item $\exists \epsilon \in S$ such that $\epsilon \circ \alpha = \alpha \circ \epsilon = \alpha$ $\forall \alpha \in S$
+    \item $\forall \alpha \in S$, $\exists \beta \in S$, such that $\alpha \circ \beta = \beta circ \alpha = \epsilon$ $\forall \alpha, \beta \in S$
+\end{itemize}
+
+\begin{center}
+  \textit{\purple{Note: we often write $\alpha\beta$ instead of $\alpha \circ \beta$}}  
+\end{center}
+
+\textbf{Example:} $S =$ symmetries of some object, is $gh = hg$ $\forall g,h \in S$?.
+\textbf{Answer:} For a rectangle, yes. But for a square, no.
+
+\begin{center}
+   \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (0) at (-11, 7) {};
+		\node [label={above: 2}] (1) at (-9, 7) {};
+		\node [label={below: 4}] (2) at (-11, 5) {};
+		\node [label={below: 3}] (3) at (-9, 5) {};
+		\node (4) at (-8.25, 6) {};
+		\node (5) at (-6.75, 6) {};
+		\node (6) at (-8, 6.25) {};
+		\node (7) at (-8, 5.75) {};
+		\node (8) at (-7, 5.75) {};
+		\node (9) at (-7, 6.25) {};
+		\node (10) at (-8.25, 6) {};
+		\node [label={above: 2}] (11) at (-6, 7) {};
+		\node [label={above: 1}] (12) at (-4, 7) {};
+		\node [label={below: 3}] (13) at (-6, 5) {};
+		\node [label={below: 4}] (14) at (-4, 5) {};
+		\node  (15) at (-3.25, 6) {};
+		\node (16) at (-2, 6) {};
+		\node (17) at (-1.75, 6.25) {};
+		\node (18) at (-2.25, 6.25) {};
+		\node [label={above: 3}] (19) at (-1, 7) {};
+		\node [label={above: 2}] (20) at (1, 7) {};
+		\node [label={below: 4}] (21) at (-1, 5) {};
+		\node [label={below: 1}] (22) at (1, 5) {};
+		\node (23) at (-2.75, 6) {90\degree};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (2.center) to (3.center);
+		\draw (4.center) to (5.center);
+		\draw (10.center) to (6.center);
+		\draw (10.center) to (7.center);
+		\draw (5.center) to (9.center);
+		\draw (5.center) to (8.center);
+		\draw (11.center) to (12.center);
+		\draw (12.center) to (14.center);
+		\draw (11.center) to (13.center);
+		\draw (13.center) to (14.center);
+		\draw [bend left=90, looseness=1.75] (15.center) to (16.center);
+		\draw (16.center) to (17.center);
+		\draw (16.center) to (18.center);
+		\draw (19.center) to (20.center);
+		\draw (20.center) to (22.center);
+		\draw (19.center) to (21.center);
+		\draw (21.center) to (22.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+\end{center}    
+\begin{center}
+    \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (24) at (-11, 4) {};
+		\node [label={above: 2}] (25) at (-9, 4) {};
+		\node [label={below: 4}] (26) at (-11, 2) {};
+		\node [label={below: 3}] (27) at (-9, 2) {};
+		\node (28) at (-3.25, 3) {};
+		\node (29) at (-1.75, 3) {};
+		\node (30) at (-3, 3.25) {};
+		\node (31) at (-3, 2.75) {};
+		\node (32) at (-2, 2.75) {};
+		\node (33) at (-2, 3.25) {};
+		\node (34) at (-3.25, 3) {};
+		\node [label={above: 4}] (35) at (-6, 4) {};
+		\node [label={above: 1}] (36) at (-4, 4) {};
+		\node [label={below: 3}] (37) at (-6, 2) {};
+		\node [label={below: 2}] (38) at (-4, 2) {};
+		\node (39) at (-8.25, 3) {};
+		\node (40) at (-7, 3) {};
+		\node (41) at (-6.75, 3.25) {};
+		\node (42) at (-7.25, 3.25) {};
+		\node [label={above: 1}] (43) at (-1, 4) {};
+		\node [label={above: 4}] (44) at (1, 4) {};
+		\node [label={below: 2}] (45) at (-1, 2) {};
+		\node [label={below: 3}] (46) at (1, 2) {};
+		\node (47) at (-7.75, 3) {90\degree};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (24.center) to (25.center);
+		\draw (25.center) to (27.center);
+		\draw (24.center) to (26.center);
+		\draw (26.center) to (27.center);
+		\draw (28.center) to (29.center);
+		\draw (34.center) to (30.center);
+		\draw (34.center) to (31.center);
+		\draw (29.center) to (33.center);
+		\draw (29.center) to (32.center);
+		\draw (35.center) to (36.center);
+		\draw (36.center) to (38.center);
+		\draw (35.center) to (37.center);
+		\draw (37.center) to (38.center);
+		\draw [bend left=90, looseness=1.75] (39.center) to (40.center);
+		\draw (40.center) to (41.center);
+		\draw (40.center) to (42.center);
+		\draw (43.center) to (44.center);
+		\draw (44.center) to (46.center);
+		\draw (43.center) to (45.center);
+		\draw (45.center) to (46.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+
+\end{center}
+
+These symmetries do not compute, so $gh \neq hg$.
+
+\subsection{Generating Sets}
+
+
+
+\begin{center}
+         \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (0) at (-11, 7) {};
+		\node [label={above: 2}] (1) at (-7, 7) {};
+		\node [label={below: 3}] (2) at (-11, 4) {};
+		\node [label={below: 4}] (3) at (-7, 4) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0.center) to (1.center);
+		\draw (1.center) to (3.center);
+		\draw (0.center) to (2.center);
+		\draw (2.center) to (3.center);
+	\end{pgfonlayer}
+\end{tikzpicture} 
+\end{center}
+\begin{align*}
+    \epsilon = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        1 & 2 & 3 & 4
+    \end{pmatrix} \hspace{0.5in}& 
+    \alpha = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 1 & 4 & 3
+    \end{pmatrix}\\[1ex]
+    \rho = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        3 & 4 & 1 & 2
+    \end{pmatrix} \hspace{0.5in}&
+    \beta = \begin{pmatrix}
+        1 & 2  & 3 & 4\\
+        4 & 3 & 2 & 1
+    \end{pmatrix}
+\end{align*}
+
+\textbf{Check:} $\alpha\beta = \rho$, $\alpha^2 = \epsilon$. So $\forall g \in S$, $g$ can be written in terms of $\alpha, \beta$.\\[2ex]
+We say that $\{\alpha,\beta\}$ \blue{generates} $S$
+
+\section{Groups}
+Let $S$ be some set with some operation $\cdot$. Then $(S, \cdot)$ is a \blue{group} if
+\begin{itemize}
+    \item \textbf{\purple{Closure:}} $ab \in S$ $\forall a,b \in S$
+    \item \textbf{\purple{Associativity:}} $(ab)c = a(bc)$  $\forall a,b,c \in S$
+    \item \textbf{\purple{Identity:}} $\exists \epsilon \in S$ such that $x\epsilon = \epsilon x = x$  $\forall x \in S$
+    \item \textbf{\purple{Inverses:}} $\forall x \in S$, $\exists y \in S$ such that $xy = yx = \epsilon$
+\end{itemize}
+\textbf{Examples:}
+\begin{itemize}
+    \item Symmetries of an object form a group.
+    \item $(\real, +)$ forms a group.
+    \item $(\real \setminus \{0\}, \cdot)$ forms a group.
+    \item $(\ints, +)$ forms a group.
+    \item $(\ints, \cdot)$ does not form a group since inverses are typically not integers.
+    \item $(\ints_n, +)$ forms a group.
+    \item $(\ints_n \setminus \{0\}, \cdot)$ forms a group.
+\end{itemize}
+
+\chapter{More Examples of Groups, Groups of Units of $\ints_n$}
+TBC.
+
+\chapter{Basic Properties of Groups, Products of Groups, Isomorphisms}
+Examples were left out I may come back to finish
+\section{Basic Properties of Groups}
+\begin{prop}
+    In every group, the identity is unique.
+\end{prop}
+\begin{proof}
+    Suppose $a,b$ are identities, so\\
+    \[\begin{rcases}
+        $ax = xa = x$\\
+        $bx = xb = x$
+    \end{rcases}\forall x
+    \]
+    Because $b$ is an identity, we have $a = ab$, and since $a$ is an identity, we have $ab = b$. So
+    $$a = ab = b$$
+    $$\therefore a = b$$
+\end{proof}
+
+\begin{prop}
+    In every group, the equation $ax = b$ has a unique solution x for all $a,b$
+\end{prop}
+\begin{proof}
+    There was no proof :(
+\end{proof}
+\begin{prop}
+    In every group, $ab = ac \implies b = c$
+\end{prop}
+\begin{proof}
+    Again, no proof :(
+\end{proof}
+\textit{Note: For matricies it is not the same, $AB = AC \centernot\implies B = C$}
+\begin{prop}
+    In every group, $(ab)^{-1} = b^{-1}a^{-1}$
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        (ab)(b^{-1}a^{-1}) &= a(bb^{-1})a^{-1} & (b^{-1}a^{-1})(ab) &= b^{-1}(a^{-1}a)b\\
+        &= a \epsilon a^{-1} & &= b^{-1} \epsilon b\\
+        &= a a^{-1} & &=b^{-1} b\\
+        &= \epsilon & &=\epsilon
+    \end{align*}
+\end{proof}
+\begin{prop}
+    In every group, $(a^{-1})^{-1} = a$
+\end{prop}
+\begin{proof}
+    Since $a^{-1}$ is the inverse of $a$, we have
+    $$aa^{-1} = a^{-1}a = \epsilon$$
+    but then,
+    $$a^{-1}a = aa^{-1} = \epsilon$$
+    So $a$ is the inverse of $a^{-1}$
+\end{proof}
+\begin{prop}
+    In every group, if $xy = x$, for some $x,y$, then $y = \epsilon$. So if $y$ behaves as the identity just once, then $y$ is the identity.
+\end{prop}
+\begin{proof}
+    No proof again :P.
+\end{proof}
+\begin{prop}
+    In every group, if $xy = \epsilon$, for some $x,y$, then $y = x^{-1}$. So if $y$ behaves like $x^{-1}$ on one side, then $y$ is $x^{-1}$
+\end{prop}
+\begin{proof}
+    No proof D: 
+\end{proof}
+\begin{prop}
+    In every group, the Cayley table has exactly one row and column that matches the headers, and no other row or column mathes the header even once.
+\end{prop}
+\begin{proof}
+    Start by taking $G$ to be some group, then let $x,y \in G$. And let $H$ be a subgroup of $G$.\\[5ex]
+    just kidding no proof.
+\end{proof}
+\begin{prop}
+    In every group, every row and column of the Cayley table contains each element exactly once.
+\end{prop}
+\begin{proof}
+    Why does the prof include a spot for the proof.
+\end{proof}
+\subsection{Small Groups}
+\begin{itemize}
+    \item Say $G$ has one element $G = \{x\}$ \\
+        \textbf{Closure:} $x \cdot x = x$\\
+        \textbf{Identity:} $x = \epsilon$\\
+        \textbf{Inverse:} $x^{-1} = x$
+        \begin{center}
+            \begin{tabular}{c|c}
+            $\cdot$ & $x$\\
+            \hline
+               $x$  & $x$
+            \end{tabular}
+        \end{center}
+    \item Say $G$ has two elements, it must have an identity so $G = \{\epsilon, x\}$ If $xx = x$, $x = \epsilon$, this is a contradiction,  So $xx = \epsilon$
+    \begin{center}
+        \begin{tabular}{c|cc}
+            $\cdot$ & $\epsilon$ & $x$  \\
+            \hline
+            $\epsilon$ & $\epsilon$ & $x$\\
+            $x$ & $x$ & $\epsilon$\\
+        \end{tabular}
+    \end{center}
+    \item Say $G$ has three elements. $G = \{\epsilon, x, y\}$
+    \begin{center}
+        \begin{tabular}{c|ccc}
+             $\cdot$ & $\epsilon$ & $x$ & $y$ \\
+             \hline
+             $\epsilon$ & $\epsilon$ & $x$ & $y$\\
+             $x$ & $x$ & $y$ & $\epsilon$\\
+             $y$ & $y$ & $\epsilon$ & $x$\\
+        \end{tabular}
+    \end{center}
+    \begin{align*}
+        x\epsilon = x &\implies xy \neq x\\
+        \epsilon y  = y &\implies xy = \neq y
+    \end{align*}
+    So $xy = \epsilon$
+    \begin{align*}
+        x \epsilon = x &\implies xx \neq x\\
+        xy = \epsilon &\implies xx \neq \epsilon
+    \end{align*}
+    So $xx = y$
+    \item Say $G$ has 4 elements. Assignment Question!
+\end{itemize}
+
+\section{Products of Groups}
+$G, H$ are groups, define 
+$$G \times H = \{(g,h) : g \in G, h \in H\}$$
+$$(x,a) \cdot (y, b) = (x \cdot y, a \cdot b)$$
+$$G_1 \times G_2 \times \cdots G_k = \{(g_1, g_2, \dots, g_n : g_j \in G_j\}$$
+\textbf{To reiterate}, operations are done by component according to the operations of the group. i.e Suppose we have a group $G = (A, +)$ and $H = (B, \cdot)$ and $g,a \in G$, $h,b \in H$.
+$$(g, h) \times (a,b) = (g + a, h \cdot b)$$
+\begin{prop}
+    The product of groups is a group.
+\end{prop}
+\begin{proof}
+    Exercise.
+\end{proof}
+\textbf{Example:}
+\section{Isomorphisms}
+Suppose $\phi: G \rightarrow H$ is a bijection between two groups with the property 
+$$\phi(xy) = \phi(x)\phi(y)$$
+Then $\phi$ is an \blue{isomorphism} of $G \blue{\cong} H$. So
+$$G: x \cdot y = z \implies H: \phi(x) \cdot \phi(y) = \phi (z)$$
+\begin{align*}
+    \begin{tabular}{c|cccc}
+       $\cdot$  & &  &  & $y$  \\
+       \hline
+                & &  &  &  \\ 
+            $x$ &  & &  & $z$\\
+            \\
+            \\
+    \end{tabular} &&
+        \begin{tabular}{c|cccc}
+       $\cdot$  &  & $y'$ &  &   \\
+       \hline
+                &   &  &  &  \\ 
+              &  & &  & \\
+            x'&  & $z'$&  &
+            \\
+            \\
+    \end{tabular}\\
+\end{align*}
+\begin{align*}
+    x' = \phi(x) && y' = \phi(y) && z' = x'y' = \phi(z)
+\end{align*}
+Start with $G$'s Cayley table, change the names (symbols, consistently) and permute the rows and columns. This gives $H$'s Cayley table.\\[3ex]
+
+\textbf{Example:}
+\begin{align*}
+    \ints_2 = \{0,1\} && \ints^\times = \{-1,1\} && G = (\{\ints^+, \ints^-\}, \cdot)\\
+    \begin{tabular}{c|cc}
+        + & $0$ & $1$  \\
+        \hline
+         $0$& $0$ & $1$\\
+         $1$ & $1$ & $0$
+    \end{tabular} &&    
+    \begin{tabular}{c|cc}
+        $\cdot$ & $1$ & $-1$  \\
+        \hline
+         $1$& $1$ & $-1$\\
+         $-1$ & $-1$ & $1$
+    \end{tabular} &&
+    \begin{tabular}{c|cc}
+        $\cdot$ & $+$ & $-$  \\
+        \hline
+         $+$& $+$ & $-$\\
+         $-$ & $-$ & $+$
+    \end{tabular}
+\end{align*}
+$$\ints_2 \cong \ints^\times \cong G$$
+
+\begin{prop}
+    All groups with two elements are isomorphic
+\end{prop}
+\begin{proof}
+    If $G$ has two elements, then its Cayley table looks like 
+    \begin{center}
+         \begin{tabular}{c|cc}
+        $\cdot$ & $\epsilon$ & $x$ \\
+        \hline
+        $\epsilon$ & $\epsilon$ & $x$\\
+        $x$ & $x$ & $\epsilon$
+    \end{tabular}   
+    \end{center}
+    Except they may use different symbols and have reordered rows/columns, so they are all isomorphic.
+\end{proof}
+
+\chapter{Automorphisms, Subgroups}
+\section{Automorphisms}
+\textbf{Example:}
+Let $H = $ \textit{symmetries of a rectangle} and $K = \ints_2 \times \ints_2 = \{(x,y): x\in \ints_2, \ y\in\ints_2\}$
+$$H = \{\epsilon, \alpha, \beta, \rho\} \ with \ composition$$
+$$K = \{00, 01, 10,11\} \ with \ addition \ in \ \ints_2$$
+\begin{align*}
+\begin{tabular}{c|cccc}
+     $H$& $\epsilon$ & $\alpha$ & $\beta$ &$\rho$  \\
+     \hline
+     $\epsilon$ & $\epsilon$ & $\alpha$ & $\beta$ & $\rho$\\
+     $\alpha$ & $\alpha$ & $\epsilon$ & $\rho$ & $\beta $\\
+     $\beta$ & $\beta$ & $\rho$ & $\epsilon$ & $\alpha$\\
+     $\rho$ & $\rho$ & $\beta$ & $\alpha$ & $\epsilon$  
+\end{tabular}&&
+\begin{tabular}{c|cccc}
+     $G$& $00$ & $01$ & $10$ &$11$  \\
+     \hline
+     $00$ & $00$ & $01$ & $10$ & $11$\\
+     $01$ & $01$ & $00$ & $11$ & $10 $\\
+     $10$ & $10$ & $11$ & $00$ & $01$\\
+     $11$ & $11$ & $10$ & $01$ & $00$  
+\end{tabular}\\
+\end{align*}
+
+\begin{align*}
+    \phi \begin{cases}
+    \epsilon \rightarrow 00\\
+    \alpha \rightarrow 01\\
+    \beta \rightarrow 10\\
+    \rho \rightarrow 11
+\end{cases} && or && 
+\phi \begin{cases}
+    \epsilon \rightarrow 00\\
+    \alpha \rightarrow 01\\
+    \beta \rightarrow 11\\
+    \rho \rightarrow 10
+\end{cases}
+\end{align*}
+In fact, all we need for the isomorphism is $\epsilon \rightarrow 00$, we can have $\alpha,\beta,\rho \rightarrow 01,10,11$ in any order.\\[3ex]
+An \blue{automorphism} of G is an isomorphism $G \rightarrow G$, this is a symmetry group of G. The set of all automorphisms of $G$ is a group we call $aut(G)$, the \blue{automorphism group} of $G$.
+\begin{align*}
+    \begin{tabular}{c|cccc}
+     $H$& $\epsilon$ & $\alpha$ & $\beta$ &$\rho$  \\
+     \hline
+     $\epsilon$ & $\epsilon$ & $\alpha$ & $\beta$ & $\rho$\\
+     $\alpha$ & $\alpha$ & $\epsilon$ & $\rho$ & $\beta $\\
+     $\beta$ & $\beta$ & $\rho$ & $\epsilon$ & $\alpha$\\
+     $\rho$ & $\rho$ & $\beta$ & $\alpha$ & $\epsilon$  
+\end{tabular} &&
+\begin{tabular}{c|cccc}
+     $H$& $\epsilon$ & $\alpha$ & $\purple{\rho}$ &$\purple{\beta}$  \\
+     \hline
+     $\epsilon$ & $\epsilon$ & $\alpha$ & $\purple{\rho}$ & $\purple{\beta}$\\
+     $\alpha$ & $\alpha$ & $\epsilon$ & $\purple{\beta}$ & $\purple{\rho} $\\
+     $\purple{\rho}$ & $\purple{\rho}$ & $\purple{\beta}$ & $\epsilon$ & $\alpha$\\
+     $\purple{\beta}$ & $\purple{\beta}$ & $\purple{\rho}$ & $\alpha$ & $\epsilon$  
+\end{tabular}
+\end{align*}
+Let $\phi$ be any bijection $\{\epsilon, \alpha, \beta, \rho\} \rightarrow \{\epsilon, \alpha, \rho\, \beta \}$ with $\phi(\epsilon) = \epsilon$. Then $\phi$ is an automorphism of $H$.\\[2ex]
+\textbf{Exercise:} Let $G =$ \textit{the symmetries of an equilateral triangle}. Show that 
+$$aut(H) \cong G$$
+\section{Quaternions}
+$$Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}$$
+$\pm$ and $1$ operate as expected. And 
+$$i^2 = j^2 = k^2 = ijk = -1$$
+\begin{center}
+    \begin{tabular}{c|cccccccc}
+        $Q_8$ & $1$ & $-1$ & $i$ & $-i$ & $j$ & $-j$ & $k$ & $-k$ \\
+        \hline
+        $1$ & $1$ & $-1$ & $i$ & $-i$ & $j$ & $-j$ & $k$ & $-k$ \\
+        $-1$ & $-1$ & $1$ & $-i$ & $i$ & $-j$ & $j$ & $-k$ & $k$\\
+        $i$ & $i$ & $-i$ & $-1$ & $1$ & $k$ & $-k$ & $j$ & $j$\\
+        $-i$ & $-i$ & $i$ & $1$ & $1$ & $-k$ & $k$ & $-j$ & $j$\\
+        $j$ & $j$ & $-j$ & $-k$ & $k$ & $-1$ & $1$ & $-i$ & $i$\\
+        $-j$ & $-j$ & $j$ & $k$ & $-k$ & $1$ & $-1$ & $i$ & $-i$\\
+        $k$ & $k$ & $-k$ & $j$ & $-j$ & $-i$ & $i$ & $-1$ & $1$\\
+        $-k$ & $-k$ & $k$ & $-j$ & $j$ & $i$ & $-i$ & $1$ & $-1$\\
+    \end{tabular}
+\end{center}
+\begin{itemize}
+    \item \textbf{Closure:} Yes, $Q_8$ is closed.
+    \item \textbf{Identity:} $1$ is the identity for $Q_8$.
+    \item \textbf{Inverse:} Every column has the identity ($1$), so an inverse exists for every element in $Q_8$.
+    \item \textbf{Associativity:} Consider the set of matrices $M_8$ with entries in $\mathbb{C}$
+    \begin{align*}
+        M_8 = \left\{ 
+        \pm \begin{bmatrix}
+         $1$ & $0$ \\
+         $0$ & $1$
+        \end{bmatrix},
+        \pm \begin{bmatrix}
+            $0$ & $1$ \\
+            $-1$ & $0$
+        \end{bmatrix},
+        \pm \begin{bmatrix}
+            $0$ & $i$ \\
+            $i$ & $0$
+        \end{bmatrix},
+        \pm \begin{bmatrix}
+            $i$ & $0$\\
+            $0$ & $-i$
+        \end{bmatrix}
+        \right\}
+    \end{align*}
+    And the function $\phi: M_8 \rightarrow Q_8$ 
+    $$Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}$$
+    $\phi: M_8 \rightarrow Q_8$ is a bijection
+    $$\phi(ab) = \phi(a)\phi(b)$$
+    Because $M_8$ is a set of matrices, it is closed, associative, has an identity and has inverses, therefore $M_8$ is a group. $Q_8$ is isomorphic to $M_8$, so it follows that it is also a group. 
+\end{itemize}
+Therefore, $Q_8$ is closed, has identity, has inverses and is associative. 
+\section{Subgroups}
+Consider the following 
+\begin{itemize}
+    \item $G$ is a group with operation $\cdot$
+    \item $H$ is a subset of $G$
+    \item $H$ is a group with the same operation $\cdot$
+\end{itemize}
+Then $H$ is a \purple{subgroup} of $G$. We denote subgroups as $H \leq G$ or $H < G$
+$$(\ints, +) < (\mathbb{Q}, +) < (\real, +) < (\mathbb{C}, +)$$
+\textbf{Example:}
+$$(\ints_3, +) \not\leq (\ints_5, + )$$
+This is the case because 
+$$\ints_3 = \{0,1,2\} = \{[0], [1], [2]\} \not\subseteq \{[0], [1], [2], [3], [4]\} = \{0,1,2,3,4\} = \ints_5$$
+These sets are equivalence classes \textbf{not} numbers so they are not subsets of each other.
+\subsection{Subgroup Test}
+\begin{prop}
+Suppose $H$ is a subset of $G$, if $H \neq \emptyset$
+$$x,y \in H \implies xy \in H$$
+$$x \in H \implies x^{-1} \in H$$
+then $H$ is a subgroup.
+\end{prop}
+\begin{proof}
+    Show that $H$ is a group
+    \begin{itemize}
+        \item \textbf{Closure:} Is given.
+        \item \textbf{Associative:} $G$ is associative so any subset "inherits" associativity.
+        \item \textbf{Identity:} Let $\epsilon_g$ be the identity in $G$. $\epsilon_a \cdot a  = a$ $\forall a \in H$. $\exists a \in H$, so $a^{-1} \in H$, since $H$ is a subset of $G$, $a, a^{-1} \in G$, therefore $a \cdot a^{-1} = \epsilon_g \in H$.
+        \item \textbf{Inverse:} Given
+    \end{itemize}
+\end{proof}
+
+\begin{prop}
+    $H$ a subgroup of $G$ $\implies \epsilon_g \in H$ and so $\epsilon_H \in G$
+\end{prop}
+\begin{proof}
+    $H \neq \emptyset$, so let $x \in H$, then $x^{-1} \in H$, then $x \cdot x^{-1} = \epsilon_G \in H$. Furthermore
+    $$\epsilon_G \cdot h = h \cdot \epsilon_G = h \ \forall h \in H$$
+    Since $H \subseteq G$,and $H$ has a unique identity, then $\epsilon_G = \epsilon_H$
+\end{proof}
+\subsection{Alternative Versions of Subgroup Test}
+Suppose $H$ is a subset of $G$, if
+\begin{itemize}
+    \item  $H \neq \emptyset$
+    \item $x,y \in H \implies xy \in H$
+    \item $x \in H \implies x^{-1} \in H$
+\end{itemize}
+then $H$ is a subgroup.
+
+\chapter{Lattices and Cyclic Groups}
+\textbf{Recall:} H is a \blue{subgroup} of G if 
+\begin{itemize}
+    \item $H \subseteq G$
+    \item They have the same operation (Cayley table of $H$ is obtained by deleting rows/columns from $G$
+    \item $H$ is a group
+\end{itemize}
+\textbf{\blue{Subgroup Test:}} 
+If $H \subseteq G$ with the same operation and $H$ is not empty,
+$$x,y \in H \implies xy \in H$$
+$$x \in H \implies x^{-1} \in H$$
+then $H$ is a subgroup of $G$. 
+
+\section{Find all subgroups of $(\ints, +)$}
+Say $H$ is a subgroup of $\ints$, $H \neq \{0\}$. Let $n$ be the smallest positive integer in $H$, then 
+$$\{\dots, -n, 0, n, 2n, 3n, \dots\} \subseteq H$$
+$$n\ints = \{nK : k\in Z\} \subseteq H$$
+Suppose $x \in H \setminus n\ints$, then write $x = qn + r$ for $0 \leq r < n$. By closure, we have
+$$ x - qn = r \in H$$
+But, this contradicts the minimality of $n$ unless $r = 0$, but if $r = 0$, then $x \in n\ints$. Therefore, $H = n \ints$\\[2ex]
+
+\textbf{Subgroups of $\ints$}: $n\ints$ $\forall n \in \ints$, ($n = 0 \implies H = \{0\})$
+
+\section{Symmetries of a Square}
+\begin{lemma}
+There are at most eight symmetries of a square.
+\end{lemma}
+\begin{proof}
+Let $\gamma$ be a symmetry, $\gamma$ maps corners to corners.
+\begin{itemize}
+    \item $\gamma(1)$ has at most four possibilities, then $\gamma(2)$ must be one of the corners adjacent to $\gamma(1)$
+    \item $\gamma(2)$ has at most two possibilities, then $\gamma(4)$ must be the other corner adjacent to $\gamma(1)$
+    \item $\gamma(4)$ has at most one possibility, then $\gamma(3)$ must be $\{1,2,3,4\} \setminus \{\gamma(1), \gamma(2), \gamma(3), \gamma(4)\}$
+    \item $\gamma(3)$ has at most one possibility
+\end{itemize} 
+So, we have $4 \cdot 2 \cdot 1 \cdot 1 = 8$ possibilities.
+\end{proof}
+\noindent
+\textbf{Question:} Do  all possibilities work?
+\begin{lemma}
+    There are at least eight symmetries of a square 
+\end{lemma}
+\begin{proof} Consider the symmetries of a square.
+    \begin{center}
+        \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [ label={above: 1}] (24) at (-11, 4) {};
+		\node [ label={above: 2}] (25) at (-9, 4) {};
+		\node [ label={below: 4}] (26) at (-11, 2) {};
+		\node [ label={below: 3}] (27) at (-9, 2) {};
+		\node [ label={above: 4}] (35) at (-8, 4) {};
+		\node [ label={above: 1}] (36) at (-6, 4) {};
+		\node [ label={below: 3}] (37) at (-8, 2) {};
+		\node [ label={below: 2}] (38) at (-6, 2) {};
+		\node [ label={above: 3}] (43) at (-5, 4) {};
+		\node [ label={above: 4}] (44) at (-3, 4) {};
+		\node [ label={below: 2}] (45) at (-5, 2) {};
+		\node [ label={below: 1}] (46) at (-3, 2) {};
+		\node [ label={above: 2}] (47) at (-2, 4) {};
+		\node [ label={above: 3}] (48) at (0, 4) {};
+		\node [ label={below: 1}] (49) at (-2, 2) {};
+		\node [ label={below: 4}] (50) at (0, 2) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (24.center) to (25.center);
+		\draw (25.center) to (27.center);
+		\draw (24.center) to (26.center);
+		\draw (26.center) to (27.center);
+		\draw (35.center) to (36.center);
+		\draw (36.center) to (38.center);
+		\draw (35.center) to (37.center);
+		\draw (37.center) to (38.center);
+		\draw (43.center) to (44.center);
+		\draw (44.center) to (46.center);
+		\draw (43.center) to (45.center);
+		\draw (45.center) to (46.center);
+		\draw (47.center) to (48.center);
+		\draw (48.center) to (50.center);
+		\draw (47.center) to (49.center);
+		\draw (49.center) to (50.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 2}] (24) at (-11, 4) {};
+		\node [label={above: 1}] (25) at (-9, 4) {};
+		\node [label={below: 3}] (26) at (-11, 2) {};
+		\node [label={below: 4}] (27) at (-9, 2) {};
+		\node [label={above: 3}] (35) at (-8, 4) {};
+		\node [label={above: 2}] (36) at (-6, 4) {};
+		\node [label={below: 4}] (37) at (-8, 2) {};
+		\node [label={below: 1}] (38) at (-6, 2) {};
+		\node [label={above: 4}] (43) at (-5, 4) {};
+		\node [label={above: 3}] (44) at (-3, 4) {};
+		\node [label={below: 1}] (45) at (-5, 2) {};
+		\node [label={below: 2}] (46) at (-3, 2) {};
+		\node [label={above: 1}] (47) at (-2, 4) {};
+		\node [label={above: 4}] (48) at (0, 4) {};
+		\node [label={below: 2}] (49) at (-2, 2) {};
+		\node [label={below: 3}] (50) at (0, 2) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (24.center) to (25.center);
+		\draw (25.center) to (27.center);
+		\draw (24.center) to (26.center);
+		\draw (26.center) to (27.center);
+		\draw (35.center) to (36.center);
+		\draw (36.center) to (38.center);
+		\draw (35.center) to (37.center);
+		\draw (37.center) to (38.center);
+		\draw (43.center) to (44.center);
+		\draw (44.center) to (46.center);
+		\draw (43.center) to (45.center);
+		\draw (45.center) to (46.center);
+		\draw (47.center) to (48.center);
+		\draw (48.center) to (50.center);
+		\draw (47.center) to (49.center);
+		\draw (49.center) to (50.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+    \end{center}
+\end{proof}
+Let 
+\begin{align*}
+    \mu = \begin{pmatrix}
+    1 & 2 & 3 & 4\\
+    2 & 1 & 4 & 3
+    \end{pmatrix} &&
+    \rho = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 3 & 4 & 1
+    \end{pmatrix}
+\end{align*}
+\begin{prop}
+    $$\rho\mu = \mu\rho^{-1} = \mu\rho^3$$
+\end{prop}
+\begin{proof}
+Consider the square and function $\mu,\rho$.\\
+    \drawsquare 
+    \begin{align*}
+        \mu = \begin{pmatrix}
+    1 & 2 & 3 & 4\\
+    2 & 1 & 4 & 3
+    \end{pmatrix} &&
+    \rho = \begin{pmatrix}
+        1 & 2 & 3 & 4\\
+        2 & 3 & 4 & 1
+    \end{pmatrix}
+    \end{align*}
+    \begin{align*}
+        \rho\mu &= \begin{pmatrix}
+            1 & 2 & 3 & 4\\
+            2 & 1 & 4 & 3\\
+            3 & 2 & 1 & 4
+        \end{pmatrix}&
+        \mu\rho^{-1} &= \begin{pmatrix}
+            1 & 2 & 3 & 4\\
+            4 & 1 & 2 & 3\\
+            3 & 2 & 1 & 4
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            1 & 2 & 3 & 4\\
+            3 & 2 & 1 & 4
+        \end{pmatrix} &
+        &= \begin{pmatrix}
+            1 & 2 & 3 & 4\\
+            3 & 2 & 1 & 4
+        \end{pmatrix}
+    \end{align*}
+    The 2 functions are equal.
+\end{proof}
+\textbf{Example:}
+$$\rho^2\mu\rho\mu\rho^3 = \mu\rho^6\rho\mu\rho^3 = \mu\rho^7\mu\rho^3 = \mu\mu\rho^{21}\rho^3=\mu\rho^{24} = \epsilon$$
+$$\mu\rho\mu\rho^2\mu\rho = \mu\mu\rho^3\rho^2\mu\rho=\mu^2\rho^5\mu\rho=\rho\mu\rho=\mu\rho^3\rho=\mu\rho^3\rho = \mu$$
+\begin{corollary}
+    \begin{align*}
+        G &= <\mu, \rho : \mu^2 = \epsilon, \rho^4 = \epsilon, \rho\mu=\mu\rho^3>\\
+        &= \{\mu^i\rho^j: 0 \leq i \leq 1, 0 \leq j \leq 3\}\\
+        &= \{\rho^i\mu^i: 0\leq i\leq 1, 0\leq j \leq 3\}
+    \end{align*}
+\end{corollary}
+\begin{proof}
+    Any sequence of $\mu$'s and $\rho$'s can be written as $\mu^s\rho^t$ using $\rho\mu = \mu\rho^3$ ($\rho^t\mu^s$ using $\mu\rho = \rho^3\mu$) reduce powers on $\mu$ and $\rho$ using $\mu^2 = \epsilon$ $\rho^4 = \epsilon$
+    $$G = \{\mu^i\rho^j: 0 \leq i \leq 1, \ 0 \leq j \leq 3\}$$
+    These are all distinct since $|G| = 8$ so the relations $\mu^2 = \epsilon$ $\rho^4 = \epsilon$ $\rho\mu = \mu\rho^3$ are sufficient to characterize $G$
+\end{proof}
+\textbf{Compare}:
+$$F = <\alpha, \beta : \alpha^2 = \epsilon, \beta^4 = \epsilon>$$
+$\alpha\beta,\alpha\beta\alpha,\alpha\beta\alpha\beta, \dots$ are all distinct
+$$\alpha^3\beta^7\alpha\beta = \alpha\beta^3\alpha\beta$$
+$$|F| = \infty$$
+\drawsquare
+\begin{align*}
+    \mu = \begin{pmatrix}
+    1 & 2 & 3 & 4\\
+    2 & 1 & 4 & 3
+\end{pmatrix} &&\rho = \begin{pmatrix}
+    1 & 2 & 3 & 4\\
+    2 & 3 & 4 & 1
+\end{pmatrix}
+\end{align*}
+\begin{align*}
+    G &= \{\mu^i\rho^i: 0\leq i \leq 1, 0 \leq j \leq 3\}\\
+    &= \{\rho^i\mu^i: 0\leq i \leq 1, 0 \leq j \leq 3\}
+\end{align*}
+\begin{center}
+    \begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [label={above: 1}] (24) at (-11, 4) {};
+		\node [label={above: 2}] (25) at (-9, 4) {};
+		\node [label={below: 4}] (26) at (-11, 2) {};
+		\node [label={below: 3}] (27) at (-9, 2) {};
+		\node [label={above: 4}] (35) at (-7, 4) {};
+		\node [label={above: 1}] (36) at (-5, 4) {};
+		\node [label={below: 3}] (37) at (-7, 2) {};
+		\node [label={below: 2}] (38) at (-5, 2) {};
+		\node [label={above: 3}] (43) at (-3, 4) {};
+		\node [label={above: 4}] (44) at (-1, 4) {};
+		\node [label={below: 2}] (45) at (-3, 2) {};
+		\node [label={below: 1}] (46) at (-1, 2) {};
+		\node [label={above: 2}] (47) at (1, 4) {};
+		\node [label={above: 3}] (48) at (3, 4) {};
+		\node [label={below: 1}] (49) at (1, 2) {};
+		\node [label={below: 4}] (50) at (3, 2) {};
+		\node [label={above: 2}] (51) at (-11, 0) {};
+		\node [label={above: 1}] (52) at (-9, 0) {};
+		\node [label={below: 3}] (53) at (-11, -2) {};
+		\node [label={below: 4}] (54) at (-9, -2) {};
+		\node [label={above: 3}] (55) at (-7, 0) {};
+		\node [label={above: 2}] (56) at (-5, 0) {};
+		\node [label={below: 4}] (57) at (-7, -2) {};
+		\node [label={below: 1}] (58) at (-5, -2) {};
+		\node [label={above: 4}] (59) at (-3, 0) {};
+		\node [label={above: 3}] (60) at (-1, 0) {};
+		\node [label={below: 1}] (61) at (-3, -2) {};
+		\node [label={below: 2}] (62) at (-1, -2) {};
+		\node [label={above: 1}] (63) at (1, 0) {};
+		\node [label={above: 4}] (64) at (3, 0) {};
+		\node [label={below: 2}] (65) at (1, -2) {};
+		\node [label={below: 3}] (66) at (3, -2) {};
+		\node (67) at (-10.25, 0.5) {};
+		\node (68) at (-10.25, 1.5) {};
+		\node (69) at (-10.5, 1.25) {};
+		\node (70) at (-10, 1.25) {};
+		\node (71) at (-8.5, 3) {};
+		\node (72) at (-7.5, 3) {};
+		\node (73) at (-7.75, 3.25) {};
+		\node (74) at (-7.75, 2.75) {};
+		\node (75) at (-4.5, 3) {};
+		\node (76) at (-3.5, 3) {};
+		\node (77) at (-3.75, 3.25) {};
+		\node (78) at (-3.75, 2.75) {};
+		\node (79) at (-0.5, 3) {};
+		\node (80) at (0.5, 3) {};
+		\node (81) at (0.25, 3.25) {};
+		\node (82) at (0.25, 2.75) {};
+		\node (83) at (0.5, -1) {};
+		\node (84) at (-0.5, -1) {};
+		\node (85) at (-0.25, -0.75) {};
+		\node (86) at (-0.25, -1.25) {};
+		\node (87) at (-3.5, -1) {};
+		\node (88) at (-4.5, -1) {};
+		\node (89) at (-4.25, -0.75) {};
+		\node (90) at (-4.25, -1.25) {};
+		\node (91) at (-7.5, -1) {};
+		\node (92) at (-8.5, -1) {};
+		\node (93) at (-8.25, -0.75) {};
+		\node (94) at (-8.25, -1.25) {};
+		\node (95) at (-9.75, 1.5) {};
+		\node (96) at (-9.75, 0.5) {};
+		\node (97) at (-9.5, 0.75) {};
+		\node (98) at (-10, 0.75) {};
+		\node (99) at (-6.25, 0.5) {};
+		\node (100) at (-6.25, 1.5) {};
+		\node (101) at (-6.5, 1.25) {};
+		\node (102) at (-6, 1.25) {};
+		\node (103) at (-5.75, 1.5) {};
+		\node (104) at (-5.75, 0.5) {};
+		\node (105) at (-5.5, 0.75) {};
+		\node (106) at (-6, 0.75) {};
+		\node (107) at (-2.25, 0.5) {};
+		\node (108) at (-2.25, 1.5) {};
+		\node (109) at (-2.5, 1.25) {};
+		\node (110) at (-2, 1.25) {};
+		\node (111) at (-1.75, 1.5) {};
+		\node (112) at (-1.75, 0.5) {};
+		\node (113) at (-1.5, 0.75) {};
+		\node (114) at (-2, 0.75) {};
+		\node (115) at (1.75, 0.5) {};
+		\node (116) at (1.75, 1.5) {};
+		\node (117) at (1.5, 1.25) {};
+		\node (118) at (2, 1.25) {};
+		\node (119) at (2.25, 1.5) {};
+		\node (120) at (2.25, 0.5) {};
+		\node (121) at (2.5, 0.75) {};
+		\node (122) at (2, 0.75) {};
+		\node (123) at (2, 4.25) {};
+		\node (124) at (-10, 4.25) {};
+		\node (125) at (-10, 4.5) {};
+		\node (126) at (-9.75, 4.25) {};
+		\node (127) at (-10, -2.25) {};
+		\node (128) at (2, -2.25) {};
+		\node (129) at (1.75, -2.25) {};
+		\node (130) at (2, -2.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (24.center) to (25.center);
+		\draw (25.center) to (27.center);
+		\draw (24.center) to (26.center);
+		\draw (26.center) to (27.center);
+		\draw (35.center) to (36.center);
+		\draw (36.center) to (38.center);
+		\draw (35.center) to (37.center);
+		\draw (37.center) to (38.center);
+		\draw (43.center) to (44.center);
+		\draw (44.center) to (46.center);
+		\draw (43.center) to (45.center);
+		\draw (45.center) to (46.center);
+		\draw (47.center) to (48.center);
+		\draw (48.center) to (50.center);
+		\draw (47.center) to (49.center);
+		\draw (49.center) to (50.center);
+		\draw (51.center) to (52.center);
+		\draw (52.center) to (54.center);
+		\draw (51.center) to (53.center);
+		\draw (53.center) to (54.center);
+		\draw (55.center) to (56.center);
+		\draw (56.center) to (58.center);
+		\draw (55.center) to (57.center);
+		\draw (57.center) to (58.center);
+		\draw (59.center) to (60.center);
+		\draw (60.center) to (62.center);
+		\draw (59.center) to (61.center);
+		\draw (61.center) to (62.center);
+		\draw (63.center) to (64.center);
+		\draw (64.center) to (66.center);
+		\draw (63.center) to (65.center);
+		\draw (65.center) to (66.center);
+		\draw (67.center) to (68.center);
+		\draw (68.center) to (70.center);
+		\draw (68.center) to (69.center);
+		\draw (71.center) to (72.center);
+		\draw (72.center) to (74.center);
+		\draw (72.center) to (73.center);
+		\draw (75.center) to (76.center);
+		\draw (76.center) to (78.center);
+		\draw (76.center) to (77.center);
+		\draw (79.center) to (80.center);
+		\draw (80.center) to (82.center);
+		\draw (80.center) to (81.center);
+		\draw (83.center) to (84.center);
+		\draw (84.center) to (86.center);
+		\draw (84.center) to (85.center);
+		\draw (87.center) to (88.center);
+		\draw (88.center) to (90.center);
+		\draw (88.center) to (89.center);
+		\draw (91.center) to (92.center);
+		\draw (92.center) to (94.center);
+		\draw (92.center) to (93.center);
+		\draw (95.center) to (96.center);
+		\draw (96.center) to (98.center);
+		\draw (96.center) to (97.center);
+		\draw (99.center) to (100.center);
+		\draw (100.center) to (102.center);
+		\draw (100.center) to (101.center);
+		\draw (103.center) to (104.center);
+		\draw (104.center) to (106.center);
+		\draw (104.center) to (105.center);
+		\draw (107.center) to (108.center);
+		\draw (108.center) to (110.center);
+		\draw (108.center) to (109.center);
+		\draw (111.center) to (112.center);
+		\draw (112.center) to (114.center);
+		\draw (112.center) to (113.center);
+		\draw (115.center) to (116.center);
+		\draw (116.center) to (118.center);
+		\draw (116.center) to (117.center);
+		\draw (119.center) to (120.center);
+		\draw (120.center) to (122.center);
+		\draw (120.center) to (121.center);
+		\draw [bend left, looseness=1.25] (124.center) to (123.center);
+		\draw (124.center) to (125.center);
+		\draw (124.center) to (126.center);
+		\draw [bend right] (127.center) to (128.center);
+		\draw (129.center) to (128.center);
+		\draw (130.center) to (128.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
+\end{center}
+Elements of $G$ are symmetries of a square, they also permute $G$ itself! Buy they are not symmetries of $G$.
+\begin{align*}
+    \mu \cdot \rho &= \mu\rho\\
+    \mu\mu\mu\rho = \mu(\mu)\mu(\rho) &\neq \mu(\mu\rho) = \mu\mu\rho
+\end{align*}
+\subsection{Subgroups of Symmetries of a Square}
+$$G = Sym(\square) = \{\mu^i\rho^i : 0 \leq i \leq 1, 0 \leq j \leq 3\}$$
+\begin{align*}
+    <\epsilon> &= \{\epsilon\} &&& <\mu,\rho> &= G = <\mu,\rho^3>\\
+    <\mu> &= \{\epsilon,\mu\} &&& <\mu, \rho^2> &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
+    <\rho> &= \{\epsilon, \rho,\rho^2,\rho^3\}\\
+    <\rho^2> &= \{\epsilon,\rho^2\} &&& <\mu, \mu\rho> &=\{\epsilon, \mu, \rho, \dots\} = G\\
+    <\rho^3> &= \{\epsilon, \rho^3, \rho^2,\rho\} &&& <\mu, \mu\rho^3> &=\{\epsilon, \mu, \rho^3, \dots\} = G\\
+    <\mu\rho> &= \{\epsilon, \mu\rho\} &&& <\mu, \mu\rho^2> &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
+    <\mu\rho^2> &= \{\epsilon, \mu\rho^2\}\\
+    <\mu\rho^3> &= \{\epsilon, \mu\rho^3\} &&& <\rho, \mu\rho> &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& <\rho, \mu\rho^3> &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& <\rho, \mu\rho^2> &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& <\rho^2, \mu\rho^2> &= \{\epsilon, \rho^2, \mu\rho,\mu\rho^3\} = G\\
+    & &&& <\rho^2, \mu\rho^3> &= \{\epsilon, \rho^2, \mu\rho^3,\mu\rho\} = G\\
+    & &&& <\rho^2, \mu\rho^2> &= \{\epsilon, \rho^2, \mu\rho^2,\mu\} = G\\
+    & &&& <\mu\rho, \mu\rho^2> &= \{\epsilon, \rho, \mu,\dots\} = G\\
+    & &&& <\mu\rho, \mu\rho^3> &= \{\epsilon, \mu\rho, \mu\rho^3,\rho^2\} = G\\
+    & &&& <\mu\rho^2, \mu\rho^3> &= \{\epsilon, \rho, \mu,\dots\} = G\\
+\end{align*}
+
+\chapter{Cyclic Groups}
+\section{Cyclic Groups}
+$G$ is \blue{cyclic} if $G = \langle g \rangle = \{g^k: k\in \ints\}$ for some $g \in G$. $g$ is a \blue{generator} of $G$, there could be other generators. 
+For addition, 
+$$G \langle g \rangle = \{kg : k \in \ints \}$$
+The \blue{order of g} is the smallest positive integer $n$ with $g^n = \epsilon$, written as $|g|$. For addition, it's the smallest positive integer $n$ with $ng = \epsilon$.
+\begin{prop}
+    $G$ is cyclic $\implies G$ is abelian
+\end{prop}
+\begin{proof}
+    Since $G$ is cyclic, then $G = \langle g \rangle$ for some $g \in G$, take $x,y \in G$. Then $x = g^s$ and $y = g^t$. So
+    $$xy = g^sg^t = g^{s+t} = g^{t+s} = g^tg^s = yx$$
+\end{proof}
+However, $G$ being abelian $\notimplies$ $G$ is cyclic.
+\textbf{Examples:} Are the following  in cyclic? Find generators, and all orders\\[2ex]
+\textbf{ $Q_8$}:
+\begin{itemize}
+    \item $\langle 1 \rangle = \{1\}$ Order 1
+    \item $\langle -1 \rangle$ = \{-1,1\} Order 2
+    \item $\langle i \rangle = \{i, -1, -i, 1\}$ Order 4
+    \item $\langle -i \rangle = \{-i, -1, i, 1\}$ Order 4
+    \item $\langle \pm j \rangle = \{\pm j, -1, \mp j, 1\}$ Order 4
+    \item $\langle \pm k \rangle = \{\pm k, -1, \mp k, 1\}$ Order 4
+\end{itemize}
+Not cyclic\\[2ex]
+\textbf{$\ints$:}
+\begin{itemize}
+    \item $\langle 1 \rangle = \{k \cdot 1 : k \in \ints \} = \ints$ Order is $\infty$, so no finite order 
+\end{itemize}
+Are there other generators? Consider $-1$
+\begin{itemize}
+    \item $\langle -1 \rangle = \{k \cdot (-1) : k \in \ints \} = \ints$
+\end{itemize}
+\textbf{$\ints_5$:}
+\begin{itemize}
+    \item $\langle 1 \rangle = \{1,2,3,4,5=0\}$ Order 5
+    \item $\langle 2 \rangle = \{2,4,6=1,3,5=0\}$ Order 5
+    \item $\purple{\langle -2 \rangle = } \langle 3 \rangle = \{3,1,4,2,5=0\}$ Order 5
+    \item $\purple{\langle -1 \rangle = }\langle 4 \rangle = \{4,3,2,1,5=0\}$ Order 5
+    \item $\langle 0 \rangle = \{0\}$
+\end{itemize}
+Therefore $\bangles{1},\bangles{2}, \bangles{3}, \bangles{4}$ generate the group, so it is cyclic.
+\textbf{$\ints_9^\times$:}
+\begin{itemize}
+    \item $\bangles{1} = \{1\}$ Order 1
+    \item $\bangles{2} = \{2,4,8,16=7,14=5,10=1\}$ Order 6
+    \item $\purple{\bangles{-4} =}\bangles{4} = \{4,7,1\}$ Order 3
+    \item $\purple{\bangles{-2} =}\bangles{5} = \{5,7,8,4,2,1\}$ Order 6
+    \item $\purple{\bangles{-1} =}\bangles{8} = \{8,1\}$ Order 2
+\end{itemize}
+Therefore $\bangles{2}$ and $\bangles{5}$ generate the group, so it is cyclic.\\[2ex]
+\textbf{$\ints_8^\times$:}
+\begin{itemize}
+    \item TBC
+\end{itemize}
+\textbf{$\mathbb{Q}$:}
+\begin{itemize}
+    \item $\bangles{1} = \ints$
+    \item $\bangles{0} = \{0\}$
+    \item $\bangles{q} = q\ints, q \in \mathbb{Q}$
+\end{itemize}
+Therefore not cyclic.\\[2ex]
+\textbf{$\real$:}
+\begin{itemize}
+    \item $\bangles{1} = \ints$
+    \item $\bangles{0} = \{0\}$
+    \item $\bangles{r} = r\ints$
+\end{itemize}
+Therefore not cyclic. \\[2ex]
+\textit{Note: $q\ints \cong \ints$ and $r \ints \cong \ints$}\\[2ex]
+\textbf{$\ints_2 \times \ints_4$:}
+\begin{itemize}
+    \item $\bangles{00} = \{00\}$
+    \item $\bangles{01} = \{01, 02,03,00\}$
+    \item $\bangles{02} = \{02,00\}$
+    \item $\bangles{03} = \{03,02,01,00\}$
+    \item $\bangles{00} = \{00\}$ 
+\end{itemize}
+TBC
+\textbf{$\ints_2 \times \ints_3$:}
+\begin{itemize}
+    \item $\bangles{00} = \{00\}$
+    \item $\bangles{01} = \{01, 02, 00\}$
+    \item $\bangles{02} = \{02,01,00\}$
+    \item $\bangles{10} = \{10,00\}$
+    \item $\bangles{11} = \{11,02,10,01,12,00\}$
+    \item $\bangles{12} = \{12,01,10,02,11,00\}$
+\end{itemize}
+\begin{prop}
+    $G$ is cyclic $\implies$ all subgroups of $G$ are cyclic
+\end{prop}
+\begin{proof}
+    Let $G = \bangles{a} = \{a^i : i \in \ints\}$. Let $H$ be a sub group of $G$. $H = \{a^i : some \ i\in \ints\}$, could be $H = \{a^0\} = \{\epsilon\}$. Let $$n = min\{k: a^k \in H, k > 0\}$$
+        $$\bangles{a^n} = \{(a^n)^k: k \in \ints\} = \{a^{kn} : k \in \ints\} = \{a^k: k \in n \ints\}$$ 
+    $$\bangles{a^n} \leq H \leq G$$
+\end{proof}
+TBC
+$$\dots$$
+but: Let $G = \bangles{g} = \{g, g^2, g^3, \dots, g^n = \epsilon\}$. Then $|G| = |g| = n$
+\begin{prop}
+    Suppose $|a| = n < \infty$, then
+    $$a^j = \epsilon \iff n|j$$
+    In otherwords, 
+    $$\{j: a^j = \epsilon\} = n\ints$$
+    Furthermore, 
+    $$a^s = a^t \iff n|s-t$$
+\end{prop}
+\textbf{Example:} $|a| = 5$ 
+$$a^5 = a^{10} = a^{-15} = a^{1005} = \cdots = \epsilon$$
+$a^j \neq \epsilon$ when $j$ is not a multiple of 5. 
+\begin{proof}
+    $\impliedby$ if $n|j$ then $j = tn$ for some $t\in \ints$
+    $$a^j = a^{tn} = (a^n)^t = \epsilon^t = \epsilon$$
+    $\implies$: if $a^j = \epsilon$, then write $j = qn + r$ for $0 \leq r < n$
+    $$a^r = a^{j-qn} =
+    ^j(a^n)^{-q} = \epsilon (\epsilon^{-q}) = \epsilon$$
+     but $a^n$ is the smallest positive integer with $a^n$ TBC
+\end{proof}
+Also,
+$$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
+\begin{corollary}
+    $|a| = |b|$ is equivalent to 
+    $$a^j = \epsilon \iff b^j = \epsilon$$
+\end{corollary}
+\begin{prop}
+    Suppose $a \in G$, $|a| = n < \infty$, $k\in \ints$. Then
+    $$|a^k| = \frac{n}{gcd(k,m)}$$
+\end{prop}
+\textbf{Example:} $|a| = 12$
+\begin{itemize}
+    \item $\red{\bangles{a^1} = \{a^1, a^2, a^3, \dots, a^{12}\}}$
+    \item $\yellow{\bangles{a^5} = \{a^5, a^{10}, a^3 \dots, a^{12}\} = \bangles{a}}$
+    \item $\green{\bangles{a^4} = \{a^4, a^8, a^{12} = a^0\}}$
+    \item $\purple{\bangles{a^{10}} = \{a^{10}, a^{8}, a^{6}, a^{4}, a^{2}, a^0\}}$
+\end{itemize}
+\begin{proof}
+    Let $|a^k| = m$, then $\epsilon = (a^k)^m = a^km$
+    Therefore, $n |km$ and $km$ is a multiple of $|a|$ by the previous theorem. Let $d = gcd(kn)$ and set\\
+    $$\begin{cases}
+        n = n'd\\
+        k = k'd
+    \end{cases}$$
+    $$gcd(n',k') = 1$$
+    Since $n | km$ for some $t \in \ints$ we have,
+    $$km = tn$$
+    $$dk'm = tdn'$$
+    $$k'm = tn'$$
+    $$m = \frac{tn'}{k'} = \frac{t}{k'}\cdot n'$$
+    This must be an integer because $gcd(k', n') = 1 \implies k' \mid t$
+    Smallest $m \iff$ smallest $t$ with $\frac{tn'}{k'}$ positive integer. So
+\end{proof}
+\begin{corollary}
+    Suppose $G = \bangles{a}$, with $|a| = n < \infty$, then the generators of $G$ are $\{a^k: gcd(n,k) = 1\}$
+\end{corollary}
+\begin{proof}
+    $$|a^k| $$ TBC 
+\end{proof}
+\begin{corollary}
+    $\ints_n = \bangles{1}$ and $|1| = a$. Generators of $\ints$ with addition are 
+    $$\{k \cdot 1 : gcd(n,k) = 1\} = \{k : gcd(n,k)=1\} = \ints_n^\times$$
+\end{corollary} TBC
+\begin{corollary}
+    all nonzero elements of $\ints_n$ are generators of $\ints_n \iff n$ is prime
+\end{corollary}
+\begin{proof}
+    We want $|k| = \frac{n}{gcd(n,k)} = n$ for $k = 1,2,3,\dots, n-1$. So $gcd(n,k) = 1$
+\end{proof}
+
+\chapter{}
+\begin{itemize}
+    \item $G$ \blue{cyclic} means there exists $g \in G$ with $G = \bangles{g} = \{g^k : k \in \int\}$
+    \item The \blue{order} of an element $g$ is the smallest positive integer $n$ with $g^n = \epsilon$
+    \item Notation: \blue{Order of an element} $g$ is written $|g|$. \blue{Order (=size!) of a group} $G$ is written $|G|$. $|g| = \infty$ means $g^k \neq \epsilon$ $\forall k \in \ints$
+    \item $\{k: g^k = \epsilon\} = |g|\ints$ so $g^k \epsilon \iff |g|$ divides $k$
+    \item $|x| = |y|$ is equivalent to $x^k = \epsilon \iff y^k = \epsilon$
+    \item if $|g| = n < \infty$, then
+    $$G = \bangles{g} = \{g,g^2,\cdots, g^n = \epsilon\}$$
+    $$|G| = |g|$$
+    $$|g^k| = \frac{n}{gcd(n,k)}$$
+    generators of $G $ are exactly $\{g^k: gcd(n,k) = 1\}$
+\end{itemize}
+\begin{corollary}
+    All nonezero elements of $\ints_n$ are generators of $\ints_n \iff n$ is prime.
+\end{corollary}
+\begin{proof}
+    We want $k = \frac{n}{gcd(n,k)} = n$ for $k = 1,2,3,\dots, n-1$. So $gcd(n,n)$ TBC
+\end{proof}
+\begin{theorem}
+    $G$ has no subgroups other than $ \{\epsilon\}$ and $G \iff G$ is cyclic of prime order $\iff |G|$ is prime. 
+\end{theorem}
+\begin{proof}
+    Suppose $g \in G$, then $\bangles{g}$ is a subgroup of $G$. Therefore, either $\bangles{g} = G$ or $\bangles{g} = \{\epsilon\}$. $g$ is a generator of $G$ 
+    So 
+    $$G = \{g,g^2,g^3, \dots, g^n = \epsilon\}$$
+    $g^k$ is a generator for $k = 1,2, \dots, n-1$
+    Therefore, 
+    $$\frac{n}{gcd(n,k)} = n$$
+    So $n$ is prime, therefore $G$ is cyclic of prime order $G \cong \ints_n$ for $n$ prime.\\[2ex]
+    Conversely,
+    $$G = \{g, g^2, \dots, g^n = \epsilon\}$$
+    then $S \neq \emptyset$ and $S \neq \{\epsilon\} \implies \bangles{S} = G$. So $x \in S$, $x = g^k$ then 
+    $$|x| = |g^k| = \frac{n}{gcd(n,k)}$$
+    So the only subgroups are $\{\epsilon\}$ and $G$
+\end{proof}
+\begin{theorem}
+    Suppose $G, H$ are both cyclic, $G \cong H \iff |G| = |H|$
+\end{theorem}
+\begin{proof}
+    ($\implies$)an isomorphism is a bijection.\\[1ex]
+    ($\impliedby$)$G = \bangles{a}$ and $H = \bangles{b}$, then 
+    $$|a| = |G| = |H| = |b|$$
+    define 
+    $$\phi: G \rightarrow H$$
+    $$\phi(a^k) = b^k$$
+    We have 2 cases, either the order is infinite.
+    $$\begin{cases}
+        G = \{\dots, a^-{2}, a^{-1}, a^0, a^1, a^2, \dots\}\\
+         H = \{\dots, a^-{2}, a^{-1}, a^0, a^1, a^2, \dots\}
+    \end{cases}$$
+    Or their order is finite
+    $$\begin{cases}
+        G = \{a, a^2, a^3, \dots, a^n \epsilon\}\\
+        H = \{b, b^2, b^3, \dots, b^n = \epsilon\}
+    \end{cases}$$
+    In both cases $\phi$ is a bijection. \\
+    TBC
+\end{proof}
+
+\textbf{Subgroups of $C_n = \bangles{a} = \{a, a^2,\dots, a^n\}$}
+\begin{itemize}
+    \item $C_n$ is cyclic, therefore all subgroups are cyclic
+    \item $|a^k| = \frac{n}{gcd(k,n)}$
+    \item Let $d \mid n$ then $|a^d| = \frac{n}{gcd(d,n) = \frac{n}{d}}$
+\end{itemize}
+So for each $d \mid n$, then $\bangles{a}^d \cong C_{\frac{n}{d}}$ is a subgroup.\\[1ex]
+No let $k \in \{1,2,3\in, n\}$. Suppose $gcd(k,n) = d$ for some $d \mid n$, then 
+$$k \in \{d, 2d, 3d, \dots, \frac{n}{d}d\}$$
+So $a^k \in \bangles{a^d}$. i.e. all elements of order $\frac{n}{d}$ are contained in the subgroup $\bangles{a^d}$\\[2ex]
+\textbf{Conclusion:} For all $d \mid n$ TBC.\\[3ex]
+\textbf{Example:} $n = 2$. $C_{12} = \bangles{a} = \{a,a^2, a^3, \dots, a^{11}, a^{12}\}$
+\begin{itemize}
+    \item \textbf{Order 12:} $a^1,a^5,a^7,a^11$ $\bangles{a} = C_{12} = \bangles{a^5} = \bangles{a^7} = \bangles{a^11}$
+     \item \textbf{Order 6:} $a^2a^{10}$ $\bangles{a^2} = \{a^2,a^4,a^6,a^8,a^{10},a^{12}\} = \bangles{a^{10}}$
+     \item \textbf{Order 4:} $a^3,a^9$ $\bangles{a^3} = \{a^3,a^6, a^9, a^{12}\} = \bangles{a^9}$
+     \item \textbf{Order 3:} $a^4,a^8$ $\bangles{a^4} = \{a^4,a^8, a^{12}\} = \bangles{a^8}$
+     \item
+\end{itemize}
+\textbf{Example:} $n = 12$ $\ints_{12} = \{1,2,3,\dots,12\}$\\
+TBC. 
+
+\subsection{Lattices}
+TBC.
+\begin{center}
+    \textbf{\purple{Cyclic groups with subgroups $\cong$ integers with divisibility}}
+\end{center}
+\section{Complex Numbers}
+$$\mathbb{C} = \{a + bi : a,b \in \real\}$$
+$$\mathbb{C} = \{re^{i\theta} : r, \theta \in \real\}$$
+\begin{lemma}
+    $$e^{i\theta} = \cos\theta = i\sin\theta$$
+\end{lemma}
+TBC
+TEST
+\end{document}
