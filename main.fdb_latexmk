@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1676501024 "c:/Users/shaki/OneDrive/Desktop/University/Winter 2023/Group Theory/Lecture Notes/main.tex" "main.pdf" "main" 1676501030 0
-  "c:/Users/shaki/OneDrive/Desktop/University/Winter 2023/Group Theory/Lecture Notes/main.tex" 1676501022 62870 95db4da16c68e0acea38a74dcbe1a057 ""
+["pdflatex"] 1676502653 "c:/Users/shaki/OneDrive/Desktop/University/Winter 2023/Group Theory/Lecture Notes/main.tex" "main.pdf" "main" 1676502660 0
+  "c:/Users/shaki/OneDrive/Desktop/University/Winter 2023/Group Theory/Lecture Notes/main.tex" 1676502651 62873 8829ed4e8f48048f4f2293b8cfec1849 ""
   "c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1676481273 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1676483421 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1676482485 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -184,10 +184,10 @@
   "c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1676499282 7879508 d61b31aa4bd32fc87996011ef18cb9fa ""
   "c:/texlive/2022/texmf.cnf" 1676498873 713 614551405fc44b98efbf516466e3c909 ""
   "lecture_notes_styles.sty" 1676473803 1165 2a346a2195236cfc257c7d520ee86937 ""
-  "main.aux" 1676501030 6018 71a9578a0ac9a7863866c173147c0e0e "pdflatex"
-  "main.out" 1676501030 6514 471a1598cd5cf84b9cb4731d26acf983 "pdflatex"
-  "main.tex" 1676501022 62870 95db4da16c68e0acea38a74dcbe1a057 ""
-  "main.toc" 1676501030 3183 1cedbad22d0847686518931ca8a09b9a "pdflatex"
+  "main.aux" 1676502659 6018 71a9578a0ac9a7863866c173147c0e0e "pdflatex"
+  "main.out" 1676502659 6514 471a1598cd5cf84b9cb4731d26acf983 "pdflatex"
+  "main.tex" 1676502651 62873 8829ed4e8f48048f4f2293b8cfec1849 ""
+  "main.toc" 1676502659 3183 1cedbad22d0847686518931ca8a09b9a "pdflatex"
   "stylesheet.sty" 1676473803 884 f18b1af0f2d3ad70fb9ff59c20a987cc ""
   (generated)
   "main.aux"
