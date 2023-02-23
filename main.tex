@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 
 
+\usepackage{multicol}
 \usepackage{stylesheet}
 \usepackage{lecture_notes_styles}
 
@@ -181,8 +182,25 @@ $$(a,b) = (c,d) = (1,2)$$
 $$(e,f) = (3,4) \ \ \ \ (g,h) = (4,3)$$
 So no, addition is not well defined. \\[3ex]
 \noindent
-\textbf{Another Example: } TBC.
-
+\textbf{Another Example:} $X = (\ints, \ints \setminus \{0\}$). $(a,b) \sim (c,d)$ means $ad = bc$. Is multiplication well-defined on equivalence classes? (\textit{Multiplication meaning $(x,y) \cdot (w,z) = (x \cdot w, y \cdot z)$}). Let
+\[\begin{cases}
+    (a,b) \sim (c,d)\\
+    (e,f) \sim (g,h)
+\end{cases} \implies \begin{cases}
+    ad = bc\\
+    ef = gh
+\end{cases}\]
+Now,
+\[\begin{cases}
+    (a,b) \cdot (e,f) = (a \cdot e, b \cdot f)\\
+    (c,d) \cdot (g,h) = (c \cdot g, d \cdot h)
+\end{cases}\]
+\textbf{Question:} Is $(ae,bf)\sim(cg,dh)$?\\
+\begin{align*}
+    (ae)(dh) &= \hlblue{ad} \cdot \hlgreen{eh}\\
+    (bf)(cg) &= \hlblue{bc} \cdot \hlgreen{fg}\\
+\end{align*}
+We have $(a,b) \sim (c,d)$, so $ad = bc$, and $(e,f) \sim (g,h)$, so $ek = fg$. So yes, multiplication is well-defined on equivalence classes.
 \section{Number Theory}
 \begin{fact}
 Every non-empty set $S \subseteq \nat$ has a minimum element $d$ in $S$
@@ -194,7 +212,7 @@ Let $a,b \in \ints$, $b > 0$, then $\exists ! \ q,r \in \ints$ with $a = bq + r$
     (Existence) Let $S = \{a - bx: x \in \ints, a-bx \geq 0 \}$. 
     $\emptyset \neq S \subseteq \nat$, so $S$ has a minimum element.\\
     Let \[\begin{cases}
-        r = min(S)\\
+        r = \min(S)\\
         q = \frac{a-r}{b}
     \end{cases}\]
     $r = a - bd$, $d \in \ints$, then $bq +r = b(\frac{a-r}{b}) + r = a - r + r = a$.\\[1ex]
@@ -209,10 +227,10 @@ Let $a,b \in \ints$, $b > 0$, then $\exists ! \ q,r \in \ints$ with $a = bq + r$
 \begin{definition}
     $m \mid n$ means $\exists x \in \ints$ with $n = mx$
 \end{definition}
-\begin{definition}
+\begin{definition}\label{def:gcd}
     Let $a,b \in \ints$. If d is a positive integer with $d \mid a$ and $d \mid b$, if $c \mid a$ and $c \mid b$, then $c \mid d$, then d is a \blue{gcd} of a and b.
 \end{definition}
-\begin{theorem}
+\begin{theorem}\label{thm:gcd}
     For every $a,b \in \ints$, $\exists \ !$ gcd $d$. Furthermore, $\exists x,y \in \ints$, $d = ax + by$. Furthermore, d is the largest common divisor of a,b
 \end{theorem}
 \begin{proof}
@@ -242,7 +260,7 @@ If $gcd(a,b) = 1$, then $\exists x,y$ such that $ax + by = 1$.
 \begin{proof}
     No proof was provided in the notes I guess. :P 
 \end{proof}
-\begin{definition}[Least Common Multiple]
+\begin{definition}[Least Common Multiple]\label{def:lcm}
     Let $a,b \in \ints$. If $m$ is a positive integer with
     \begin{itemize}
         \item $a\mid m$ and $b \mid m$
@@ -250,7 +268,7 @@ If $gcd(a,b) = 1$, then $\exists x,y$ such that $ax + by = 1$.
     \end{itemize}
     then m is a \blue{lcm} of $a,b$.
 \end{definition}
-\begin{theorem}
+\begin{theorem}\label{thm:lcm}
     For every $a,b$, $\exists \ !$ lcm $m$.
 \end{theorem}
 \begin{definition}
@@ -280,7 +298,7 @@ If $gcd(a,b) = 1$, then $\exists x,y$ such that $ax + by = 1$.
 \end{proof}
 
 \section{Prime Factorization}
-\begin{theorem}
+\begin{theorem}\label{thm:primefactorization}
     $n \in \ints$ $n > 1$\\[1ex]
     $\exists!$ $\begin{cases}
         p_1 p_2 \dots p_s , &\text{distinct primes}\\
@@ -293,7 +311,7 @@ If $gcd(a,b) = 1$, then $\exists x,y$ such that $ax + by = 1$.
     Proof was omitted.
 \end{proof}
 \noindent
-\textbf{Prime Factorization Gives GCD:}\\
+\textbf{Prime Factorization Gives GCD:}\label{primefactorization:gcd}\\
 
 \textbf{Example:} 
 $$a = 2 \cdot 5 \cdot 7^{10} \cdot 13 = 2^{\hlblue{1}} \cdot 3^{\hlblue{0}} \cdot 5^1 \cdot 7^{10} \cdot 13^1 \cdot 17^{\hlblue{0}}$$
@@ -311,7 +329,7 @@ Then,
 $$gcd(a,b) = \prod_{prime \ p} p^{g(p)}$$ 
 
 \noindent
-\textbf{Prime Factorization Gives LCM:}\\
+\textbf{Prime Factorization Gives LCM:}\label{primefactorization:lcm}\\
 
 \textbf{Example:} 
 $$a = 2 \cdot 5 \cdot 7^{10} \cdot 13 = 2^1 \cdot 3^0 \cdot 5^{\hlblue{1}} \cdot 7^{\hlblue{10}} \cdot 13^{\hlblue{1}} \cdot 17^0$$
@@ -327,13 +345,160 @@ $\forall$ prime $p$, define $l(p) = min\begin{cases}
 \end{cases}$.\\
 Then, 
 $$gcd(a,b) = \prod_{prime \ p} p^{l(p)}$$ 
-
+\subsection{Summary}
+\begin{itemize}
+    \item Definition of \hyperref[def:gcd]{$gcd(a,b)$}
+    \item \hyperref[thm:gcd]{$d=gcd(a,b)$ exists $\implies$ $d$ is a divisor of $a$ and $b$ and $d = ax + by$ for some $x,y \in \ints$}
+    \item also, $\{ax + by : x,y \in \ints \} = d \ints$
+    \item Definition of \hyperref[def:lcm]{$lcm(a,b)$}
+    \item \hyperref[thm:lcm]{$m = lcm(a,b)$ exists and is unique, $m$ is the smallest common multiple.}
+    \item \hyperref[thm:primefactorization]{Prime Factorization exists and is unique.}
+    \item Prime factorization of $a$ and $b$ gives \hyperref[primefactorization:gcd]{$gcd(a,b)$} and \hyperref[primefactorization:lcm]{$lcm(a,b)$}
+    \item $gcd(a,b) \cdot lcm(a,b) = |ab|$
+\end{itemize}
+\noindent
 \section{Integers Modulo n}
-TBC.
+Let $n \in \ints$ with $n \geq 2$, $a \equiv b \pmod{n}$ means $n \mid (a-b)$. So 
+\begin{align*}
+    a\equiv b \pmod(n) &\iff n \mid (a-b)\\
+                    &\iff a-b = kn, \text{ for some } k \in \ints\\
+                    &\iff \frac{a-b}{n}\in \ints
+\end{align*}
+\begin{prop}
+    Congruence modulo $n$ is an equivalence relation.
+\end{prop}
+\begin{proof}
+    ~\newline
+    \begin{itemize}
+        \item \textbf{Reflexivity:} Show $a \equiv a \pmod{n}$ $\forall a \in \ints$. \[\frac{a - a}{n} = 0 \in \ints\] So $a \equiv a \pmod{n}$.
+        \item \textbf{Symmetric:} Show $a \equiv b \iff b \equiv a$ $\forall a,b \in \ints$\[a \equiv b \iff \frac{a-b}{n}\in \ints \iff - \frac{a-b}{n}= \frac{b-a}{n}\in \ints \iff b\equiv a\]
+        \item \textbf{Transitivity:} Show $a \equiv b \wedge b \equiv c \implies a \equiv c$ $\forall a,b,c \in \ints$\\
+        \begin{align*}
+            a \equiv b \equiv c &\implies \frac{a-b}{n}\in \ints \wedge \frac{b-c}{n}\in \ints\\
+            &\implies \frac{a-b}{n} + \frac{b-c}{n} = \frac{a-c}{n}\in \ints \implies a \equiv c
+        \end{align*}
+    \end{itemize}
+\end{proof}
+
+\textbf{Example:} Define $\ints_n = \{[k]_n: k\in \ints\}$. Consider $n = 5$.
+\begin{itemize}
+    \item $[2] = \{\ldots, -8,-3,2,7,12,17,\ldots\}$
+    \item $[0] = \{\ldots, -10,-5,0,5,10,\ldots\}$
+    \item $[7] = \{\ldots, -3,2, 7,12,17,22,\ldots\}$
+\end{itemize}
+\begin{center}
+    \textbf{Note:} $\ints_5$ is a set containing 5 elements, and each element of $\ints_5$ is a subset of $\ints$. Also, recall that equivalence classes are disjoint or equal, so $[2] = [7]$
+\end{center}
+\begin{align*}
+    \ints_5 &= \{[0],[1],[2],[3],[4]\}\\
+            &= \{[-2],[-1],[0],[1],[2]\}\\
+\end{align*}
+\textbf{Examples:}
+\begin{enumerate}[label=(\alph*)]
+    \item $[3]_5 = [8]_5$ $3 \equiv 8 \pmod{5}$ $5 | (8-3)$
+    \item $[3]_9 = [-24]_9$ $3 \equiv -24 \pmod{9}$ $9 | (3- (-24))$
+\end{enumerate}
+\begin{center}
+    All representations in an equivalence classare equivalent (modulo $n$).
+\end{center}
+\noindent
+\textbf{Question:} Is addition and multiplication on $\ints_n$ well defined? We want
+\[\begin{cases}
+    [a] + [b] = [a+b]\\
+    [a] \cdot [b] = [a \cdot b]
+\end{cases}\]
+We'll see this in the lecture. 
 
 \chapter{Operations on $\ints_n$, Symmetries, and Groups}
 \section{Arithmetic Modulo n}
-TBC.
+\textbf{Question:} Is addition and multiplication on $\ints_n$ well defined? We want
+\[\begin{cases}
+    [a] + [b] = [a+b]\\
+    [a] \cdot [b] = [a \cdot b]
+\end{cases}\]
+\begin{prop}
+Let $n \in \ints$ $n \geq 2$. Suppose
+\begin{align*}
+    a \equiv a' \pmod{n}\\
+    b \equiv b' \pmod{n}\\
+\end{align*}
+then 
+\begin{align*}
+    a+b \equiv a'+b' \pmod{n}\\
+    ab \equiv a'b' \pmod{n}
+\end{align*}
+So, addition and multiplication on integers are well well defined on congruence classes.
+\end{prop}
+\begin{proof}
+    \[a \equiv a' \pmod{n} \iff \frac{a-a'}{n} \in \ints \iff a' = a + sn \text{ for some } s \in \ints\]
+    \[b \equiv b' \pmod{n} \iff \frac{b-b'}{n} \in \ints \iff b' = b + tn \text{ for some } t \in \ints\]
+    Then,
+    \[\frac{(a+b)- (a'+b')}{n} = \frac{a-a'}{n} + \frac{b - b'}{n} \in \ints\]
+    So, $a+b \equiv a'+b' \pmod{n}$. Also,
+    \begin{align*}
+        \frac{ab - a'b'}{n} &= \frac{ab - a'b + a'b - a'b'}{n}\\
+        &= \left(\frac{a-a'}{n}\right)b + \left(\frac{b-b'}{n}\right)a' \in \ints\\
+    \end{align*}
+    So $ab \equiv a'b' \pmod{n}$.
+\end{proof}
+\subsection{Properties of Arithmetic Modulo n}
+\begin{itemize}
+    \item \textbf{Commutative:} $a + b \equiv b + a \pmod{n}$
+    \item \textbf{Commutative:} $ab \equiv ba \pmod{n}$
+    \item \textbf{Associative:} $(a+b)+c \equiv a+(b+c) \pmod{n}$
+    \item \textbf{Associative:} $(ab)c \equiv a(bc) \pmod{n}$
+    \item \textbf{Distributive:} $a(b+c) \equiv ab + ac \pmod{n}$
+    \item \textbf{Identity for +:} $a + 0 \equiv a \pmod{n}$
+    \item \textbf{Identity for $\cdot$:} $a \cdot 1 \equiv a \pmod{n}$
+    \item \textbf{Additive Inverse:} $a + (-a) \equiv 0 \pmod{n}$
+    \item \textbf{Multiplicative Inverse?}
+\end{itemize}
+\subsection{Multiplicative Inverses}
+\begin{prop}
+Let $a \in \ints_n$, $\exists b \in \ints_n$ with $ab\equiv 1 \pmod{n} \iff gcd(a,n) = 1$.
+\end{prop}
+\begin{proof}
+    Suppose such $b$ exists, then
+    \begin{align*}
+        ab - 1 &= rn \text{ for some } r \in \ints\\
+        ab + (-r)n &=1 \\
+        \therefore gcd(a,n)&=1
+    \end{align*}
+    Suppose $gcd(a,n) = 1$, then
+    \begin{align*}
+        as + nt &= 1 \text{ for some } s,t \in \ints\\
+        as - 1 &= (-t)n\\
+        as &\equiv 1 \pmod{n}\\
+    \end{align*}
+    So we can choose $b = s$. 
+\end{proof}
+\textbf{Example:} Addition and multiplication in $\ints_6$.
+\begin{center}
+    \begin{tabular}{c|cccccc}
+        + & 0 & 1 & 2 & 3 & 4 & 5\\
+        \hline
+        0 & 0 & 1 & 2 & 3 & 4 & 5\\
+        1 & 1 & 2 & 3 & 4 & 5 & 0\\
+        2 & 2 & 3 & 4 & 5 & 0 & 1\\
+        3 & 3 & 4 & 5 & 0 & 1 & 2\\
+        4 & 4 & 5 & 0 & 1 & 2 & 3\\
+        5 & 5 & 0 & 1 & 2 & 3 & 4
+    \end{tabular}  
+\end{center}
+The table being symmetric implies that addition is commutative, 0-row and 0-column implies that 0 is the identity for addition, every row has a 0 imples that the addiive inverse exists for every element.
+\begin{center}
+    \begin{tabular}{c|cccccc}
+        $\cdot$ & 0 & 1 & 2 & 3 & 4 & 5\\
+        \hline
+        0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        1 & 0 & 1 & 2 & 3 & 4 & 5\\
+        2 & 0 & 2 & 4 & 0 & 2 & 4\\
+        3 & 0 & 3 & 0 & 3 & 0 & 3\\
+        4 & 0 & 4 & 2 & 0 & 4 & 2\\
+        5 & 0 & 5 & 4 & 3 & 2 & 1\\
+    \end{tabular}
+\end{center}
+The table being symmetric implies that multiplication is commutative, 1-row and 1-column is the header implies that 1 is the identity for multiplication, some rows not having 1 implies that some elements have no multiplicative inverse.
 \section{Symmetries}
 Consider the symmetries of a rectangle.\\
 \begin{center}
@@ -617,10 +782,10 @@ Let $S$ be some set with some operation $\cdot$. Then $(S, \cdot)$ is a \blue{gr
     \item $(\ints_n, +)$ forms a group.
     \item $(\ints_n \setminus \{0\}, \cdot)$ forms a group.
 \end{itemize}
-
-\chapter{More Examples of Groups, Groups of Units of $\ints_n$}
-TBC.
-
+%---------------------- Lecture 5 ----------------------
+\chapter{More Examples of Groups}
+This lecture was not well organizing so I am not gonna type it out.
+%---------------------- Lecture 6 ---------------------- 
 \chapter{Basic Properties of Groups, Products of Groups, Isomorphisms}
 Examples were left out I may come back to finish
 \section{Basic Properties of Groups}
@@ -742,7 +907,6 @@ Examples were left out I may come back to finish
     So $xx = y$
     \item Say $G$ has 4 elements. Assignment Question!
 \end{itemize}
-
 \section{Products of Groups}
 $G, H$ are groups, define 
 $$G \times H = \{(g,h) : g \in G, h \in H\}$$
@@ -756,7 +920,7 @@ $$(g, h) \times (a,b) = (g + a, h \cdot b)$$
 \begin{proof}
     Exercise.
 \end{proof}
-\textbf{Example:}
+
 \section{Isomorphisms}
 Suppose $\phi: G \rightarrow H$ is a bijection between two groups with the property 
 $$\phi(xy) = \phi(x)\phi(y)$$
@@ -825,7 +989,7 @@ $$\ints_2 \cong \ints^\times \cong G$$
     \end{center}
     Except they may use different symbols and have reordered rows/columns, so they are all isomorphic.
 \end{proof}
-
+%------------------ Lecture 9 ------------------
 \chapter{Automorphisms, Subgroups}
 \section{Automorphisms}
 \textbf{Example:}
@@ -986,6 +1150,7 @@ Suppose $H$ is a subset of $G$, if
 \end{itemize}
 then $H$ is a subgroup.
 
+%---------------------------- Lecture 8 ----------------------------%
 \chapter{Lattices and Cyclic Groups}
 \textbf{Recall:} H is a \blue{subgroup} of G if 
 \begin{itemize}
@@ -1385,24 +1550,25 @@ Elements of $G$ are symmetries of a square, they also permute $G$ itself! Buy th
 \subsection{Subgroups of Symmetries of a Square}
 $$G = Sym(\square) = \{\mu^i\rho^i : 0 \leq i \leq 1, 0 \leq j \leq 3\}$$
 \begin{align*}
-    <\epsilon> &= \{\epsilon\} &&& <\mu,\rho> &= G = <\mu,\rho^3>\\
-    <\mu> &= \{\epsilon,\mu\} &&& <\mu, \rho^2> &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
-    <\rho> &= \{\epsilon, \rho,\rho^2,\rho^3\}\\
-    <\rho^2> &= \{\epsilon,\rho^2\} &&& <\mu, \mu\rho> &=\{\epsilon, \mu, \rho, \dots\} = G\\
-    <\rho^3> &= \{\epsilon, \rho^3, \rho^2,\rho\} &&& <\mu, \mu\rho^3> &=\{\epsilon, \mu, \rho^3, \dots\} = G\\
-    <\mu\rho> &= \{\epsilon, \mu\rho\} &&& <\mu, \mu\rho^2> &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
-    <\mu\rho^2> &= \{\epsilon, \mu\rho^2\}\\
-    <\mu\rho^3> &= \{\epsilon, \mu\rho^3\} &&& <\rho, \mu\rho> &= \{\epsilon, \mu, \rho, \dots\} = G\\
-    & &&& <\rho, \mu\rho^3> &= \{\epsilon, \mu, \rho, \dots\} = G\\
-    & &&& <\rho, \mu\rho^2> &= \{\epsilon, \mu, \rho, \dots\} = G\\
-    & &&& <\rho^2, \mu\rho^2> &= \{\epsilon, \rho^2, \mu\rho,\mu\rho^3\} = G\\
-    & &&& <\rho^2, \mu\rho^3> &= \{\epsilon, \rho^2, \mu\rho^3,\mu\rho\} = G\\
-    & &&& <\rho^2, \mu\rho^2> &= \{\epsilon, \rho^2, \mu\rho^2,\mu\} = G\\
-    & &&& <\mu\rho, \mu\rho^2> &= \{\epsilon, \rho, \mu,\dots\} = G\\
-    & &&& <\mu\rho, \mu\rho^3> &= \{\epsilon, \mu\rho, \mu\rho^3,\rho^2\} = G\\
-    & &&& <\mu\rho^2, \mu\rho^3> &= \{\epsilon, \rho, \mu,\dots\} = G\\
+    \bangles{\epsilon} &= \{\epsilon\} &&& \bangles{\mu,\rho} &= G = \bangles{\mu,\rho^3}\\
+    \bangles{\mu} &= \{\epsilon,\mu\} &&& \bangles{\mu, \rho^2} &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
+    \bangles{\rho} &= \{\epsilon, \rho,\rho^2,\rho^3\}\\
+    \bangles{\rho^2} &= \{\epsilon,\rho^2\} &&& \bangles{\mu, \mu\rho} &=\{\epsilon, \mu, \rho, \dots\} = G\\
+    \bangles{\rho^3} &= \{\epsilon, \rho^3, \rho^2,\rho\} &&& \bangles{\mu, \mu\rho^3} &=\{\epsilon, \mu, \rho^3, \dots\} = G\\
+    \bangles{\mu\rho} &= \{\epsilon, \mu\rho\} &&& \bangles{\mu, \mu\rho^2} &= \{\epsilon, \mu, \rho^2, \mu\rho^2\}\\
+    \bangles{\mu\rho^2} &= \{\epsilon, \mu\rho^2\}\\
+    \bangles{\mu\rho^3} &= \{\epsilon, \mu\rho^3\} &&& \bangles{\rho, \mu\rho} &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& \bangles{\rho, \mu\rho^3} &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& \bangles{\rho, \mu\rho^2} &= \{\epsilon, \mu, \rho, \dots\} = G\\
+    & &&& \bangles{\rho^2, \mu\rho^2} &= \{\epsilon, \rho^2, \mu\rho,\mu\rho^3\} = G\\
+    & &&& \bangles{\rho^2, \mu\rho^3} &= \{\epsilon, \rho^2, \mu\rho^3,\mu\rho\} = G\\
+    & &&& \bangles{\rho^2, \mu\rho^2} &= \{\epsilon, \rho^2, \mu\rho^2,\mu\} = G\\
+    & &&& \bangles{\mu\rho, \mu\rho^2} &= \{\epsilon, \rho, \mu,\dots\} = G\\
+    & &&& \bangles{\mu\rho, \mu\rho^3} &= \{\epsilon, \mu\rho, \mu\rho^3,\rho^2\} = G\\
+    & &&& \bangles{\mu\rho^2, \mu\rho^3} &= \{\epsilon, \rho, \mu,\dots\} = G\\
 \end{align*}
 
+%-------------- Lecture 9------------------------------
 \chapter{Cyclic Groups}
 \section{Cyclic Groups}
 $G$ is \blue{cyclic} if $G = \langle g \rangle = \{g^k: k\in \ints\}$ for some $g \in G$. $g$ is a \blue{generator} of $G$, there could be other generators. 
@@ -1454,10 +1620,14 @@ Therefore $\bangles{1},\bangles{2}, \bangles{3}, \bangles{4}$ generate the group
     \item $\purple{\bangles{-1} =}\bangles{8} = \{8,1\}$ Order 2
 \end{itemize}
 Therefore $\bangles{2}$ and $\bangles{5}$ generate the group, so it is cyclic.\\[2ex]
-\textbf{$\ints_8^\times$:}
+\textbf{$\ints_8^\times$}
 \begin{itemize}
-    \item TBC
+    \item $\bangles{1} = \{1\}$ Order 1
+    \item $\bangles{3} = \{3,1\}$ Order 2
+    \item $\bangles{5} = \{5,1\}$ Order 2
+    \item $\bangles{7} = \{7,1\}$ Order 2
 \end{itemize}
+Therefore not cyclic.\\[2ex]
 \textbf{$\mathbb{Q}$:}
 \begin{itemize}
     \item $\bangles{1} = \ints$
@@ -1475,33 +1645,45 @@ Therefore not cyclic. \\[2ex]
 \textit{Note: $q\ints \cong \ints$ and $r \ints \cong \ints$}\\[2ex]
 \textbf{$\ints_2 \times \ints_4$:}
 \begin{itemize}
-    \item $\bangles{00} = \{00\}$
-    \item $\bangles{01} = \{01, 02,03,00\}$
-    \item $\bangles{02} = \{02,00\}$
-    \item $\bangles{03} = \{03,02,01,00\}$
-    \item $\bangles{00} = \{00\}$ 
+    \item $\bangles{00} = \{00\}$ Order 1
+    \item $\bangles{01} = \{01, 02,03,00\}$ Order 4
+    \item $\bangles{02} = \{02,00\}$ Order 2
+    \item $\bangles{03} = \{03,02,01,00\}$ Order 4
+    \item $\bangles{10} = \{10,00\}$ Order 2
+    \item $\bangles{11} = \{11, 02, 13,00\}$ Order 4 
+    \item $\bangles{12} = \{12, 00\}$ Order 2 
+    \item $\bangles{13} = \{13, 02, 11,00\}$ Order 4
 \end{itemize}
-TBC
+Therefore not cyclic.\\[2ex]
 \textbf{$\ints_2 \times \ints_3$:}
 \begin{itemize}
-    \item $\bangles{00} = \{00\}$
-    \item $\bangles{01} = \{01, 02, 00\}$
-    \item $\bangles{02} = \{02,01,00\}$
-    \item $\bangles{10} = \{10,00\}$
-    \item $\bangles{11} = \{11,02,10,01,12,00\}$
-    \item $\bangles{12} = \{12,01,10,02,11,00\}$
+    \item $\bangles{00} = \{00\}$ Order 1
+    \item $\bangles{01} = \{01, 02, 00\}$ Order 3
+    \item $\bangles{02} = \{02,01,00\}$ Order 3
+    \item $\bangles{10} = \{10,00\}$ Order 2
+    \item $\bangles{11} = \{11,02,10,01,12,00\}$ Order 6
+    \item $\bangles{12} = \{12,01,10,02,11,00\}$ Order 6
 \end{itemize}
+Therefore cyclic
 \begin{prop}
     $G$ is cyclic $\implies$ all subgroups of $G$ are cyclic
 \end{prop}
 \begin{proof}
-    Let $G = \bangles{a} = \{a^i : i \in \ints\}$. Let $H$ be a sub group of $G$. $H = \{a^i : some \ i\in \ints\}$, could be $H = \{a^0\} = \{\epsilon\}$. Let $$n = min\{k: a^k \in H, k > 0\}$$
-        $$\bangles{a^n} = \{(a^n)^k: k \in \ints\} = \{a^{kn} : k \in \ints\} = \{a^k: k \in n \ints\}$$ 
+    Let $G = \bangles{a} = \{a^i : i \in \ints\}$. Let $H$ be a sub group of $G$. 
+    $$H = \{a^i : some \ i\in \ints\}$$ 
+    could be $H = \{a^0\} = \{\epsilon\}$. Let 
+    $$n = min\{k: a^k \in H, k > 0\}$$
+    $$\bangles{a^n} = \{(a^n)^k: k \in \ints\} = \{a^{kn} : k \in \ints\} = \{a^k: k \in n \ints\}$$ 
     $$\bangles{a^n} \leq H \leq G$$
+    Suppose $a^j \in H$ with $j \not\in \ints$ so $\bangles{a^n} \neq H$. Then 
+    \[j = qn + r \ \ 0\leq r < n \ \ r \neq 0\]
+    So
+    \[a^r = a^{j - qn} = a^j(a^n)^{-q} \in H\]
+    This contradicts the minimality of $n$. Therefore $H = \bangles{a^n}$.
 \end{proof}
-TBC
-$$\dots$$
-but: Let $G = \bangles{g} = \{g, g^2, g^3, \dots, g^n = \epsilon\}$. Then $|G| = |g| = n$
+\begin{definition}[Order]
+    The \blue{order} of an element $g \in G$ is the smallest positive integer $n$ such that $g^n = \epsilon$. We write $|g|$ for the order of $g$, if no such $n$ exists we say $|g| = \infty$.
+\end{definition}
 \begin{prop}
     Suppose $|a| = n < \infty$, then
     $$a^j = \epsilon \iff n|j$$
@@ -1519,7 +1701,7 @@ $a^j \neq \epsilon$ when $j$ is not a multiple of 5.
     $\implies$: if $a^j = \epsilon$, then write $j = qn + r$ for $0 \leq r < n$
     $$a^r = a^{j-qn} =
     ^j(a^n)^{-q} = \epsilon (\epsilon^{-q}) = \epsilon$$
-     but $a^n$ is the smallest positive integer with $a^n$ TBC
+     but $n$ is the smallest positive integer with $a^n = \epsilon$, so $0 \leq r < n$ implies $r = 0$. Therefore $j = nq$ and $n \mid j$.  
 \end{proof}
 Also,
 $$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
@@ -1558,12 +1740,12 @@ $$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
     Suppose $G = \bangles{a}$, with $|a| = n < \infty$, then the generators of $G$ are $\{a^k: gcd(n,k) = 1\}$
 \end{corollary}
 \begin{proof}
-    $$|a^k| $$ TBC 
+    \[|a^k| = \frac{n}{gcd(n,k)} = n \iff gcd(n,k) = 1\]
 \end{proof}
 \begin{corollary}
-    $\ints_n = \bangles{1}$ and $|1| = a$. Generators of $\ints$ with addition are 
+    $\ints_n = \bangles{1}$ and $|1| = n$. Generators of $\ints$ with addition are 
     $$\{k \cdot 1 : gcd(n,k) = 1\} = \{k : gcd(n,k)=1\} = \ints_n^\times$$
-\end{corollary} TBC
+\end{corollary}
 \begin{corollary}
     all nonzero elements of $\ints_n$ are generators of $\ints_n \iff n$ is prime
 \end{corollary}
@@ -1571,9 +1753,9 @@ $$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
     We want $|k| = \frac{n}{gcd(n,k)} = n$ for $k = 1,2,3,\dots, n-1$. So $gcd(n,k) = 1$
 \end{proof}
 
-\chapter{}
+\chapter{Subgroups of Cyclic Groups, Lattices, $\mathbb{T}$}
 \begin{itemize}
-    \item $G$ \blue{cyclic} means there exists $g \in G$ with $G = \bangles{g} = \{g^k : k \in \int\}$
+    \item $G$ \blue{cyclic} means there exists $g \in G$ with $G = \bangles{g} = \{g^k : k \in \ints\}$
     \item The \blue{order} of an element $g$ is the smallest positive integer $n$ with $g^n = \epsilon$
     \item Notation: \blue{Order of an element} $g$ is written $|g|$. \blue{Order (=size!) of a group} $G$ is written $|G|$. $|g| = \infty$ means $g^k \neq \epsilon$ $\forall k \in \ints$
     \item $\{k: g^k = \epsilon\} = |g|\ints$ so $g^k \epsilon \iff |g|$ divides $k$
@@ -1588,7 +1770,7 @@ $$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
     All nonezero elements of $\ints_n$ are generators of $\ints_n \iff n$ is prime.
 \end{corollary}
 \begin{proof}
-    We want $k = \frac{n}{gcd(n,k)} = n$ for $k = 1,2,3,\dots, n-1$. So $gcd(n,n)$ TBC
+    We want $k = \frac{n}{gcd(n,k)} = n$ for $k = 1,2,3,\dots, n-1$. So $gcd(n,k) = 1$ for $k = 1,2,3,\dots, n-1$. Therefore $n$ is prime.
 \end{proof}
 \begin{theorem}
     $G$ has no subgroups other than $ \{\epsilon\}$ and $G \iff G$ is cyclic of prime order $\iff |G|$ is prime. 
@@ -1627,10 +1809,10 @@ $$a^s = a^t \iff a^{s-t} \epsilon \iff n|s-t$$
         G = \{a, a^2, a^3, \dots, a^n \epsilon\}\\
         H = \{b, b^2, b^3, \dots, b^n = \epsilon\}
     \end{cases}$$
-    In both cases $\phi$ is a bijection. \\
-    TBC
+    In both cases $\phi$ is a bijection.
+    \[\phi(a^sa^t) = \phi(a^{s+t})=b^{s+t} = b^sb^t = \phi(a^s)\phi(a^t)\]
 \end{proof}
-
+\noindent
 \textbf{Subgroups of $C_n = \bangles{a} = \{a, a^2,\dots, a^n\}$}
 \begin{itemize}
     \item $C_n$ is cyclic, therefore all subgroups are cyclic
@@ -1641,20 +1823,99 @@ So for each $d \mid n$, then $\bangles{a}^d \cong C_{\frac{n}{d}}$ is a subgroup
 No let $k \in \{1,2,3\in, n\}$. Suppose $gcd(k,n) = d$ for some $d \mid n$, then 
 $$k \in \{d, 2d, 3d, \dots, \frac{n}{d}d\}$$
 So $a^k \in \bangles{a^d}$. i.e. all elements of order $\frac{n}{d}$ are contained in the subgroup $\bangles{a^d}$\\[2ex]
-\textbf{Conclusion:} For all $d \mid n$ TBC.\\[3ex]
+\textbf{Conclusion:} For all $d \mid n$, there is a unique subgroup of $C_n$ of order $\frac{n}{d}$, generated by $a^d$.\\[3ex]
 \textbf{Example:} $n = 2$. $C_{12} = \bangles{a} = \{a,a^2, a^3, \dots, a^{11}, a^{12}\}$
 \begin{itemize}
     \item \textbf{Order 12:} $a^1,a^5,a^7,a^11$ $\bangles{a} = C_{12} = \bangles{a^5} = \bangles{a^7} = \bangles{a^11}$
      \item \textbf{Order 6:} $a^2a^{10}$ $\bangles{a^2} = \{a^2,a^4,a^6,a^8,a^{10},a^{12}\} = \bangles{a^{10}}$
      \item \textbf{Order 4:} $a^3,a^9$ $\bangles{a^3} = \{a^3,a^6, a^9, a^{12}\} = \bangles{a^9}$
      \item \textbf{Order 3:} $a^4,a^8$ $\bangles{a^4} = \{a^4,a^8, a^{12}\} = \bangles{a^8}$
-     \item
+     \item \textbf{Order2:} $a^6$ $\bangles{a^6} = \{a^6, a^{12}\}$
+     \item \textbf{Order 1:} $a^2$ $\bangles{a^2} = \{a^{12}\}$
 \end{itemize}
 \textbf{Example:} $n = 12$ $\ints_{12} = \{1,2,3,\dots,12\}$\\
-TBC. 
+\begin{itemize}
+    \item \textbf{Order 12:} $1,5,7,11$ $\bangles{1} = \ints_{12} = \bangles{5} = \bangles{7} = \bangles{11}$
+    \item \textbf{Order 6:} $2,10$ $\bangles{2} = \{2,4,6,8,10,12\} = \bangles{10}$
+    \item \textbf{Order 4:} $3,9$ $\bangles{3} = \{3,6,9,12\} = \bangles{9}$
+    \item \textbf{Order 3:} $4,8$ $\bangles{4} = \{4,8,12\} = \bangles{8}$
+    \item \textbf{Order 2:} $6$ $\bangles{6} = \{6,12\}$
+    \item \textbf{Order 1:} $12$ $\bangles{12} = \{12\}$
+\end{itemize}
 
 \subsection{Lattices}
-TBC.
+\begin{multicols}{2}
+    \begin{center}
+        \textbf{Subgroups of $\ints_{12}$}
+    \end{center}
+    \begin{tikzpicture}
+        \begin{pgfonlayer}{nodelayer}
+            \node [] (0) at (-3, 4) {$\ints_{12}$};
+            \node [] (1) at (-4, 3) {$\ints_4$};
+            \node [] (2) at (-3, 2) {$\ints_2$};
+            \node [] (3) at (-2, 3) {$\ints_6$};
+            \node [] (4) at (-2, 1) {$\ints_1$};
+            \node [] (5) at (-1, 2) {$\ints_1$};
+            \node [] (6) at (-3.75, 3.25) {};
+            \node [] (7) at (-3.75, 2.75) {};
+            \node [] (8) at (-2.75, 3.75) {};
+            \node [] (9) at (-3.25, 3.75) {};
+            \node [] (10) at (-2.25, 3.25) {};
+            \node [] (11) at (-1.75, 2.75) {};
+            \node [] (12) at (-3.25, 2.25) {};
+            \node [] (13) at (-2.75, 1.75) {};
+            \node [] (14) at (-2.25, 1.25) {};
+            \node [] (15) at (-1.75, 1.25) {};
+            \node [] (16) at (-1.25, 1.75) {};
+            \node [] (17) at (-1.25, 2.25) {};
+            \node [] (18) at (-3.75, 2.75) {};
+        \end{pgfonlayer}
+        \begin{pgfonlayer}{edgelayer}
+            \draw (18.center) to (12.center);
+            \draw (13.center) to (14.center);
+            \draw (15.center) to (16.center);
+            \draw (17.center) to (11.center);
+            \draw (10.center) to (8.center);
+            \draw (9.center) to (6.center);
+        \end{pgfonlayer}
+    \end{tikzpicture}
+
+    \begin{center}
+        \textbf{Positive Divisors of 12}
+    \end{center}
+    \begin{tikzpicture}
+        \begin{pgfonlayer}{nodelayer}
+            \node [] (0) at (-3, 4) {12};
+            \node [] (1) at (-4, 3) {4};
+            \node [] (2) at (-3, 2) {2};
+            \node [] (3) at (-2, 3) {6};
+            \node [] (4) at (-2, 1) {1};
+            \node [] (5) at (-1, 2) {3};
+            \node [] (6) at (-3.75, 3.25) {};
+            \node [] (7) at (-3.75, 2.75) {};
+            \node [] (8) at (-2.75, 3.75) {};
+            \node [] (9) at (-3.25, 3.75) {};
+            \node [] (10) at (-2.25, 3.25) {};
+            \node [] (11) at (-1.75, 2.75) {};
+            \node [] (12) at (-3.25, 2.25) {};
+            \node [] (13) at (-2.75, 1.75) {};
+            \node [] (14) at (-2.25, 1.25) {};
+            \node [] (15) at (-1.75, 1.25) {};
+            \node [] (16) at (-1.25, 1.75) {};
+            \node [] (17) at (-1.25, 2.25) {};
+            \node [] (18) at (-3.75, 2.75) {};
+        \end{pgfonlayer}
+        \begin{pgfonlayer}{edgelayer}
+            \draw (18.center) to (12.center);
+            \draw (13.center) to (14.center);
+            \draw (15.center) to (16.center);
+            \draw (17.center) to (11.center);
+            \draw (10.center) to (8.center);
+            \draw (9.center) to (6.center);
+        \end{pgfonlayer}
+    \end{tikzpicture}
+    
+\end{multicols}
 \begin{center}
     \textbf{\purple{Cyclic groups with subgroups $\cong$ integers with divisibility}}
 \end{center}
@@ -1664,5 +1925,11 @@ $$\mathbb{C} = \{re^{i\theta} : r, \theta \in \real\}$$
 \begin{lemma}
     $$e^{i\theta} = \cos\theta = i\sin\theta$$
 \end{lemma}
-\textbf{test}
+\[z = re^{i\theta} = re^{i(\theta + 2k\pi)} = -re^{i(\theta + (2k+1)\theta)}\]
+\[z = re^{i\theta} = r \cos \theta + ir \sin \theta\]
+\[\begin{cases}
+    |z| = |a + bi| = \sqrt{a^2 + b^2} = r\\
+    \frac{b}{a} = \tan \theta \\
+\end{cases}\]
+Refer to the profs notes for the rest of the complex number stuff. 
 \end{document}
