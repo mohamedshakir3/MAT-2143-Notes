@@ -7,6 +7,7 @@
 \usepackage{stylesheet}
 \usepackage{lecture_notes_styles}
 
+\renewcommand{\chaptername}{Lecture}
 
 \title{MAT 2143 Lecture Notes}
 \author{Last updated:}
@@ -1932,4 +1933,20 @@ $$\mathbb{C} = \{re^{i\theta} : r, \theta \in \real\}$$
     \frac{b}{a} = \tan \theta \\
 \end{cases}\]
 Refer to the profs notes for the rest of the complex number stuff. 
+\chapter{Subgroups of $\mathbb{T}$, Permutations, Disjoint Cycles}
+
+\section{Subgroups of a Finite Cyclic Subgroup}
+$G = \bangles{g}$ with $|g| = |G| = n = md$, choose $r$ with $\gcd(n,r) = d$, then
+\[|g^r| = \frac{n}{\gcd(n,r)} = \frac{n}{d} = m\]
+Any subgroup of order $m$ can be obtained this way. If 
+\[H = \bangles{g^r}\]
+is a subgroup of $G$ of order $m$, then
+\[H = \bangles{g^r, g^{2r}, \dots, g^{mr} = \epsilon}\text { and } |g| = n = |nr|\]
+Furthermore, 
+\[(g^{tr})^m  = (g^{mr})^t = (\epsilon)^t = \epsilon\]
+So $H$ consists of $m$ elements and $x \in H \rightarrow x^m = \epsilon$. So
+\begin{align*}
+    x^m = (g^k)^m = \epsilon &\iff g^{km} =\epsilon\\
+    &\iff 
+\end{align*}
 \end{document}

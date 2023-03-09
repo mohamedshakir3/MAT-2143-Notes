@@ -1,0 +1,446 @@
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{environ}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\title{CSI 2132 Midterm Cheat Sheet}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+
+
+\definecolor{blue}{HTML}{A7BED3}
+\definecolor{brown}{HTML}{DAB894}
+\definecolor{pink}{HTML}{FFCAAF}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+
+
+\tikzset{header/.style={path picture={
+\fill[green, even odd rule, rounded corners]
+(path picture bounding box.south west) rectangle (path picture bounding box.north east) 
+([shift={( 2pt, 4pt)}] path picture bounding box.south west) -- 
+([shift={( 2pt,-2pt)}] path picture bounding box.north west) -- 
+([shift={(-2pt,-4pt)}] path picture bounding box.north east) -- 
+([shift={(-6pt, 6pt)}] path picture bounding box.south east) -- cycle;
+},
+label={[anchor=west, fill=green]north west:\textbf{#1:}},
+}} 
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, rounded corners, font=\bfseries]
+
+
+\tikzstyle{bluebox} = [draw=blue, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{bluetitle} =[fill=blue, inner sep=4pt, text=white, font=\small]
+
+
+\tikzstyle{brownbox} = [draw=brown, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{browntitle} =[fill=brown, inner sep=4pt, text=white, font=\small]
+
+\tikzstyle{pinkbox} = [draw=pink, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{pinktitle} =[fill=pink, inner sep=4pt, text=white, font=\small]
+
+\tikzstyle{redbox} = [draw=red!35, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{redtitle} =[fill=red!35, inner sep=4pt, text=white, font=\small]
+
+
+
+\NewEnviron{redbox}[1]{
+    \begin{tikzpicture}
+    \node[redbox](box){%
+    \begin{minipage}{0.9\textwidth}
+    \BODY
+    \end{minipage}};
+    \node[redtitle, right=10pt] at (box.north west) {#1};
+    \end{tikzpicture}
+}
+
+\NewEnviron{brownbox}[1]{
+    \begin{tikzpicture}
+    \node[brownbox](box){%
+    \begin{minipage}{0.9\textwidth}
+    \BODY
+    \end{minipage}};
+    \node[browntitle, right=10pt] at (box.north west) {#1};
+    \end{tikzpicture}
+}
+
+     
+
+\NewEnviron{bluebox}[1]{%
+\begin{tikzpicture}
+    \node[bluebox](box){%
+        \begin{minipage}{0.9\textwidth}
+            \BODY
+        \end{minipage}
+    };
+    
+\node[bluetitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+\NewEnviron{pinkbox}[1]{%
+\begin{tikzpicture}
+    \node[pinkbox](box){%
+        \begin{minipage}{0.9\textwidth}
+            \BODY
+        \end{minipage}
+    };
+    
+\node[pinktitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+
+
+\NewEnviron{blackbox}[1]{%
+\begin{tikzpicture}
+    \node[mybox](box){%
+        \begin{minipage}{0.3\textwidth}
+        \small{
+            \BODY
+        }
+        \end{minipage}
+    };
+    
+\node[fancytitle, right=10pt] at (box.north west) {#1};
+\end{tikzpicture}
+}
+
+
+\begin{document}
+
+\begin{center}
+\large{\textbf{MAT 2143 Midterm Summary Sheet}}\\
+\end{center}
+\begin{multicols*}{3}
+\begin{blackbox}{Equivalence Classes and Relations}
+    \begin{bluebox}{Equivalence Relations}
+        \textit{$\sim$ is an equivalence relation on a set $X$ if it is
+        \begin{itemize}
+            \item \textbf{Reflexive:} $x \sim x$ $\forall x \in X$
+            \item \textbf{Symmetric:} $x \sim y \iff y \sim x$ $\forall x,y \in X$
+            \item \textbf{Transitive:} $x \sim y \wedge y \sim z \implies x \sim z$ $\forall x,y,z \in X$
+        \end{itemize}
+        }
+    We say $\approx$ is a refinement of $\sim$ if $a \approx b \implies a \sim b$ $\forall a,b \in X$ 
+    \end{bluebox}
+    An \emph{equivalence class} is denoted by\\[-2ex]
+    \[[x] = \{y \in X: x \sim y\}\]\\[-4ex]
+    \begin{redbox}{Theorems}
+    \raggedright
+    \textbf{Theorem.}\textit{ Let $X$ be a set with an equivalence relation. Then }\\[-1ex]
+    $$[x] \cap [y] \neq \emptyset \implies [x] = [y]$$
+    \textbf{Theorem.} Let $X$ be a set with an equivalence relation. Then the equivalence classes form a partition of $X$.\\[1ex]
+    \textbf{Theorem.} Let $R_j$ form a partion of $X$. Say that $x \sim y$ means $x,y \in R_j$ for some $j$. Then $\sim$ is an equivalence relation on $X$.\\[1ex]
+    \end{redbox}
+    \begin{brownbox}{Operations}
+    An operation is \emph{well-defined on equivalence classes} if 
+    \[\begin{rcases}
+    x \sim y\\
+    w \sim z
+    \end{rcases} \implies x \cdot w \sim y \cdot z\]
+    Or equivalently, 
+    \[\begin{rcases}
+        [x] = [y]\\
+        [w] = [z]
+    \end{rcases} \implies [x \cdot w] = [y \cdot z]\]
+    \textbf{Example:} $X = \mathbb{R} \times \mathbb{R}$ $(a,b) \sim (c,d)$ means $a^2 + b^2 = c^2 + d^2$ Is addition well defined? Let\\[-1ex]
+    \[\begin{cases}
+        (a,b) \sim (c,d)\\
+        (e,f) \sim (g,h)
+    \end{cases} \implies \begin{cases}
+        a^2 + b^2 = c^2 + d^2\\
+        e^2 + f^2 = g^2 + h^2
+    \end{cases}\]
+    Then\\[-3ex]
+    \[\begin{cases}
+        (a,b) + (e,f) = (a+e, b+f)\\
+        (c,d) + (g,h) = (c+g, d+h)
+    \end{cases}\]
+    Now we have to check if\\[-1.5ex]
+    \[(a+e)^2 + (b+f)^2 = (c+g)^2 + (d+h)^2\]
+    \end{brownbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Number Theory}
+\raggedright
+\textbf{Fact:}\textit{ Every Non-empty $S \subseteq N$ has a minimum element $d$ in $S$}\\[0.5ex]
+\textbf{Prop:} Let $a, b \in \mathbb{Z}$ with $b > 0$, then $\exists ! q,r \in \mathbb{Z}$ with $a = bq + r$ for $0 \leq r < b$\\[0.75ex]
+\begin{bluebox}{GCD}
+    \textbf{Definition:} \textit{ Let $a,b \in \mathbb{Z}$, if $d$ is a positive integer with}\\[-4ex]
+    \begin{itemize}
+        \item $d \mid a$ and $d \mid b$
+        \item if $c \mid a$ and $c \mid b$, then $c \mid d$
+    \end{itemize}
+    \textit{then d is the $\gcd$ of $a$ and $b$}\\[0.5ex]
+    \textbf{Theorem:} \textit{For every $a,b \in \mathbb{Z}$, $\exists ! d = \gcd(a,b)$. Furthermore, $\exists x,y \in \mathbb{Z}$ such that $d =   ax+ by$. Furthermore $d$ is the largest common divisor of $a,b$}\\[0.5ex]
+    \textbf{Corollary:} \textit{$\gcd(a,b) = 1$ $\implies$ $\exists x,y$ s.t $ax + by = 1$}\\[0.5ex]
+    \textbf{Corollary:} \textit{$\gcd(a,b) = d$ $\implies$ $\{ax + by: x,y \in \mathbb{Z}\} = d\mathbb{Z}$}
+\end{bluebox}
+\begin{redbox}{LCM}
+    \textbf{Definition:} \textit{let $a,b \in \mathbb{Z}$ if $m$ is a positive integer with 
+    \begin{itemize}
+        \item $a \mid m$ and $b \mid m$
+        \item if $a \mid n$ and $b \mid n$, then $m \mid n$
+    \end{itemize}
+    then $m$ is a \emph{lcm} of $a,b$.}\\[1ex]
+    \textbf{Theorem:} \textit{ For every $a,b$ $\exists !$ \emph{lcm} $m$}
+\end{redbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Cayley Tables}
+\[\begin{tabular}{c|cccc}
+    $\cdot$ &  $\epsilon$ & $a_1$ &$ a_2 $& $\cdots$ \\
+    \hline
+    $\epsilon$ & $\epsilon$ & $a_1$ & $a_2$ & $\cdots$ \\
+    $a_1$ & $a_1$ & $\cdots$ & $\cdots$ & $\cdots$\\
+    $a_2$ & $a_2$ & $\cdots$ & $\cdots$ & $\cdots$\\
+    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\
+\end{tabular}\]
+\textbf{Properties:}
+\begin{itemize}
+    \item Symmetric $\implies$ Operation is commutative
+    \item row and column is the header $\implies$ corresponding element is the identity
+    \item every row has the identity $\implies$ each element an inverse
+    \item Only one row and column can match the header (in other words there is only one identity)
+    \item Each row and column contains each element \emph{exactly} once (since the group is closed)
+\end{itemize}
+\end{blackbox}
+\begin{blackbox}{Isomorphisms}
+\begin{brownbox}{Isomoprhism}
+    If $\phi: G \rightarrow H$ is a bijection with $\phi(xy) = \phi(x)\phi(y)$ Then $\phi$ is an isomoprhism and $G,H$ are isomorphic. 
+\end{brownbox}
+\begin{pinkbox}{Automorphism}
+If $\phi: G \rightarrow G$ is an isomorphism, then $\phi$ is an automorphism. We denote the set of all automorphisms as aut$(G)$ 
+\end{pinkbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Cyclic Groups}
+    \textbf{Definition:} \textit{G is cyclic $\iff$ $\exists$ a generator $g \in G$ s.t $G = \langle g \rangle = \{g^k: k \in \mathbb{Z}\}$}
+    \raggedright
+    The \emph{order} of an element $g \in G$ is the smallest positive integer $n$ with $g^n = \epsilon$\\[1.2ex]
+    \begin{bluebox}{Facts and Notation}
+        \begin{itemize}
+        \item $|g| = $ order of an element, $|g| = \infty \iff g^k \neq \epsilon$ $\forall k \in \mathbb{Z}$
+        \item $\{k: g^k = \epsilon\} = |g| \cdot \mathbb{Z}$, so $g^k = \epsilon \iff |g| \mid k$
+        \item $|x| = |y| \iff (x^k = \epsilon \iff y^k = \epsilon)$ 
+        \item $G$ is cyclic $\implies$ $G$ is abelian
+        \item $G$ is cyclic $\implies$ All subgroups of $G$ are cyclic 
+        \item $G$ is cyclic with with no subgroups other than $\{\epsilon\} \iff$ $|G| = n$ is prime. \textit{(We say G is cyclic of prime order)}
+        \item If $G,H$ are both cyclic, then $G \cong H \iff |G| = |H|$
+        \item $|g^k| = \frac{n}{\gcd(n,k)}$
+        \item Generators are exactly $\{g^k: \gcd(n,k) = 1\}$
+    \end{itemize}   
+    \end{bluebox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Complex Numbers}
+    \[ \mathbb{C} = \{a + bi: a,b \in \mathbb{R}\}\]
+    \[ \mathbb{C} = \{re^{i\theta}: r,\theta\in \mathbb{R} \text{ s.t } r \geq 0, 0 \leq \theta < 2\pi\}\]
+    \[re^{i\theta} = r\cos\theta + ri\sin\theta \implies e^{i\theta} = \cos\theta + i\sin\theta\]
+    \[z = re^{i\theta} = re^{i(\theta + 2k\pi)} = -re^{i(\theta + (2k + 1)\pi)}\]
+    \[z = re^{i\theta} = r\cos\theta + ir\sin\theta\]
+    \[a = r\cos\theta \text{ and } b = ir\sin\theta\]
+    $$|z| = |a+bi| = \sqrt{a^2 + b^2} = r$$
+    \[\frac{b}{a} = \tan\theta\]
+\end{blackbox}
+\begin{blackbox}{Roots of Unity and The Circle Group $\mathbb{T}$}
+The \emph{nth} root of unity is the solution to $z^n = 1$\\[-1ex]
+\[R_n = \{e^{i2\pi\cdot\frac{1}{n}}, e^{i2\pi\cdot\frac{2}{n}}, \ldots, e^{i2\pi\cdot\frac{n}{n}}\} = \langle e^{\frac{i2\pi}{n}} \rangle\]\\[-2ex]
+\begin{bluebox}{Circle Group $\mathbb{T}$}
+    \[\mathbb{T} = \{z \in \mathbb{C}: |z| = 1\} = \{e^{i\theta}: \theta \in \mathbb{R}\} \leq \mathbb{C}^\times\]\\[-7ex]
+    \[R_n \leq \mathbb{T} \leq \mathbb{C}^\times\]
+\end{bluebox}
+\begin{pinkbox}{R Group}
+    \[R = \bigcup_{n=1}^\infty R_n = \{e^{\frac{2\pi ij}{n}}: 0 \leq j <n, \ n \geq 1\}\]
+    \textbf{Properties:}
+    \begin{itemize}
+        \item $|z|$ is finite $\forall z \in R$
+        \item $|R|$ is infinite
+        \item R is abelian but \emph{not} cyclic
+        \item Every finite subset is contained in a finite subgroup
+        \item Every finite subgroup is cyclic
+        \item Every infinite subgroup is not cyclic
+        \[R = \langle \{e^{\frac{2\pi i}{n}}: n \geq 1\} \rangle = \langle \{e^{\frac{2\pi i}{n}}: n \geq k\} \rangle\]
+        For any $k$
+    \end{itemize}
+\end{pinkbox}\\[-4ex]
+\begin{center}
+    \textbf{Subgroup Hierarchy:}
+\[R_n < R < \mathbb{T} < \mathbb{C^\times}\]
+\end{center}
+\end{blackbox}
+\begin{blackbox}{Symmetric Group}
+$\Omega$ is some set, a \emph{permutation} of $\Omega$ is a bijection $\Omega \mapsto \Omega$. $S_{\Omega} = $ the set of all permutations of $\Omega$, which is called the \emph{symmetric group} $S_n$. $S_n = S_{\Omega}$ for $\Omega = \{1,2,\ldots, n\}$. so $|\Omega| = n$.\\
+A subgroup of $S_n$ is called a permutation group.  
+\begin{redbox}{Theorems}
+    \begin{itemize}
+        \item $S_\Omega$ with the operation of compositions is a group
+        \item $|S_n| = n!$
+    \end{itemize}
+\end{redbox}
+\begin{brownbox}{Cycle Notation}
+    If $\sigma \in S_n$ then
+    \[\sigma = \begin{pmatrix}
+        1 & 2 & \cdots& n\\
+        \sigma(1) & \sigma(2)&  \cdots & \sigma(n)
+    \end{pmatrix}\]
+\end{brownbox}\\[-2ex]   
+\end{blackbox}
+\begin{blackbox}{Cycles}
+$\sigma \in S_n$ is a cycle if $\exists a_1, \ldots, a_k$ such that 
+\[\begin{cases}
+    \sigma(a_j) = a_{j+1}\\
+    \sigma(a_k) = a_1\\
+    \sigma(x) = x, \ x \neq a_j
+\end{cases}\]\\[-4ex]
+    \begin{bluebox}{Cycle Order}
+        \begin{itemize}
+            \item A $k$-cycle has $a_1, \ldots, a_k$ terms
+            \item 2-cycles are called \emph{transpositions}
+        \end{itemize}
+    \end{bluebox}
+    \begin{brownbox}{More Notation}
+        \textbf{Two-Line Notation:}\\[-1ex]
+        \[\sigma = \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+            3 & 2 & 5 & 1 & 4
+        \end{pmatrix}\]\\[-3ex]
+        \textbf{One-Line Notation:}\\[-1ex]
+        \[\sigma = \begin{pmatrix}
+            1 & 3 & 5 & 4
+        \end{pmatrix}(2)(6) = \begin{pmatrix}
+            1 & 3 & 5 & 4
+        \end{pmatrix}\]
+        \[\sigma^{-1} = \begin{pmatrix}
+            4 & 5 & 3 & 1
+        \end{pmatrix}\]
+    \end{brownbox}
+    \begin{pinkbox}{Supports}
+        The support of a permutation $\pi$ is $\{x: \pi(x) \neq x\}$. Permutations are \emph{disjoint} if their supports are disjoint. 
+        \textbf{Example:}\\[-2ex]
+        \[\sigma = \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 \\
+            5 & 2  & 3 & 1 & 4
+        \end{pmatrix}, \text{ support}(\sigma) = \{1,4,5\}\]
+    \end{pinkbox}
+    \begin{redbox}{Cycle Types \& Order}
+        The \emph{cycle type} of a permutation $\pi$ is the list of the lengths of its disjoint cycles. The order is the lcm of the cycle types.  \\
+        \textbf{Example:} List all the possible orders and cycle-types of permutations in $S_7$\\[-2ex]
+        \[\begin{tabular}{c|c}
+              Cycle-Type & Order \\
+              \hline
+              7 & 7\\
+              6 & 6\\
+              5,2 & 10\\
+              5 & 5\\
+              4,3 & 12\\
+              4,2 & 4\\
+              4 & 4\\
+              3,3 & 3\\
+              3,2,2 & 6\\
+              3,2 & 6\\
+              3 & 3\\
+              2,2,2 & 2\\
+              2,2 & 2\\
+              2 & 2 \\
+              1 & 1\\
+        \end{tabular}\]
+    \end{redbox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Dihedral Group}
+$D_n$ is the group of symmetries of a regular $n$-gon with 
+\begin{itemize}
+    \item $\rho =$ reflection by $\frac{1}{n}$ circle $ = \begin{pmatrix}
+        1 & 2 & \cdots & n
+    \end{pmatrix}$
+    \item $\mu=$ reflection through corner 1 $=$\\[-2ex]
+\end{itemize}
+$\begin{cases}
+        (1)\begin{pmatrix}2 & 2m\end{pmatrix}\begin{pmatrix}3 & 2m-1\end{pmatrix}\ldots
+        \begin{pmatrix}m & m+2\end{pmatrix}(m+1)\\
+        (1)\begin{pmatrix}2 & 2m+1\end{pmatrix}\begin{pmatrix}3 & 2m\end{pmatrix}\ldots
+        \begin{pmatrix}m+1 & m+2\end{pmatrix}
+    \end{cases}$\\[1ex]
+    For $n = 2m$, and $m = 2m+1$ respectively. \\[1ex]
+    \[D_n = \{\mu^i\rho^j\} = \{\rho^j\mu^i\}\]
+    \textbf{Theorem:} $D_n$ is a subgroup of $S_n$
+\end{blackbox}
+\begin{blackbox}{Conjugation}
+    $\sigma, \pi \in S_n$, we say $\pi$ is conjugated by $\sigma$ for $\sigma\pi\sigma^{-1}$. Suppose $\pi(i) = j$, then
+    \[\pi(i) = j \iff (\sigma\pi\sigma^{-1})(\sigma(i)) = \sigma(j)\]
+    \textbf{Proposition:} $\alpha, \beta \in S_n$ have the same cycle type $\iff$ $\beta = \sigma \alpha \sigma^{-1}$ for some $\sigma \in S_n$.
+\end{blackbox}
+\begin{blackbox}{Important Theorems}
+    \textit{*Note: Some of these are repeats but are very important}
+    \raggedright
+    \begin{itemize}
+        \item $|g^k| = \frac{n}{\gcd(n,k)}$
+        \item If $G,H$ are both cyclic, then $G \cong H \iff |G| = |H|$
+        \item Cyclic $\implies$ Abelian
+        \item Disjoint permutations commute
+        \item $x \in $ support$(\pi) \implies \pi(x), \pi(\pi(x)), \ldots \in$ supp($\pi$)
+        \item Order of a permutation is the lcm of the cycle types
+        \item Every permutation can be written as products of disjoint cycles
+        \item $S_n$ is generated by the set of all cycles
+        \item $k$-cycles can be written as the product of $k - 1$ transpositions
+        \item The set of all transpositions generates $S_n$, so $S_n = \langle \{\begin{pmatrix}
+            a & b
+        \end{pmatrix}: 1 \leq a < b \leq n\}$
+        \item The following are minimal generating sets of $S_n$
+        \[\{\begin{pmatrix}
+            1 & a
+        \end{pmatrix}: 2 \leq a \leq n\}\]
+        \[\{\begin{pmatrix}
+            a & a+1
+        \end{pmatrix}: 1 \leq a \leq n-1\}\]
+        \[\{\begin{pmatrix}
+            1 & 2
+        \end{pmatrix}, \begin{pmatrix}
+            1 & 2 & \ldots & n
+        \end{pmatrix}\}\]
+    \end{itemize}
+\end{blackbox}
+\end{multicols*}
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[openany]{report}
+
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{multicol}
+\usepackage{stylesheet}
+\usepackage{lecture_notes_styles}
+
+\title{MAT 2143 Suggested Exercises Solutions}
+\author{Last updated:}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Preliminaries}
+\chapter{The Integers}
+\chapter{Groups}
+\section{Question 1}
+Find all $x \in \ints$ satisfying each of the following equations. 
+\begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item $3x \equiv 2 \pmod{7}$
+        \item $5x + 1 \equiv 13 \pmod{23}$
+        \item $5x + 1 \equiv 13 \pmod{26}$
+        \item $9x \equiv 3 \pmod{5}$
+        \item $5x \equiv 1 \pmod{6}$
+        \item $3x \equiv 1 \pmod{6}$
+    \end{enumerate}
+\end{multicols}
+\textbf{Solution:}
+\begin{enumerate}[label=(\alph*)]
+    \item $3x \equiv 2 \pmod{7}$, we have $3 \cdot 5 \equiv 1 \pmod{7}$, so $3^{-1} \equiv 5 \pmod{7}$, then 
+    \[x \equiv 2 \cdot 5 \equiv 3 \pmod{7}\]
+    So 
+    $$x \in 3\cdot \ints$$
+    \item $5x + 1 \equiv 13 \pmod{23}$ $\implies$ $5x \equiv 12 \pmod{23}$. We have $5 \cdot 14 = 70 \equiv 1 \pmod{23}$, so $5^{-1} \equiv 14 \pmod{23}$, then
+    \item \[5x \equiv 12 \implies x \equiv 12 \cdot 14 \equiv 7 \pmod{23}\]
+    Therefore 
+    \[x \in 7 \cdot \ints\] 
+    The rest of these are easy.
+\end{enumerate}
+
+\section{Question 2}
+Which of the following multiplaction tables defined on the set $G = \{a,b,c,d\}$ form a group? Support your answer in each case. 
+\begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item \[\begin{tabular}{c|cccc}
+            $\circ$ & a & b & c & d \\
+            \hline
+            a & a & c & d & a \\
+            b & b & b & c & d\\
+            c & c & d & a & b\\
+            d & d & a & b & c 
+        \end{tabular}\]
+        \item \[\begin{tabular}{c|cccc}
+            $\circ$ & a & b & c & d \\
+            \hline
+            a & a & b & c & d \\
+            b & b & a & d & c\\
+            c & c & d & a & b\\
+            d & d & c & b & a 
+        \end{tabular}\]
+        \item \[\begin{tabular}{c|cccc}
+            $\circ$ & a & b & c & d \\
+            \hline
+            a & a & b & c & d \\
+            b & b & c & d & a\\
+            c & c & d & a & b\\
+            d & d & a & b & c 
+        \end{tabular}\]
+        \item \[\begin{tabular}{c|cccc}
+            $\circ$ & a & b & c & d \\
+            \hline
+            a & a & b & c & d \\
+            b & b & a & c & d\\
+            c & c & b & a & d\\
+            d & d & d & b & c 
+        \end{tabular}\]
+    \end{enumerate}
+\end{multicols}
+
+\textbf{Solution:}
+\begin{enumerate}[label=(\alph*)]
+    \item is \emph{not} a group since there does not exist an identity. $a$ cannot be the identity since $ab = c \neq ba = b$. $b$ cannot be the identity since $bc = c \neq cb = d$. $c$ cannot be the identity since no element combined with $c$ yields that element. $d$ cannot be the identity for the same reason as $c$.
+    \item is a group. Since the corresponding row and column for $a$ matches the headers, $a$ is the identity, and each element is its own inverse. We also have that $(bc)d = (d)d = a$ and $b(cd) = b(b) = a$ so the operation is associative. Therefore $(b)$ is a group.
+    \item is a group. $a$ is the identity, and $a$ appears in each column and row so each element has an inverse. We also have that $(bc)d = (d)d = c$ and $b(cd) = b(b) = c$ so the operation is associative. Therefore $(c)$ is a group.
+    \item is \emph{not} a group since the corresponding row and column for $a$ matches the headers, but $d$ does not have an inverse.
+\end{enumerate}
+\section{Question 3}
+Write out Cayley tables for groups formed by the symmetries of a rectange and for $(\ints_4, +)$. How many elements are in each group? Are the groups the same? Why or why not? \\[3ex]
+\textbf{Solution:} The Cayley table for the symmetry group of a rectangle is
+\[\begin{tabular}{c|cccc}
+    $\circ$ & $\epsilon$ & $\rho$ & $\alpha$ & $\beta$\\
+    \hline
+    $\epsilon$ & $\epsilon$ & $\rho$ & $\alpha$ & $\beta$\\
+    $\rho$ & $\rho$ & $\epsilon$ & $\beta$ & $\alpha$\\
+    $\alpha$ & $\alpha$ & $\beta$ & $\epsilon$ & $\rho$\\
+    $\beta$ & $\beta$ & $\alpha$ & $\rho$ & $\epsilon$\\
+\end{tabular}\]
+Where $\alpha, \beta, \epsilon, \rho$ are defined as we've seen in class. The Cayley table for $(\ints_4, +)$ is
+\[\begin{tabular}{c|cccc}
+    + & 0 & 1 & 2 & 3\\
+    \hline
+    0 & 0 & 1 & 2 & 3\\
+    1 & 1 & 2 & 3 & 0\\
+    2 & 2 & 3 & 0 & 1\\
+    3 & 3 & 0 & 1 & 2\\
+\end{tabular}\]
+
+
+\end{document}
