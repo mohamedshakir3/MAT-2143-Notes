@@ -445,16 +445,18 @@ $\begin{cases}
 \end{blackbox}
 \begin{blackbox}{Lagrange Theorem}
     Let $G$ be a finite group and $H$ be a subgroup of $G$. Then\\[-2ex]
-    \[|G| = [G : H] \cdot |H|\]
+    \[|G| = [G : H] \cdot |H| \implies [G:H] = \frac{|G|}{|H|}\]
     \raggedright
     $[G:H]$ is the number of left cosets of $G$ in $H$.
     \begin{bluebox}{Corollaries}
         \textbf{Corollary:}\\[-2ex]
         \[H <  G \implies |H| \text{ divides } |G|\]
-
+        \textit{Proof. } \\[-2ex]
+        $$|H| \cdot [G : H]  = |G|$$
         \textbf{Corollary:}\\[-2ex]
         \[g \in G \implies |g| \text{ divides } |G|\]
-        
+        \textit{Proof. }\\[-2ex]
+        \[|g| = |\langle {g} \rangle| \ \ |\langle {g} \rangle| \cdot [G : \langle {g} \rangle]\]
         \textbf{Corollary:}\\[-2ex]
         \[|G| \text{ prime } \implies G = \langle a \rangle \ \forall a \neq \epsilon\]
         If 
@@ -465,10 +467,10 @@ $\begin{cases}
     \end{bluebox}\\[-2ex]
 \end{blackbox}
 \begin{blackbox}{Cosets}
-    $H$ is s subgroup of $G$, $g$ is any fixed element in $G$. Then the left coset of $H$ in $G$ is 
+    $H$ is s subgroup of $G$, $g$ is any fixed element in $G$. Then the left coset of $H$ in $G$ is \\[-2ex]
     \[gH = \{gh: h \in H\}\]
-    The right coset of $H$ in $G$ is 
-    \[Hg = \{hg: h \in H\}\]\\[-6ex]
+    The right coset of $H$ in $G$ is \\[-2ex]
+    \[Hg = \{hg: h \in H\}\]\\[-4ex]
     \begin{redbox}{Properties}
     \begin{itemize}
         \item $G$ abelian $\implies$ $gH = Hg$ $\forall g \in G$ $H \leq G$
@@ -485,9 +487,7 @@ $\begin{cases}
             \item $g_2^{-1}g_1 \in H$ (or $g_1^{-1}g_2 \in H$)
         \end{itemize}
     \end{bluebox}
-    \end{redbox}
-    The number of left cosets $[G:H]$ is given by 
-    \[[G: H] = \frac{|G|}{|H|}\]
+    \end{redbox}\\[-2ex]
 \end{blackbox}
 \end{multicols*}
 \end{document}
