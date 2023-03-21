@@ -262,7 +262,7 @@ $$|(a,b)| = mn = lcm\left(\frac{n}{gcd(m,n)}, \frac{m}{gcd(m,n)}\right) $$
 $$\iff gcd(m,n) = gcd(n,a) = 1$$
 \subsection{(e)}
 Find a formula for the order of $(x,y)$ in $G \times H$. 
-$$(xy)^k = \epsilon \iff (x^k, y^k) = (\epsilon_G, \epsilon_H$$
+$$(xy)^k = \epsilon \iff (x^k, y^k) = (\epsilon_G, \epsilon_H)$$
 $|x|$ in $G$ divides $k$ and $|y|$ in $H$ divides $k$. Therefore $k$ is a multiple of $lcm(|x|, |y|)$
 $$\therefore |(x,y)| = lcm(|x|,|y|)$$
 
@@ -272,5 +272,143 @@ $$\begin{pmatrix}
 1 & 2 & 3\\
 1 & 2 & 3
 \end{pmatrix}$$
+
+\chapter{Cosets, Isomporhisms, Inner Automorphisms}
+\section{Question 1}
+Recall that the “(left) Coset Comparison Theorem” says that for $H$ a subgroup of $G$ and $g_1, g_2 \in G$ the following are equivalent:
+\begin{enumerate}[label=(\alph*)]
+    \item $g_1H = g_2H$
+    \item $Hg_1^{-1} = Hg_2^{-1}$
+    \item $g_1H \subseteq g_2H$ (or $g_2H \subseteq g_1H$)
+    \item $g_1 \in g_2H$ (or $g_2 \in g_1H$)
+    \item $g_2^{-1}g_1 \in H$ (or $g_1^{-1}g_2 \in H$)
+\end{enumerate}
+
+In each case, the statement remains true if we swap g1 and g2, hence the parenthesized versions.
+In class we showed that (a), (b), (e) were equivalent. Show that they are also equivalent to (c) and (d).
+\begin{align*}
+    g_1H = g_2H &\iff \{g_1h : h \in H\} = \{g_2h : h \in H\}\\
+    &\iff \exists \text{ a bijection } \alpha: H \mapsto H\\
+    &g_1h = g_2\alpha(h)\\
+    &\iff \exists \text{ a bijection } \alpha : H \mapsto H\\
+    &(g_1h)^{-1} = (g_2\alpha(h))^{-1}\\
+    &h^{-1}g_1^{-1} = \alpha(h)^{-1}g_2^{-1}\\
+    &\iff \exists \text{ a bijection } \beta : H \mapsto H\\
+    &kg^{-1} = \beta(k)g_2^{-1}\\
+\end{align*}
+Where $\beta(k) = \alpha(k^{-1})^{-1}$. Therefore,
+\[Hg_1^{-1} = Hg_2^{-1}\]
+To prove $g_1H = g_2H \iff g_1 \in g_2H$, 
+\begin{align*}
+    g_1H = g_2H &\iff \{g_1h : h \in H\} = \{g_2h : h \in H\}\\
+    &\iff \exists \text{ a bijection } \alpha: H \mapsto H\\
+    &g_1h = g_2\alpha(h)\\
+    &g_1 = g_2\alpha(h)h^{-1}\\
+    &\implies g_1 \in g_2H
+\end{align*}
+Then we have 
+\begin{align*}
+    g_1 \in g_2H &\implies g_1=g_2k  \text{ for some } k \in H\\
+    &\implies g_1H = \{g_1h: h \in H\}\\
+    &= \{g_2kh: h \in H\} = \{g_2h: h \in H\} = g_2H\\
+\end{align*}
+Proving $g_1 \in g_2H \iff g_1H \subseteq g_2H$. 
+\[g_1 \in g_2H \implies g_1h \in g_2H \ \forall h \in H\]
+\[g_1H \subseteq g_2H \implies g_1 \epsilon \in g_2H\]
+\begin{center}
+    \textbf{Recall:}
+    $g_1H = Hg_1 \iff g_1H^{-1 } = H$
+    
+\end{center}
+
+\section{Question 2}
+\begin{align*}
+    G = D_4 &= \{\mu^i, \rho^i: 0 \leq i \leq 1 \ \ 0 \leq j \leq 3\}\\
+    &= \bangles{\mu, \rho: \mu^2 = \rho^2 \epsilon \ \ \rho\mu=\mu\rho^{-1}}
+\end{align*}
+\subsection{(a)}
+$H = \bangles{\mu}$. Fine the left and right cosets of $H$ in $D_4$. \\[2ex]
+The size of the coset is the same as 
+\[|H| = |\{\epsilon, \mu\}|\] 
+The number of cosets are 
+\[\frac{|D_4|}{|H|} = \frac{8}{2} = 4\]
+So we have 
+\begin{itemize}
+    \item $\epsilon H = \{\epsilon, \mu\}$
+    \item $\rho H = \{\rho, \rho\mu\} = \{\rho, \mu\rho^3\}$
+    \item $\rho^2H = \{\rho^2, \rho^2,\mu\} = \{\rho^2, \mu\rho^2\}$
+    \item $\rho^3H = \{\rho^3,\rho^3\mu\} = \{\rho^3, \mu\rho\}$
+\end{itemize}
+Notice, that some of the left cosets are equal to the right cosets, such as $\epsilon H = H\epsilon$ and $H\rho^2 = \rho^2H$.
+\subsection{(b)}
+$H = \bangles{p}$. Find the left and right cosets of $H$ in $D_4$. Is $gH = Hg$ for every $g \in G$?
+We have 
+\[\frac{|D_4|}{|H|} = \frac{8}{4} = 2\]
+cosets. The size of the cosets is 
+\[|H| = |\{\rho,\rho^2, \rho^3, \rho^4 = \epsilon\}| = 4\]
+So we have 
+\begin{itemize}
+    \item $\rho^3 = \epsilon H = \{\epsilon, \rho, \rho^2, \rho^3\} = H\epsilon$
+    \item $\mu\rho^2H = \mu H = \{\mu,\mu\rho,\mu\rho^2, \mu\rho^3\} = H\mu$
+\end{itemize}
+Therefore, all the left cosets are equal to the right cosets.
+\subsection{(c)}
+Let $H = \bangles{\rho^2}$. Find left and right cosets of $H$ in $D_4$. Is $gH = Hg$ for every $g \in G$?
+Similary, we have 
+\[\frac{|D_4|}{|H|} = [D_4 : H]= \frac{8}{2} = 4\]
+cosets. The size of the cosets is 
+\[|H| = |\{\rho^2, \rho^4 = \epsilon\}| = 2\]
+So we have 
+\begin{itemize}
+    \item $\epsilon H = \{\epsilon, \rho^2\}$
+    \item $\mu H = \{\mu, \mu\rho^2\}$
+    \item $\rho H = \{\rho,\rho^3\} = H \rho$
+    \item $\mu\rho H = \{\mu\rho, \mu\rho^3\}$
+    \item $H\epsilon = \{\epsilon, \rho^2\}$
+    \item $ H \mu = \{\mu, \rho^2\mu\} = \{\mu, \mu\rho^2\}$ since $(\rho^2)^{-1} = \rho^2$. 
+    \item $H \rho = \{\rho, \rho^2\}$
+    \item $H \mu\rho = \{\mu\rho, \mu\rho^3\}$
+\end{itemize}
+Notice that every left coset is equal to its right coset. 
+\section{Question 3}
+$GL_n(\real)$ is the group of $n \times n$ matrices with real entries. $SL_N(\real)$ is the subgroup of $GL_n(\real)$ consisting of matrices with determinant 1.
+\subsection{(a)}
+Show $SL_n(\real)$ is a subgroup of $GL_n(\real)$.\\[2ex]
+We want to prove that 
+\[\text{det} = 1 \implies \text{ invertible so } SL_n(\real) \subseteq GL_n(\real)\]
+We'll use the subgroup test. 
+\begin{itemize}
+    \item \textbf{$SL_n(\real)$ is non empty} since $I \in SL_n(\real)$
+    \item \textbf{Closure:} If $A,B \in SL_n(\real)$, is $AB \in SL_n(\real)$? Yes, since $\det(AB) = \det(A)\det(B) = 1$. 
+    \item \textbf{Inverses: } If $A \in SL_n(\real)$, is $A^{-1} \in SL_n(\real)$? Yes, since 
+    $$\det(A^{-1}) = \det(A)^{-1} = \frac{1}{\det(A)} = 1$$.
+\end{itemize}
+\subsection{(b)}
+Describe the cosets of $SL_n(\real)$ in $GL_n(\real)$. Are left and right cosets the same?\\[2ex]
+Let $A\in GL_n(\real)$, then 
+\begin{align*}
+    gH \rightarrow A \cdot SL_n(\real) &= AB : B \in SL_n(\real)\\
+    &= \{AB: \det(B) = 1\}
+\end{align*}
+So, 
+\[\det(AB) = \det(A)\det(B) = \det(A)\cdot 1 = \det(A)\]
+If $\det(C) = \det(A)$, is $C \in A \cdot SL_n(\real)$? We have 
+\[C = A \cdot A^{-1}C\]
+Set $B = A^{-1}C$. Then
+\[\det(B) = \frac{1}{\det(A)} \det(C) = \frac{1}{\det(A)} \det(A) = 1\]
+Therefore, yes.
+\section{Question 4}
+Let $\psi: G \rightarrow H$ be an isomoprhism. 
+\subsection{(a)}
+Show that $\alpha \in$ Aut$(G)$ $\implies \psi \circ \alpha$ is an automorphism. \\[2ex]
+$\psi$ and $\alpha$ are bijections, so $\psi \circ \alpha$ is a bijection. We want to check the homomorphism property.
+\[(\psi \circ \alpha) (xy) = (\psi \circ \alpha)(x)(\psi \circ \alpha)(y)\]
+So,
+\begin{align*}
+    (\psi \circ \alpha)(xy) &= \psi(\alpha(xy))\\
+    &= \psi(\alpha(x)\alpha(y))\\
+    &= \psi(\alpha(x))\psi(\alpha(y))\\
+    &= (\psi \circ \alpha)(x)(\psi \circ \alpha)(y)
+\end{align*}
 
 \end{document}
