@@ -443,5 +443,51 @@ $\begin{cases}
         \item If $G$ is abelian and $H$ is not, then they are never isomorphic.
     \end{itemize}
 \end{blackbox}
+\begin{blackbox}{Lagrange Theorem}
+    Let $G$ be a finite group and $H$ be a subgroup of $G$. Then\\[-2ex]
+    \[|G| = [G : H] \cdot |H|\]
+    \raggedright
+    $[G:H]$ is the number of left cosets of $G$ in $H$.
+    \begin{bluebox}{Corollaries}
+        \textbf{Corollary:}\\[-2ex]
+        \[H <  G \implies |H| \text{ divides } |G|\]
+        \textit{Proof. } \\[-2ex]
+        $$|H| \cdot [G : H]  = |G|$$
+        \textbf{Corollary:}\\[-2ex]
+        \[g \in G \implies |g| \text{ divides } |G|\]
+        \textit{Proof. }\\[-2ex]
+        \[|g| = |\langle {g} \rangle| \ \ |\langle {g} \rangle| \cdot [G : \langle {g} \rangle]\]
+        \textbf{Corollary:}\\[-2ex]
+        \[|G| \text{ prime } \implies G = \langle a \rangle \ \forall a \neq \epsilon\]
+        If 
+        \[K < H < G\]
+        then 
+        \[|G| = [G : H][H : K] |K|\]
+        \[[G:K] = [G:H][H:K]\]
+    \end{bluebox}\\[-2ex]
+\end{blackbox}
+\begin{blackbox}{Cosets}
+    $H$ is s subgroup of $G$, $g$ is any fixed element in $G$. Then the left coset of $H$ in $G$ is 
+    \[gH = \{gh: h \in H\}\]
+    The right coset of $H$ in $G$ is 
+    \[Hg = \{hg: h \in H\}\]\\[-6ex]
+    \begin{redbox}{Properties}
+    \begin{itemize}
+        \item $G$ abelian $\implies$ $gH = Hg$ $\forall g \in G$ $H \leq G$
+        \item $H \leq Z(G) \implies gH = Hg$ $\forall g \in G$
+        \item $g \in Z(G) \implies gH = Hg$ $\forall H \leq H$  
+    \end{itemize}
+    \begin{bluebox}{Equivalent Statements}
+        Let $H \leq G$ $g_1, g_2 \in G$
+        \begin{itemize}
+            \item $g_1H = g_2H$ 
+            \item $Hg_1^{-1} = Hg_2^{-1}$
+            \item $g_1H \subseteq g_2H$ (or $g_2H \subseteq g_1H$)
+            \item $g_1 \in g_2H$ (or $g_2 \in g_1H$)
+            \item $g_2^{-1}g_1 \in H$ (or $g_1^{-1}g_2 \in H$)
+        \end{itemize}
+    \end{bluebox}
+    \end{redbox}\\[-2ex]
+\end{blackbox}
 \end{multicols*}
 \end{document}
