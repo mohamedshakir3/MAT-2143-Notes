@@ -1987,5 +1987,165 @@ order of $e^{2\pi ij/n}$ is $n$ finite. If $S \subseteq R$, then let $m =$ lcm o
     \item So $\bangles{S} = \bangles{e^{2\pi i1/m}}$
 \end{itemize}
 every finite subgroup is cyclic.\\[2ex]
-Suppose $S \subseteq R$. Choose 
+Suppose $S \subseteq R$. Choose\\
+TBC 
+\chapter{}
+\chapter{}
+\chapter{}
+\chapter{}
+\chapter{}
+\chapter{}
+\chapter{}
+
+%-----------------------%
+\chapter{Normal Subgroups, Quotient Groups}
+\textbf{Recall:} The external direct product is defined as 
+\[H,K \text{ groups} \implies G = H \times K = \{(x,y) : x\in H, y \in K\}\]
+The internal direct product is defined on subgroups $H, K$ of $G$ with 
+\[H \cap K = \{\epsilon\}\]
+\[xy = yx \ \ \forall x \in H \ y \in K\]
+\textbf{Uniqueness:} If $G = HK$ as an internal direct product, then $\forall g \in G$, $\exists ! x \in H, y \in K$ such that $g = xy$.\\[2ex]
+\textbf{Isomorphisms:} If $G = H \times K$ as  an external direct product, then
+\[G = (H \times \{\epsilon\})(\{\epsilon\} \times K)\]
+as an internal direct product. If $G = HK$ as an internal direct product then $G \cong H \times K$ as an external direct product.
+\begin{theorem}
+    If $G = HK$ as internal direct product, then 
+    \[G \cong H \times K\]
+\end{theorem}
+\begin{proof}
+    For $g \in G$, $\exists 1 x \in H, y \in K$ such that $g = xy$. Define
+    \[\psi: G \mapsto H \times K\]
+    by $\psi(g) = (x,y)$. So 
+    \[\begin{rcases}
+        g_1 = x_1y_1\\
+        g_2 = x_2y_2
+    \end{rcases}\implies g_1g_2 = x_1y_1x_2y_2 = \]
+    \textbf{Claim:} $\psi$ is an isomorphism.
+    TBC
+\end{proof}
+\begin{theorem}
+    If $G = H \times K$ as an external direct product, then $G \cong MN$ as an internal direct product where 
+    \[M = H \times \{\epsilon_K\} \text{ and } N = \{\epsilon_H\} \times K\]
+\end{theorem}
+    
+\begin{proof}
+    \begin{itemize}
+        \item $M$ and $N$ are subgroups of $G$
+        \item $(x,y) \in M \implies  y = \epsilon_K$ and $(x,y) \in N \implies x = \epsilon_H$
+        so 
+        \[(x,y) \in M \cap N) \implies (x,y) = (\epsilon_H, \epsilon_G)\]
+        So $M \cap N = \epsilon_G$
+        \item \begin{align*}
+            (x,\epsilon_K)(\epsilon_H, y) &= (x\epsilon_H, \epsilon_Ky)\\
+            &= (\epsilon_Hx, y\epsilon_K)\\
+            &= (\epsilon_Hy)(x,\epsilon_K)
+        \end{align*}
+        So $hK = Kh$ if $h \in H$ and $k \in K$
+        \item $(x,y) \in G \implies (x,y) = (x,\epsilon_K)(\epsilon_K, y)$ So $HK = G$
+    \end{itemize}
+\end{proof}
+\textbf{Example:} Consider $D_6 = \bangles{\mu,\rho}$. Set $H = \bangles{\mu}$ and $K = \bangles{\rho}$. Is $D_6 = HK$ as an inner direct product?\\[2ex]
+We want to check if $H \cap K = \{\epsilon\}$.
+\[H = \{\epsilon, \mu\} \ \ K = \{\epsilon, \rho, \rho^2, \rho^3, \rho^4, \rho^5\}\]
+So we have 
+\[H \cap K = \{\epsilon\}\]
+We also want to show that 
+\[hk = kh \ \forall h \in H \ k \in K\]
+No, since 
+\[\rho\mu = \mu\rho^{-1} = \neq \rho\mu\]
+Is $D_6 = HK$? Yes, since 
+\[HK = \{hk: h \in H \ k \in K\} = \{\mu^i\rho^j: 0 \leq i \leq 1 \ 0 \leq \rho \leq 5\} = D_6\]
+So this is not a direct product. \\[3ex]
+\textbf{Example:} Set $H = \bangles{\rho^3} = \{\epsilon, \rho^3\}$, and 
+\[K = \bangles{\mu, \rho^2} = \{\epsilon, \mu,\rho^2, \mu\rho^2, \rho^4, \mu\rho^4\}\]
+Is $D_6 = HK$ an inner direct product?\\[2ex]
+We have that $\{H \cap K = \{\epsilon\}\}$. We want to show that 
+\[hk = kh \ \forall h \in H \ k \in K\]
+Yes, since $(\rho^3)^{-1} = \rho^3$, so $\mu\rho^3 = \rho^3\mu$, we can show that $\rho^3$ commutes with every element in $K$. We can also just check that the generator of $H$ ($\rho^3$) commutes with the generator of $K$ ($\mu,\rho^2$). Now we want to check if $D_6 = HK$. 
+\[HK = \{hk : h \in H \ k \in K\} = D_6\] 
+So this is a direct product.\\[3ex]
+\textbf{Notice:} $H \cong \ints_2$ and $K \cong D_3$. To prove this, we want to show that 
+\[K = \bangles{\alpha,\beta: \alpha^2 = \beta^3 = \epsilon, \alpha\beta = \beta^{-1}\alpha}\]
+by mapping elements of $K$ to $\alpha, \beta$.
+\begin{center}
+    \textbf{Question:} For which $m$ is $D_{2m} \cong \ints_2 \times D_m$?    
+\end{center}
+\section{Normal Subgroups}
+\begin{definition}
+    For $K < G$, we say \blue{K is a normal subgroup of $G$ if }
+    \[gK = Kg \ \forall g \in G\]
+    We denote a normal subgroup as 
+    \[K \triangleleft G\]
+\end{definition}
+\begin{center}
+    \textbf{Note:} $gx = xg \forall x \in K \implies gK = Kg$  but $gK = Kg \notimplies$ $gx = xg$
+\end{center}
+\textbf{Facts:}
+\begin{itemize}
+    \item $G$ abelian $\implies$ every subgroup is normal 
+    \item $K < Z(G) \implies K \triangleleft G$
+    \item $[G : K] = 2 \implies K \triangleleft G$ 
+\end{itemize}
+\textbf{Example:}
+\[S_3 = \{\epsilon, (23), (13), (12), (123), (132)\}\]
+Is $K = \{\epsilon, (12)\}$ normal in $S_3$? 
+\[g \in G \implies gK = \{g\epsilon, g(12)\}\]
+\[Kg = \{\epsilon g, (12)g\}\]
+\textbf{The following statements are equivalent:}
+\begin{itemize}
+    \item $K \triangleleft G$
+    \item $gK = Kg$ $\forall g \in G$
+    \item $gKg^{-1} = K$ $\forall g \in G$
+    \item Define $phi_g$ by $\phi_g(x) = gxg^{-1}$ $\forall x \in G$ then $\phi_g$ maps $K to K$
+\end{itemize}
+\begin{lemma}
+    Suppose $K \triangleleft G$, then 
+    \[g_1K = g_2K \iff g_1K = Kg_2 \iff g_1Kg_2^{-1} = K\]
+    TBC
+\end{lemma}
+\section{Quotient Groups}
+\begin{definition}
+    Let $K \triangleleft G$. Define a group $G/K$, then the elements of the group are the cosets of $K$ in $G$, so 
+    \[G/K = \{gK : g \in G\}\]
+    The operation is on the representatives of the cosets
+    \[xK \cdot yK = xyK\]
+\end{definition}
+\noindent
+The \emph{order} of $G / K$ is 
+\[[G:K] = \frac{|G|}{|K|}\]
+\textbf{Question:} Is this operation well-defined? 
+\[x_1K = x_2K \ \ \ y_1K = y_2K\]
+\[\begin{cases}
+    x_1K \cdot y_1K = x_1y_1K\\
+    x_2K \cdot y_2K = x_2y_2K
+\end{cases}\]
+From the coset comparison theorem, is $x_1y_1K = x_2y_2K$, $(x_2y_2)^{-1}x_1y_1 \in K$?
+\[(x_2y_2)^{-1}x_1y_1 = y_2^{-1}x_2^{-1}x_1y_1 = y_2^{-1}Ky_1\]
+Since $x_1K = x_2K$, $x_2^{-1}x_1 \in K$. So
+\[ky_1 = Ky+1 = y_1K\]
+so 
+\[ky_1 = y_1k' \ \text{ some } k' \in K\]
+Then 
+\[(x_2y_2)^{-1}x_1y_1 = y_2^{-1}y_1k' = k''k' \in K\]
+\[\therefore x_1y_1K = \]
+\begin{theorem}
+    If $K \triangleleft G$, then $G / K$ is a group.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item \textbf{closure:} $xK \cdot yK = xyK$
+        \item \textbf{Associativity:}
+        \begin{align*}
+            aK \cdot (bK \cdot cK) &= aK \cdot (bc)K = a(bc)K\\
+            (aK \cdot bK) \cdot cK &= (ab)K \cdot cK = (ab)cK
+        \end{align*} 
+        \[a(bc) = (ab)c \text{ since $G$ is a group}\]
+        \item \textbf{Identity:} 
+        \[aK \cdot \epsilon K = a\epsilon K = a K\]
+        \[\epsilon K \cdot aK = \epsilon aK = a K\]
+        \item \textbf{Inverses:}
+        \[aK \cdot a^{-1}K = aa^{-1}K = \epsilon K = K\]
+        \[a^{-1}K \cdot aK =a^{-1}1K = \epsilon K = K \]
+    \end{itemize}
+\end{proof}
 \end{document}
