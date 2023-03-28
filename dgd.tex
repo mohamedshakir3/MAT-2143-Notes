@@ -411,4 +411,133 @@ So,
     &= (\psi \circ \alpha)(x)(\psi \circ \alpha)(y)
 \end{align*}
 
+\chapter{Quotient Groups}
+\textbf{Recap:} If $H \triangleleft G$, then define the quotient group $G/H$ as 
+\begin{itemize}
+    \item Elements of $G/H$ are the cosets $gH$ for $g \in G$
+    \item The operation in $G/H$ is $aH \cdot bH = (ab)H$, and $ab \in G$.
+\end{itemize}
+Also, 
+\[H \triangleleft G \implies \begin{rcases}
+    a_1H = a_2H \\
+    b_1H = b_2H
+\end{rcases} \implies (a_1b_1)H = (a_2b_2)H\]
+So the operation is well-defined.\\[3ex]
+\noindent
+\textbf{Example:}
+Let $G = \ints$, $K = n\ints$ for $n > 0$. $K \triangleleft G$ because $G$ is abelian. So if we take $a + K = \{a + tn : t \in \ints\} = \{t_n + a: t \in \ints\} =K + a$.
+\[G/ K = \text{ cosets } = \left\{0 + n\ints, 1 + n\ints, \ldots,(n-1) + n\ints \right\}\]
+So there are $n$ cosets, and the operation is addition of cosets, defined the same way as multplication but with addition. 
+\[a + n\ints + b + n\ints = (a+b)+ n\ints\]
+\textbf{Note:} 
+\begin{align*}
+    x + n\ints &= \{x + tn: t \in \ints\}\\
+    &= \{x + sn + tn : t \in \ints\}\\
+    &= x + sn \in n\ints\
+\end{align*}
+These are equivalent cosets. Notice, 
+\[\ints/n\ints = \{j + n\ints : 0 \leq j \leq n-1\}\]
+These cosets are exactly the equivalence classes mod $n$. So
+\[\ints/n\ints = \ints_n\]
+\textbf{Example:}
+$G = S_3$, $K = \bangles{\begin{pmatrix}1 & 2\end{pmatrix}} = \{\epsilon, \begin{pmatrix}1 & 2\end{pmatrix}\}$.\\[2ex]
+$G = S_3$, $K = \bangles{\begin{pmatrix}1 & 2 & 3\end{pmatrix}} = \{\epsilon, \begin{pmatrix}1 & 2 & 3\end{pmatrix}, \begin{pmatrix}1 & 3 & 2\end{pmatrix}\} = A_3$. Here $K \triangleleft G$. 
+\[G/K = \left\{ \{\epsilon, (123), (132)\}, \{(23),(13),(12)\} \right\} = \{K, (23)K\} = \{(132)K, K(13)\} \text{ etc}\]
+\[
+\begin{tabular}{c|cc}
+    $S_3/A_3$ & $A_3$ & $(12)A_3$\\
+    \hline
+   $ A_3$ &$ A_3 $& $(12)A_3$\\
+    $(23)A_3$ & $(12)$ &$ A_3$
+\end{tabular}    
+\]
+$A_3 \cdot A_3 = A_3$ since $\epsilon A_3 = A_3$, so
+\[A_3 \cdot A_3 = \epsilon A_3 \cdot \epsilon A_3 = \epsilon\epsilon A_3 = \epsilon A_3 = A_3\]
+From the Cayley Table, we can see that $S_3/A_3 \cong \ints_2$. What does multiplication in $S_3/A_3$ look like? 
+\begin{itemize}
+    \item $S_3/A_3 \cong \ints_2$
+    \item In a crude sense, multiplication in $S_3$ is like addition mod 2 because of the parity of the permutation. So the product of two even permutations has an even parity, and an even and odd results in an odd parity.
+\end{itemize}
+\textbf{Some Context:} From assingment 4. Say $[G:H] = 2$. Show 
+\[x,y \in G \setminus H \implies xy \in H\] 
+\[x \in G \setminus H \implies x^{-1} \in H\]
+If we consider the quotient group $G/H$, consider the Cayley Table
+\[
+\begin{tabular}{c|cc}
+    $G/H$ & $H$ & $G \setminus H$\\
+    \hline
+    $H$ & $H$ & $G \setminus H$\\
+    $G \setminus H$ & $G \setminus H$ &$H$ \\
+\end{tabular}
+\] 
+So, $x, y \in G \setminus H$, $xHyH = xyH$, therefore $xyH = H$ so $xy \in H$. $x \in G \setminus H$. So $x H x^{1}H = x x^{-1}H = \epsilon H = H$. Since $[G : H] = 2$, we have $H \triangleleft G$.
+\section{Question 1}
+Let $K \leq G$. 
+\subsection{Part (a)}
+Show $K$ is a normal subgroup if and only if $\forall x \in G, y\in K$, $\exists y' \in K$ such that $xy =y'x$. \\[2ex]
+\textbf{Solution:}
+For all $x \in G$, we have the cosets
+\begin{align*}
+    K \text{ is normal in $G$} &\iff gK = Kg \ \ \forall g \in G\\
+    &\iff \{xy :  y \in K\} = \{yx = y \in K\}\\
+    &\iff \text{ For some $x \in G$, $y\in K$, then $xy \in Kx$. }
+\end{align*}
+So $xy = y'x$ for some $y' \in K$ as required.
+\subsection{Part (b)}
+Using part (a), show $\bangles{\rho}$ is a normal subgroup in $D_n$. Identify $y'$ in terms of $xy$. \\[2ex]
+\textbf{Solution} Set
+\[K = \bangles{\rho} = \{\epsilon, \rho, \rho^2, \rho^3, \ldots, \rho^{n-1}\}\]
+Recall,
+\[D_n = \{\mu^i\rho^j: 0 \leq i \leq 1, \ 0 \leq j \leq n - 1\} = \{\rho^j: \ 0 \leq j \leq n - 1\} \cup \{\mu\rho^j: 0 \leq j \leq n-1\}\]
+If $x$ is a rotation, so $x = \rho^j$, and $y = \rho^r \in K$, then 
+\[xy = \rho^j\rho^r = \rho^{j+r} = \rho^r\rho^j = y'x\]
+So we can take $y' = \rho^r$. So for $x = \rho^j$, $y' = y$. If $x = \mu\rho^j$, and $y = \rho^r \in K$, then 
+\[xy = \mu\rho^j\rho^r = \mu\rho^r\rho^j = \rho^{-r}\mu\rho^j = y'x\]
+So for $x = \mu\rho^j$, $y' = \rho^{-r} = y^{-1}$. Furthermore, $K$ is a normal subgroup in $D_n$ since the elements \emph{psuedo} commute, in otherwords there is $y' \in K$ such that $xy = y'x$.
+
+\section{Question 2}
+Show that $[G:H] = 2 \implies$ $H$ is a normal subgroup in $G$.(Prof said this is a final exam question)\\[2ex]
+\textbf{Solution:}
+We have two cosets, one of which must be $H$ since $\epsilon H = H$ and $\epsilon \in H$. Since the cosets partition $G$, we must have that the other coset is $gH$ for some element $g$, so it must be $g \not\in H$. The same idea applies to the right cosets, we have $H$, $Hg$, so $g \not\in H$. So the two subgroups are percisely $H$, $G \setminus H$. So $gH = Hg$. Therefore the subgroup is normal in $G$. 
+
+\section{Question 3} 
+Show that if $H$ is a subgroup of $Z(G)$ then $H$ is a normal subgroup of $H$. \\[2ex]
+\textbf{Solution:}
+We want to prove that $gH = Hg$ $\forall g \in G$. We have
+\[gH = \{gh : h \in H\}\]
+But, $\forall h \in H$, these elements commute with every element in $G$ since they are in the center of $G$. 
+\[gH = \{gh : h \in H\} = \{hg: h \in H\} = Hg\]
+as required.
+
+\section{Question 4}
+Find $G$ and normal subgroup $K$ with $K$ not a subgroup of $Z(G)$ and $[G :K] \neq 2$. \\[2ex]
+\textbf{Solution:}
+Consider the question from the previous quiz with $G = D_8$ and 
+\[K = \bangles{\rho^2} = \{\epsilon, \rho^2,\rho^4, \rho^6\}\]
+so
+\[\rho K = \{\rho, \rho^3, \rho^5, \rho^7\} = K \rho\]
+\[\mu K = \{\mu, \mu\rho^2, \mu\rho^4, \mu\rho^6\}\]
+\[K\mu = \{\mu, \rho^2\mu, \rho^4\mu,\rho^6 \mu\}\]
+Using the fact that $\rho \mu = \mu\rho^{-1}$, we have $\rho^2 \mu = \mu(\rho^2)^{-1} = \mu\rho^6 \in \mu K$. Therefore, 
+\[\mu K = K \mu\]
+\begin{center}
+\textbf{Note:} $Z(G) < K$ does not imply $K$ is normal. Consider $H = \bangles{\mu,\rho^4}$  
+\end{center}
+\textbf{Question:} Consider $D_n$ and $H = \bangles{\rho^k}$. When is $H \triangleleft D_n$? 
+
+\section{Question 5}
+Let $K < H < G$ with $H \neq K$ and $H \neq G$. Suppose $K \triangleleft G$. 
+\begin{enumerate}[label=(\alph*)]
+    \item Is $H \triangleleft G$?
+    \item Is $K \triangleleft H$?
+\end{enumerate}
+\noindent
+\textbf{Solution}:
+\begin{enumerate}[label=(\alph*)]
+   \item No, counter example. Take $H = S_3$, $G = S_4$, and $K = \{\epsilon\}$. $K$ is always normal since the identity always commutes. We want to check if $H$ is not normal in $G$.
+   \item We want $hK = Kh $ $ \forall h \in H$. Yes, because it works for all $g \in G$, and $H < G$, so $h \in G$. 
+\end{enumerate}
+
+\section{Question 6} Recall the quaternions,
+\[Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}\]
 \end{document}
