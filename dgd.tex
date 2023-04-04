@@ -3,6 +3,7 @@
 \usepackage{lecture_notes_styles}
 \usepackage{stylesheet}
 
+
 \renewcommand{\chaptername}{DGD}
 
 \title{Group Theory DGD's}
@@ -540,4 +541,133 @@ Let $K < H < G$ with $H \neq K$ and $H \neq G$. Suppose $K \triangleleft G$.
 
 \section{Question 6} Recall the quaternions,
 \[Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}\]
+
+\chapter{}
+\textbf{Recap:}
+$f: G \mapsto H$ is a \blue{homomorphism} if 
+\[f(xy) = f(x)f(y)\]
+The kenral of $f$ is 
+\[ker(f) = \{x: f(x)  = \epsilon_H\}\]
+The image of $f$ is
+\[Im(f) = \{f(x) : x \in G\}\]
+\[R \subseteq G \rightarrow f(R) = \{f(x) : x \in R\}\]
+\[S \subseteq H \rightarrow f^{-1}(S) = \{x : f(x) \in S\}\]
+\[K \triangleleft G \implies f(K) \triangleleft H\]
+\[K \triangleleft H \implies f^{-1}(K) \triangleleft G\]
+So, ker$(f) = f^{-1}(\{\epsilon_H\})$ is a normal subgroup of $G$. \\[3ex]
+\noindent
+\textbf{Theorem}\\[1ex]
+\textit{
+    $K \triangleleft G \iff K$ is the kernal of some homomorphism $G \mapsto ?$}\\[2ex]
+\noindent
+\textbf{Theorem} First Isomoprhism Theorem\\[1ex]
+   \textit{ Let $f: G \mapsto H$ be a homomorphism. Then}
+    \[G / \text{ker}(f) \cong \text{Im}(f)\] 
+
+\section{Question 1: Generators}
+Generators with $K \leq G$ $G = \bangles{R}$ $K = \bangles{S}$.
+\subsection{Part (a)}
+Show $ab = ba \implies a^{-1}b = ba^{-1}, ab^{-1}b^{-1}a, a^{-1}b^{-1}b^{-1}a^{-1}$. \\[2ex]
+\textbf{Solution:}
+    \begin{align*}
+        ab = ba &\iff a^{-1}(ab)a^{-1} = a^{-1}(ba)a^{-1}\\
+        &\iff ba^{-1} = a^{-1}b\\
+        &\iff b^{-1}a^{-1}b^{-1}a^{-1} = a^{-1}b^{-1}\\
+    \end{align*}
+
+\subsection{Part (b)}
+Show $xy = yx \forall x,y \in R \implies G$ is abelian. \\[2ex]
+
+\textbf{Solution: }
+Let $u ,v \in G$. We want to show $uv = vu$. $x,y$ generate $G$, so $u = x_1x_2\ldots x_r$, $v = y_1y_2\ldots y_s$. 
+\[uv = x_1x_2\ldots x_ry_1y_2 \ldots y_s\]
+Since $x,y$ are generators, we can rearrange the products to get 
+\[uv = x_1x_2\ldots x_ry_1y_2 \ldots y_s\ = y_1y_2\ldots y_sx_1x_2\ldots x_r = vu\]
+
+\subsection{Part (c)}
+Show $xy = yx \ \forall x \in R \ y\in S \implies K \leq Z(G)$.\\[2ex]
+\textbf{Solution:}
+Let $u \in G$, $v \in K$. We want to show $uv = vu$. 
+We have 
+\[u = x_1x_2 \ldots x_r\]
+\[v = y_1y_2 \ldots y_s\]
+
+\subsection{Part (d)}
+
+Show $\forall x \in R$ $y \in S$, $\exists k \in K$ with $xy = kx \implies K \triangleleft G$. \\[2ex]
+\textbf{Solution:} Let $u \in G$, $v \in K$, we want to show that $uv = v'u$ for some $v' \in K$
+\[u = x_1x_2 \ldots x_r\]
+\[v = y_1y_2 \ldots y_s\]
+So 
+\begin{align*}
+    uv &= x_1x_2 \ldots x_ry_1y_2\ldots y_s  \\
+    &= x_1x_2 \ldots y'_1x_ry_2 \ldots y_s \tag{some $y_1' \in K$}\\
+    &= x_1x_2\ldots y_2'x_ry_3 \ldots y_s\\
+    &\vdots\\
+    &= y_1'y_2'\ldots y_s x_r
+\end{align*}
+This process continues for each element in $K$, so we can find some $y_1' \ldots y_s' \in K$ such that $uv = v'u$.
+\subsection{Part (e)}
+Show $\forall x \in R$ $y \in S$ then $xyx^{-1} \in K \implies K \triangleleft G$. \\[2ex]
+\textbf{Solution}
+Let $u \in G$, $v \in K$. Show that $uvu^{-1} \in K$, with 
+\[u = x_1x_2\ldots x_r\]
+\[v = y_1y_2\ldots y_s\]
+So 
+\[uvu^{-1} = x_1x_2\ldots x_{r-1}x_r y_1y_2\ldots y_s x_r^{-1}x_{r-1}^{-1}\ldots x_1^{-1}\]
+Then 
+\[uvu^{-1} = \tilde{y} x_1x_2 \ldots \]
+\section{Question 2}
+Let $G = \bangles{R}$ and $\phi: G \mapsto H$. 
+\subsection{Part (a)}
+Show that knowing $\phi(x)$ $\forall x \in R$ determines $\phi(u)$ $\forall u \in G$. \\[2ex]
+\textbf{Solution:} Note that $\phi(x^{-1}) = \phi(x)^{-1}$, so $\phi(x^{-1}) $ is known for $ x \in R$. Let $u \in G$. Then $u = x_1x_2\ldots x_r$.
+\[\phi(u) = \phi(x_1x_2\ldots x_r) = \phi(x_1)\phi(x_2)\ldots\phi(x_r)\]
+Each $\phi(x_i)$ is known, so $\phi(u)$ is determined by $\phi(x)$.
+\subsection{Part (b)}
+$\alpha$ and $\beta$ are homomorphisms $G \mapsto H$, show that $\alpha(x) = \beta(x)$ $\forall  x \in R$ $\implies \alpha = \beta$. \\[2ex]
+\textbf{Solution}
+Let $u \in G$. 
+\begin{align*}
+    \alpha(u) = \alpha(x_1x_2\ldots x_r)\\
+    &= \alpha(x_1)\alpha(x_1)\ldots\alpha(x_r)
+    &= \beta(x_1)\beta(x_1)\ldots\beta(x_r)\\
+    &= \beta(u)
+\end{align*}
+ 
+\section{Question 5}
+Define $f: \mathbb{Q} \mapsto \mathbb{C}^*$ by $f(q) = e^{2\pi iq}$. Show that $f$ is a homomorphism. Find ker$(f)$ and Im$(f)$.  \\[2ex]
+
+\textbf{Solution:} We want to show $f(p + q) = f(p)f(q)$ for all $p,q \in \mathbb{Q}$. Note $p+q$ is the operation in $\mathbb{Q}$ and $f(p)f(q)$ is the operation in $\mathbb{C}^*$.
+\begin{align*}
+    f(p+q) &= e^{2\pi i(p+q)}\\
+    &= e^{2\pi i(p)}e^{2\pi i(q)}\\
+    &= f(p)f(q)
+\end{align*}
+\[\text{ker}(f) = \{q: e^{2 \pi i q} = 1\} = \ints\]
+% \begin{align*}
+%     \text{Im}(f) &= \{e^{2 \pi i q} : q \in \mathbb{Q}\}\\
+%     &= \bipcup_{n \geq 1} \{z : z^n = 1\}\\
+%     &= \bipcup_{n \geq 1} R_n\\
+%     &= R
+% \end{align*}
+\section{Question 6}
+Define $g: \real^* \mapsto \real$ By $g(r) = \ln(|r|)$. Show $g$ is a homomorphism. Find the kernal and image.
+\textbf{Solution:}
+\begin{align*}
+    g(rs) &= \ln(|rs|)\\
+    &= \ln(|r||s|)\\
+    &= \ln(|r|) + \ln(|s|)\\
+    &= g(r) + g(s)
+\end{align*}
+\begin{align*}
+    \text{ker}(g) &= \{r: \ln(|r|) = 0\}\\
+    &= \{1, -1\}
+\end{align*}
+\begin{align*}
+    \text{Im}(g) &= \{\ln(|r|) : r \in \real^*\}\\
+    &= \real
+\end{align*}
+ 
+
 \end{document}

@@ -2276,7 +2276,208 @@ but we don't necesasrily have $a^r = \epsilon$.
     $A_n$ is simple for $n \geq 5$.
 \end{theorem}
 \begin{proof}
-    Suppose $K \triangle left$ for $n \geq 5$ and $K \neq \{\epsilon\}$. By the previous lemma's, $K$ contains a 3-cycle, $K$ contains all 3-cycles. TBC
+    Suppose $K \triangleleft A_n$ for $n \geq 5$ and $K \neq \{\epsilon\}$. By the previous lemma's, $K$ contains a 3-cycle, $K$ contains all 3-cycles. TBC
+\end{proof}
+
+\section{}
+\textbf{Recap:} Recall the definition for quotient groups. Let $K \triangleleft G$. Then $G/K$ is 
+\begin{itemize}
+    \item The cosets of $K$ in $G$
+    \item If $C,D \in G/K$, then $C \cdot D$ is defined by the coset $E$ such that 
+    \[x\in C \ \ y \in D \implies xy \in E\] 
+\end{itemize}
+\textbf{Example:}
+\[S_3/ A_3 = \{\{\epsilon, (123), (132)\}, \{(12),(13),(23)\}\}\]
+\[A_3 \cdot (12) A_3 = (12)A_3\]
+\[\{\epsilon, (123), (132)\} \cdot \{(12),(13),(23)\} = \{(12),(13), (23)\}\]
+\section{Homomorphisms}
+$\phi: G \mapsto H$ is a \blue{Homomorphism} if $\forall x,y \in G$
+\[\phi(xy) = \phi(x)\phi(y)\]
+\begin{definition}
+    The \emph{\blue{kernal}} of $\phi$ is defined as 
+    \[\text{ker}(\phi) = \{x \in G : \phi(x) = \epsilon_H\}\]
+\end{definition}
+\begin{definition}
+    The \emph{\blue{image}} of $\phi$ is defined as 
+    \[\text{im}(\phi) = \{y \in H  :y = \phi(x) \}\]
+\end{definition}
+\noindent
+\textbf{Examples:}
+\begin{itemize}
+    \item $\phi: G \mapsto H$ with $\phi(x) = \epsilon_H$ $\forall x \in G$. We can theck that $\phi$ is a homomorphism by checking 
+    \[\phi(xy) = \epsilon_H = \epsilon_H\epsilon_H = \phi(x)\phi(y)\]
+    The kernal is $G$, so ker$(\phi) = G$, and Im$(\phi) = \{\epsilon_H\}$
+    \item Suppose $G \cong H$ with $\phi: G \mapsto H$. Isomoprhisms are bijective Homomorphisms. We can check that \[\text{ker}(\phi) = H  \text{ and } \text{Im}(\phi) = \{\epsilon_H\}\]
+    \item $\alpha: \ints \mapsto \ints_n$
+    \[\alpha(x) = x + n\ints\]
+    Check that $\alpha$ is a homomorphism
+    \[\phi(x+y) = (x+y) + n\ints\]
+    \[\phi(x) + \phi(y) = (x + n\ints) + (y + n \ints) = (x+y) +n\ints\]
+    \[\text{ker}(\alpha) = \{k \in \ints: \alpha(k) = \{\ldots, n, 2n, \ldots\}\} = n\ints\]
+    \[\text{Im}(\alpha) = \{\alpha(k): k \in \ints\} = \text{The cosets of $n\ints$ in $\ints$} = \ints/n\ints = \ints_n\]
+\end{itemize} 
+\subsection{Definitions}
+Let $\phi: G \mapsto H$ be a homomorphism.
+\begin{definition}
+    If $R \subseteq G$ then $\phi(R) = \{\phi(x) : x \in R\}$. This is the image of R, the set of all possible outputs with an input in $R$.
+\end{definition}
+
+\begin{definition}
+    If $S \subseteq H$ then $\phi^{-1}(S) = \{x \in G: \phi(x) \in S\}$. Note that $\phi^{-1}(S)$ is not the inverse of $\phi$. This is known as the pre-image of $S$, the set of all possible inputs that give outputs in S.
+\end{definition}
+\subsection{Properties of Homomorphisms}
+\begin{enumerate}[label=(\alph*)]
+    \item $\phi(\epsilon_G) = \epsilon_H$
+    \item $\phi(g^{-1}) = \phi(g)^{-1}$
+    \item $\phi(g^n) = \phi(g)^n$. Proof of the a,b,c is a good exercise
+    \item $K \leq G \implies \phi(K) \leq H$. $\phi(K)$ is the image of $K$.
+    \item $K \triangleleft G \implies \phi(K) \triangleleft H$ This needs $\phi$ to be surjective.
+    \item $K \leq H \implies \phi^{-1}(K) \leq G$. $\phi^{-1}(K)$ is the pre-image of $K$.
+    \item $K \triangleleft H \implies \phi^{-1}(K) \triangleleft G$
+\end{enumerate}
+\textbf{Proofs:}
+\begin{center}
+    \textbf{\red{Note:} Proofs for a,b,c could be final exam questions}
+\end{center}
+\begin{enumerate}[label=(\alph*)]
+    \item \begin{proof}
+        Exercise.
+    \end{proof}
+    \item \begin{proof}
+        Exercise.
+    \end{proof}
+    \item \begin{proof}
+        Exercise.
+    \end{proof}
+    \item $K \leq G \implies \phi(K) \leq H$. \begin{proof}
+        We have $\epsilon_G \in K$ since $K$ is a subgroup. So 
+        $$\phi(\epsilon_G) = \epsilon_H \in \phi(K)$$
+        So $\phi(K)$ is not a empty. Let $u,v \in \phi(K)$, so
+        \[u,v \in \phi(K) \implies \begin{cases}
+            u = \phi(x)\\
+            v = \phi(y)
+        \end{cases} \]
+        $K$ is a subgroup so $xy \in K$. Then from the homomorphism property, we have
+        \[uv = \phi(x)\phi(y) = \phi(xy) \in \phi(K)\]
+        We want to show that $u \in \phi(K) \implies u^{-1} \in \phi(K)$. 
+        \[u \in \phi(K) \implies u = \phi(x)\]
+        for some $x \in K$, $x^{-1} \in K$ since $K$ is a subgroup, so 
+        \[u^{-1} = \phi(x^{-1}) = \phi(x)^{-1} \in \phi(K)\]
+        Therefore from the subgroup test, $\phi(K) \leq H$.  
+    \end{proof}
+    \item $K \triangleleft G \implies \phi(K) \triangleleft H$ and assuming $\phi$ is surjective. 
+    \begin{proof}
+        Suppose $h \in H$ and $u \in \phi(K)$, we want to show 
+        \[huh^{-1} \in \phi(K)\]
+        We have $u \in \phi(K) \implies u = \phi(x)$ for some $x \in K$. Then $h \in H$ and $\phi$ is surjective, so $h = \phi(g)$ for some $g \in G$. So
+        \[huh^{-1} = \phi(g)\phi(x)\phi(g)^{-1} = \phi(gxg^{-1})\in \phi(K)\]
+        $gxg^{-1} \in K$ since $x \in K$ and $g \in G$ and $K \triangleleft G$.
+    \end{proof}
+    \item $K \leq H \implies \phi^{-1}(K) \leq G$
+    \begin{proof}
+        Using the subgroup test again, we have $\epsilon_H \in K$ since $K$ is a subgroup. So 
+        \[\phi(\epsilon_G) = \epsilon_H \implies \epsilon_G \in \phi^{-1}(K)\]
+        $\phi^{-1}(K)$ is non-empty. So take 
+        $$x,y \in \phi^{-1}(x) \implies \begin{cases}
+            \phi(x)=u \in K\\
+            \phi(y) = v \in K
+        \end{cases}$$
+        \[\phi(xy) = \phi(x)\phi(y) = uv \in K\]
+        So $xy \in \phi^{-1}(K)$. Now take $x \in \phi^{-1}(x)$, using (b) we get
+        \[\phi(x^{-1}) = \phi(x){-1} = \mu^{-1} \in K \implies x^{-1} \in \phi^{-1}(K)\]
+        Therefore $\phi^{-1}(K) \leq G$.
+    \end{proof}
+    \item $K \triangleleft H \implies \phi^{-1}(K) \triangleleft G$.
+    \begin{proof}
+        Suppose $g \in G$ and $x \in \phi^{-1}(K)$. We want $gxg^{-1} \in \phi^{-1}(K)$. 
+        \[\phi(gxg^{-1}) = \phi(g)\phi(x)\phi(g^{-1}) = \phi(g)u\phi(g)^{-1}\]
+        Therefore $gxg^{-1} \in \phi^{-1}(K)$.
+    \end{proof}
+\end{enumerate}
+
+
+\begin{corollary}
+    Let $\phi: G \mapsto H$ be a homomorphism. 
+    \begin{itemize}
+        \item Im$(\phi)$ is a subgroup of $H$.
+        \item Ker$(\phi)$ is a subgroup of $G$.
+        \item Ker($\phi$) is normal in $G$.
+    \end{itemize}
+\end{corollary}
+
+\begin{proof}
+    \begin{itemize}
+        \item Im$(\phi) = \phi(G)$ and $G$ is a subgroup of G
+        \item Ker$(\phi) = \phi^{-1}(\{\epsilon_H\})$ and $\{\epsilon_H\}$ is a subgroup of $G$
+        \item $\{\epsilon_H\}$ is a normal subgroup of $H$ since $\epsilon_H$ commutes with every element.
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    If $G \mapsto$ is a homomorphism, then $G / $Ker$(\phi)$ exists.
+\end{theorem}
+\begin{proof}
+    Ker$(\phi) \triangleleft G$ so the quotient exists. 
+\end{proof}
+
+\begin{theorem}
+    Let $\phi: G \mapsto H$ be a homomorphism. Then $|\phi(g)|$ divided $|g|$ for all $g \in G$.
+\end{theorem}
+\begin{proof}
+    Exercise. Consider 
+    \[|g| = n \implies g^r = \epsilon \iff n \mid r\]
+    \[|\phi(g)| = m \implies \phi(g)^r = \epsilon \iff m \mid r\]
+    We want to show that 
+    \[g^r = \epsilon_G \implies \phi(g)^r = \epsilon_H\] 
+\end{proof}
+
+\begin{theorem}
+    Let $\phi: G \mapsto H$ be a homomorphism. Then 
+    \[\phi \text{ is injective } \iff \text{ker}(\phi) = \{\epsilon\}\]
+\end{theorem}
+\begin{proof}
+    Exercise. 
+    \[\exists x \neq y \ \phi(x) = \phi(y) \implies \epsilon = \phi(x)\phi(y)^{-1} \ldots\]
+    \[\exists \epsilon \neq \in \text{ker}(\phi) \implies \phi(z) \ \epsilon \ldots\] 
+\end{proof}
+
+
+\begin{theorem}
+    Let $\phi: G \mapsto H$ be a homomorphism. Suppose $G = \bangles{S}$ for some $S \subseteq G$. Then knowing $\phi(x)$. tbc
+\end{theorem}
+
+\begin{definition}
+    Say $K \triangleleft G$. Define $\phi: G \mapsto G/K$ by $\phi(x) = xK$. This the \blue{canonical homomorphism}.
+\end{definition}
+\noindent
+\textbf{Exercise:} Show this is a homomorphism
+
+\begin{theorem}
+    If $K \triangleleft G$, then $K =$ ker$(\phi)$ for some homomorphism $\phi$.
+\end{theorem}
+\begin{proof}
+    Consider the canonical homomorphism
+    \[\phi: G \mapsto G/K\]
+    with $\phi(x) = xK$. Then
+    \[\phi(x) = K \iff xK = K \iff x \in K\]
+    So ker$(\phi) = K$.
+\end{proof}
+
+
+\begin{corollary}
+    $K$ is normal subgroup $\ldots$ tbc 
+\end{corollary}
+
+\section{First Isomorphism Theorem}
+\begin{theorem}[First Isomoprhism Theorem]
+    Let $\phi: G \mapsto H$ be a homomorphism then 
+    \[G / \text{ker}(\psi) \cong \text{Im}(\psi)\]
+\end{theorem}
+
+\begin{proof}
+    Let $K = $ ker$(\psi)$, $F =$ Im$(\psi)$. $K \triangleleft G$ and $F \leq K$. Define $\alpha: G/K \mapsto F$ so
+    \[\alpha(gK) = \psi(g)\]
+    Our goal is to show that $\alpha$ is an isomporphism. tbc
 \end{proof}
 
 \end{document}
